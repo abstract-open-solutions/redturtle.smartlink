@@ -1,3 +1,3 @@
 # -*- extra stuff goes here -*-
-from link import ILink
+from link import ISmartLink
 

@@ -1,9 +1,7 @@
-"""Common configuration constants
-"""
+from Products.ATContentTypes.permission import permissions
 
 PROJECTNAME = 'redturtle.smartlink'
 
 ADD_PERMISSIONS = {
-    # -*- extra stuff goes here -*-
-    'Link': 'redturtle.smartlink: Add Link',
+    'SmartLink': permissions['Link']
 }

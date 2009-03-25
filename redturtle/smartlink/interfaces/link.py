@@ -4,9 +4,9 @@ from zope.interface import Interface
 from zope.app.container.constraints import contains
 from zope.app.container.constraints import containers
 
-from redturtle.smartlink import smartlinkMessageFactory as _
+from Products.ATContentTypes.interface import IATLink
 
-class ILink(Interface):
+class ISmartLink(IATLink):
     """A link to an internal or external resource."""
-    
-    # -*- schema definition goes here -*-
+
+

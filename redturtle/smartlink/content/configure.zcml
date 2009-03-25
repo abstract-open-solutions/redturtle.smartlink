@@ -6,14 +6,14 @@
   <!-- configure your content components here -->
   
   <!-- -*- extra stuff goes here -*- -->
-  <class class=".link.Link">
+  <class class=".link.SmartLink">
     <require
         permission="zope2.View"
-        interface="..interfaces.ILink"
+        interface="..interfaces.ISmartLink"
         />
     <require
         permission="cmf.ModifyPortalContent"
-        set_schema="..interfaces.ILink"
+        set_schema="..interfaces.ISmartLink"
         />
   </class>
 
