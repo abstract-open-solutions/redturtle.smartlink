@@ -1,6 +1,9 @@
 """Definition of the SmartLink content type
 """
 
+import urlparse
+from urllib import quote
+
 from zope.interface import implements, directlyProvides
 from AccessControl import ClassSecurityInfo
 
@@ -90,9 +93,12 @@ class SmartLink(ATLink):
     """A link to an internal or external resource."""
     implements(ISmartLink)
 
-    meta_type = "Link"
+    meta_type = "ATLink"
     schema = LinkSchema
-    
+
+    title = atapi.ATFieldProperty('title')
+    description = atapi.ATFieldProperty('description')
+
     security = ClassSecurityInfo()
 
     security.declareProtected(permissions.View, 'tag')
@@ -120,7 +126,17 @@ class SmartLink(ATLink):
                 return image
 
         return ATLink.__bobo_traverse__(self, REQUEST, name)
- 
+
+    security.declareProtected(permissions.ModifyPortalContent, 'setExternalLink')
+    def setExternalLink(self, value, **kwargs):
+        """remote url mutator
+        Use urlparse to sanify the url
+        Also see http://dev.plone.org/plone/ticket/3296
+        """
+        if value:
+            value = urlparse.urlunparse(urlparse.urlparse(value))
+        self.getField('externalLink').set(self, value, **kwargs)
+
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
         
@@ -131,8 +147,15 @@ class SmartLink(ATLink):
         else:
             remote = self.getExternalLink()
         
-        return remote
-    
+        if not remote: remote = '' # ensure we have a string
+        return quote(remote, safe='?$#@/:=+;$,&%')
+
+    security.declarePrivate('cmf_edit')
+    def cmf_edit(self, remote_url=None, **kwargs):
+        if not remote_url:
+            remote_url = kwargs.get('remote_url', None)
+        self.update(externalLink = remote_url, **kwargs)
+
     def post_validate(self, REQUEST, errors):
         """Check to make sure that either an internal or external link was supplied."""
     
