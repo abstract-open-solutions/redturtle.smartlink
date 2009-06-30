@@ -40,7 +40,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
 
     atapi.ReferenceField("internalLink",
                    default=None,
-                   relationship="interal_page",
+                   relationship="internal_page",
                    multiValued=False, 
                    widget=ATReferenceBrowserWidget.ReferenceBrowserWidget(
                         label= _(u'label_smartlink_internallink', default='Internal link'),

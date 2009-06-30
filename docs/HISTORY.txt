@@ -4,7 +4,7 @@ Changelog
 0.3.0
 -----
 
-* ???
+* Fixed syntax error on relation name ("internal_page" was "interal_page")
 
 0.2.0
 -----
