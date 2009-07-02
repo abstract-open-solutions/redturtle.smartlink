@@ -9,7 +9,8 @@ def setupVarious(context):
     if context.readDataFile('redturtle.smartlink_various.txt') is None: 
         return
     
-    backupATLink(portal)
+    # Disabled: have the old portal_type in the types_tool duplicate "Event" choice in some places
+    #backupATLink(portal)
 
 def backupATLink(portal):
     """Make a backup of ATLink before the types.xml step overwrite it"""

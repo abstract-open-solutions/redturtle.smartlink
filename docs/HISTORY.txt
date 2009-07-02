@@ -1,18 +1,13 @@
 Changelog
 =========
 
-0.3.1
-_____
-
-* Fixed some integration problem in content/link.py related to p4a. p4a use a remoteUrl property of base 
-  ATLink that return the external link. I crete a python property that return the current getRemoteUrl.
-  Fixed the original getRemoteUrl method that have problem related to p4a when we don't have an internal
-  link
 
 0.3.0
 -----
 
-* Fixed syntax error on relation name ("internal_page" was "interal_page")
+* Fixed syntax error on relation name ("internal_page" was "interal_page") [keul]
+* Disabled the backup of basic Plone ATLink [keul]
+* Fixed some integration problem in content/link.py related to p4a (remoteUrl) [lucabel] 
 
 0.2.0
 -----

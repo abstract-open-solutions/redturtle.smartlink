@@ -64,7 +64,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                 'listing' :  (16, 16),
                },
         validators = (('isNonEmptyFile', V_REQUIRED),
-                             ('checkNewsImageMaxSize', V_REQUIRED)),
+                      ('checkNewsImageMaxSize', V_REQUIRED)),
         widget = atapi.ImageWidget(
             description = _(u'help_smartlink_image', default=u"Will be shown views that render content's images and in the link view itself"),
             label= _(u'label_smartlink_image', default=u'Image'),
