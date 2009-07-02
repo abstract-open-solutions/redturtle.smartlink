@@ -98,7 +98,8 @@ class SmartLink(ATLink):
 
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
-
+    internalLink = atapi.ATReferenceFieldProperty('internalLink')
+    
     security = ClassSecurityInfo()
 
     security.declareProtected(permissions.View, 'tag')
@@ -139,9 +140,10 @@ class SmartLink(ATLink):
 
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
-        
-        ilink = self.getInternalLink()
-    
+        if hasattr(self, 'internalLink'): 
+            ilink = self.getInternalLink()
+        else:
+            ilink = None
         if ilink:
             remote = ilink.absolute_url()
         else:
@@ -167,6 +169,15 @@ class SmartLink(ATLink):
             if (not xlink and not ilink) or (xlink and ilink):
                 errors['externalLink'] = _(u'You must either select an internal link or enter an external link. You cannot have both.')
             return errors
+    
+    @property
+    def remoteUrl(self):
+        """
+        @author: lucabel
+        @summary: add this method to solve compatibility problem with p4a. remoteUrl is the schema attribute for the real Link 
+        object, here we have internalLink, externalLink and getRemoteUrl that return the correct one.
+        """
+        return self.getRemoteUrl()
 
 
 atapi.registerType(SmartLink, PROJECTNAME)
