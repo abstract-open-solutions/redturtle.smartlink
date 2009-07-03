@@ -140,7 +140,12 @@ class SmartLink(ATLink):
 
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
-        if hasattr(self, 'internalLink'): 
+        
+        """
+        We need to check if the self object has the reference_catalog attribute. It's an integration problem
+        with p4a that call this method when we don't have an internal link.
+        """
+        if hasattr(self, 'reference_catalog'): 
             ilink = self.getInternalLink()
         else:
             ilink = None
