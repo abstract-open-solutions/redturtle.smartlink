@@ -8,6 +8,7 @@ Changelog
 * Fixed syntax error on relation name ("internal_page" was "interal_page") [keul]
 * Disabled the backup of basic Plone ATLink [keul]
 * Fixed some integration problem in content/link.py related to p4a (remoteUrl) [lucabel] 
+* Created italian translation [andrea]
 
 0.2.0
 -----

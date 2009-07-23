@@ -35,6 +35,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                     label= _(u'label_smartlink_externallink', default='External Link'),
                     description = _(u'help_smartlink_externallink',
                                     default=u"Enter the web address for a page which is not located on this server."),
+                    i18n_domain='redturtle.smartlink',
               )
     ),
 
@@ -47,6 +48,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                         description = _(u'help_smartlink_internallink',
                                         default=u"Browse to find the internal page to which you wish to link. If this field is used, then any entry in the external link field will be ignored. You cannot have both an internal and external link."),
                         force_close_on_insert = True,
+                        i18n_domain='redturtle.smartlink',
                     )
     ),
 
@@ -68,6 +70,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
         widget = atapi.ImageWidget(
             description = _(u'help_smartlink_image', default=u"Will be shown views that render content's images and in the link view itself"),
             label= _(u'label_smartlink_image', default=u'Image'),
+            i18n_domain='redturtle.smartlink',
             show_content_type = False)
         ),
 
@@ -77,6 +80,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
         widget = atapi.StringWidget(
             description = '',
             label = _(u'label_image_caption', default=u'Image Caption'),
+            i18n_domain='redturtle.smartlink',
             size = 40)
         ),
 
