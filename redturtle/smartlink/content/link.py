@@ -169,14 +169,15 @@ class SmartLink(ATLink):
 
     def post_validate(self, REQUEST, errors):
         """Check to make sure that either an internal or external link was supplied."""
-    
-        request = self.REQUEST
 
-        if not request.form.has_key('externalLink') and not request.form.has_key('internalLink'):
-            xlink=request.get('externalLink', None)
-            ilink=request.get('internalLink', None)
-            if (not xlink and not ilink) or (xlink and ilink):
-                errors['externalLink'] = _(u'You must either select an internal link or enter an external link. You cannot have both.')
+        if not REQUEST.form.get('externalLink') and not REQUEST.form.get('internalLink'):
+            xlink=REQUEST.get('externalLink', None)
+            ilink=REQUEST.get('internalLink', None)
+            if (not xlink and not ilink):
+                errors['externalLink'] = _("label_internallink_externallink",default=u'You must either select an internal link or enter an external link. You cannot have both.')
+            return errors
+        if REQUEST.form.get('externalLink') and REQUEST.form.get('internalLink'):
+            errors['externalLink'] = _("label_internallink_externallink",default=u'You must either select an internal link or enter an external link. You cannot have both.')
             return errors
     
     @property

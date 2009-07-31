@@ -9,6 +9,8 @@ Changelog
 * Disabled the backup of basic Plone ATLink [keul]
 * Fixed some integration problem in content/link.py related to p4a (remoteUrl) [lucabel] 
 * Created italian translation [andrea]
+* Fixed bug of post_validate in link.py [fdelia]
+* Internalization with i18ndude [fdelia]
 
 0.2.0
 -----
