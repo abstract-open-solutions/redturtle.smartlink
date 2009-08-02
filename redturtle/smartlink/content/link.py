@@ -36,6 +36,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                     description = _(u'help_smartlink_externallink',
                                     default=u"Enter the web address for a page which is not located on this server."),
                     i18n_domain='redturtle.smartlink',
+                    size=50,
               )
     ),
 
