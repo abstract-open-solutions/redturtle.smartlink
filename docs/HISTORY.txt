@@ -9,7 +9,7 @@ Changelog
 * Fixed some integration problem in content/link.py related to p4a (remoteUrl) [lucabel] 
 * Fixed major bug in post_validate (validation was useless) [fdelia]
 * Internalization with i18ndude [fdelia]
-* Created italian translation [andrea]
+* Created italian translation [micecchi]
 * Clean uninstall (restoring the original ATLink in portal_types) [keul]
 
 0.2.0
