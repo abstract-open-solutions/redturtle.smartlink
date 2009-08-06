@@ -28,6 +28,17 @@ from Products.validation import V_REQUIRED
 
 LinkSchema = ATLinkSchema.copy() + atapi.Schema((
 
+    # HIDDEN!
+    atapi.StringField('remoteUrl',
+        searchable=True,
+        accessor="getHiddenRemoteUrl",
+        widget = atapi.StringWidget(
+            description = '',
+            label = _(u'label_url', default=u'URL'),
+            visible={'view': 'invisible', 'edit': 'invisible' },
+        )
+    ),
+
     atapi.StringField("externalLink",
               searchable=True,
               required=False,
@@ -90,8 +101,6 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
 LinkSchema['title'].storage = atapi.AnnotationStorage()
 LinkSchema['description'].storage = atapi.AnnotationStorage()
 
-del LinkSchema['remoteUrl']
-
 schemata.finalizeATCTSchema(LinkSchema, moveDiscussion=False)
 
 class SmartLink(ATLink):
@@ -142,14 +151,18 @@ class SmartLink(ATLink):
         if value:
             value = urlparse.urlunparse(urlparse.urlparse(value))
         self.getField('externalLink').set(self, value, **kwargs)
+        self.setRemoteUrl(self.getRemoteUrl())
+
+    security.declareProtected(permissions.ModifyPortalContent, 'setInternalLink')
+    def setInternalLink(self, value, **kwargs):
+        self.getField('internalLink').set(self, value, **kwargs)
+        self.setRemoteUrl(self.getRemoteUrl())
 
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
         
-        """
-        We need to check if the self object has the reference_catalog attribute. It's an integration problem
-        with p4a that call this method when we don't have an internal link.
-        """
+        # We need to check if the self object has the reference_catalog attribute. It's an integration problem
+        # with p4a that call this method when we don't have an internal link.
         if hasattr(self, 'reference_catalog'): 
             ilink = self.getInternalLink()
         else:
@@ -180,15 +193,5 @@ class SmartLink(ATLink):
         if REQUEST.form.get('externalLink') and REQUEST.form.get('internalLink'):
             errors['externalLink'] = _("label_internallink_externallink",default=u'You must either select an internal link or enter an external link. You cannot have both.')
             return errors
-    
-    @property
-    def remoteUrl(self):
-        """
-        @author: lucabel
-        @summary: add this method to solve compatibility problem with p4a. remoteUrl is the schema attribute for the real Link 
-        object, here we have internalLink, externalLink and getRemoteUrl that return the correct one.
-        """
-        return self.getRemoteUrl()
-
 
 atapi.registerType(SmartLink, PROJECTNAME)
