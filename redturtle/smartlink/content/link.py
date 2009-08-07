@@ -31,7 +31,6 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
     # HIDDEN!
     atapi.StringField('remoteUrl',
         searchable=True,
-        accessor="getHiddenRemoteUrl",
         widget = atapi.StringWidget(
             description = '',
             label = _(u'label_url', default=u'URL'),
@@ -113,6 +112,7 @@ class SmartLink(ATLink):
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
     internalLink = atapi.ATReferenceFieldProperty('internalLink')
+    remoteUrl = atapi.ATReferenceFieldProperty('remoteUrl')
     
     security = ClassSecurityInfo()
 
