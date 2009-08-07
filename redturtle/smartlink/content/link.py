@@ -112,7 +112,6 @@ class SmartLink(ATLink):
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
     internalLink = atapi.ATReferenceFieldProperty('internalLink')
-    remoteUrl = atapi.ATReferenceFieldProperty('remoteUrl')
     
     security = ClassSecurityInfo()
 
