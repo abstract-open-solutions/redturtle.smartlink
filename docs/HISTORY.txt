@@ -5,7 +5,7 @@ Changelog
 -----
 
 * Restored the original StringField remoteUrl, due to continue bad integration with 3rd party
-  products (like p4a and collective.flowplayer).
+  products (like p4a and collective.flowplayer) [keul].
 
 0.3.0
 -----
