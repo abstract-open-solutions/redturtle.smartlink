@@ -2,7 +2,7 @@
 <import-steps>
  <import-step id="imaged-event" version="20090317-01"
               handler="redturtle.smartlink.setuphandlers.setupVarious"
-              title="SmartLink - ATLink backup">
-     Hide the basic event type
+              title="SmartLink - various import steps">
+     Various import steps
  </import-step>
 </import-steps>

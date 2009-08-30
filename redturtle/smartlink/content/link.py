@@ -4,7 +4,7 @@
 import urlparse
 from urllib import quote
 
-from zope.interface import implements, directlyProvides
+from zope import interface
 from AccessControl import ClassSecurityInfo
 
 from Products.Archetypes import atapi
@@ -18,7 +18,7 @@ from Products.ATContentTypes.content.link import ATLink, ATLinkSchema
 from Products.ATReferenceBrowserWidget import ATReferenceBrowserWidget
 
 from redturtle.smartlink import smartlinkMessageFactory as _
-from redturtle.smartlink.interfaces import ISmartLink
+from redturtle.smartlink.interfaces import ISmartLink, ISmartLinked
 from redturtle.smartlink.config import PROJECTNAME
 
 from Products.ATContentTypes.configuration import zconf
@@ -104,7 +104,7 @@ schemata.finalizeATCTSchema(LinkSchema, moveDiscussion=False)
 
 class SmartLink(ATLink):
     """A link to an internal or external resource."""
-    implements(ISmartLink)
+    interface.implements(ISmartLink)
 
     meta_type = "ATLink"
     schema = LinkSchema
@@ -192,5 +192,15 @@ class SmartLink(ATLink):
         if REQUEST.form.get('externalLink') and REQUEST.form.get('internalLink'):
             errors['externalLink'] = _("label_internallink_externallink",default=u'You must either select an internal link or enter an external link. You cannot have both.')
             return errors
+
+    security.declarePrivate('_processForm')
+    def _processForm(self, data=1, metadata=None, REQUEST=None, values=None):
+        """BBB: I need to check old value before change it...
+        I don't find a good place where to put this code. Zope3 Event don't help me"""
+        form = self.REQUEST.form
+        target = self.getInternalLink()
+        if target and target.UID()!=form.get('internalLink') and ISmartLinked.providedBy(target):
+            interface.noLongerProvides(target, ISmartLinked)
+        ATLink._processForm(self, data=data, metadata=metadata, REQUEST=REQUEST, values=values)
 
 atapi.registerType(SmartLink, PROJECTNAME)

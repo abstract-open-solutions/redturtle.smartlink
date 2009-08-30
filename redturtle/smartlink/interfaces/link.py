@@ -1,12 +1,12 @@
-from zope import schema
+# -*- coding: utf-8 -*-
+
 from zope.interface import Interface
-
-from zope.app.container.constraints import contains
-from zope.app.container.constraints import containers
-
 from Products.ATContentTypes.interface import IATLink
 
 class ISmartLink(IATLink):
     """A link to an internal or external resource."""
+
+class ISmartLinked(Interface):
+    """Marker interface for content that are referenced (smart-linked) by Smart Link content"""
 
 

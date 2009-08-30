@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4.0
+-----
+
+ * Keep relation of internal link even if the target content is renamed/moved.
+ * Added a merker interface for internally linked contents.
+
 0.3.1
 -----
 
