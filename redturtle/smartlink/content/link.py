@@ -25,6 +25,9 @@ from Products.ATContentTypes.configuration import zconf
 from Products.validation.config import validation
 from Products.validation.validators.SupplValidators import MaxSizeValidator
 from Products.validation import V_REQUIRED
+from zope.component import queryUtility
+from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
+from Products.CMFPlone.utils import getToolByName
 
 LinkSchema = ATLinkSchema.copy() + atapi.Schema((
 
@@ -162,12 +165,16 @@ class SmartLink(ATLink):
         
         # We need to check if the self object has the reference_catalog attribute. It's an integration problem
         # with p4a that call this method when we don't have an internal link.
-        if hasattr(self, 'reference_catalog'): 
+        if hasattr(self, 'reference_catalog'):
             ilink = self.getInternalLink()
         else:
             ilink = None
         if ilink:
-            remote = ilink.absolute_url()
+            if queryUtility(ISmartlinkConfig,name="smartlink_config").relativelink:            
+                object = self.getField('internalLink').get(self)
+                remote = '/'.join(object.getPhysicalPath())
+            else:
+                remote = ilink.absolute_url()
         else:
             remote = self.getExternalLink()
         

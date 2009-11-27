@@ -29,5 +29,11 @@
       description="Remove Smart Link component"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+      
+  <adapter
+  	  for="Products.CMFPlone.Portal.PloneSite"
+  	  provides=".interfaces.utility.ISmartlinkConfig"
+  	  factory=".utility.rn_config_adapter"
+   />
  
 </configure>
