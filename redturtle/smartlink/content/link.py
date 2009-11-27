@@ -173,12 +173,17 @@ class SmartLink(ATLink):
             if queryUtility(ISmartlinkConfig,name="smartlink_config").relativelink:            
                 object = self.getField('internalLink').get(self)
                 remote = '/'.join(object.getPhysicalPath())
+                return quote(remote, safe='?$#@/:=+;$,&%')
             else:
                 remote = ilink.absolute_url()
         else:
             remote = self.getExternalLink()
-        
+
         if not remote: remote = '' # ensure we have a string
+        backendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").backendlink
+        if remote in backendlinks:
+            frontendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").frontendlink
+            remote = frontendlinks[backendlinks.index(remote)]
         return quote(remote, safe='?$#@/:=+;$,&%')
 
     security.declarePrivate('cmf_edit')

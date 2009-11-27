@@ -41,7 +41,7 @@ class SmartlinkConfigForm(ControlPanelForm):
         self.request.response.redirect(url + '/@@smartlink-config')
         return ''
 
-    @form.action("Update the existing internal links")
+    @form.action("Update the existing links")
     def action_update(self, action, data):
         results=self.context.portal_catalog.searchResults(portal_type='Link')
         for res in results:
