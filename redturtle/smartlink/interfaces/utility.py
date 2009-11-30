@@ -12,7 +12,7 @@ class ISmartlinkConfig(Interface):
     )
     
     frontendlink = schema.List(
-        title=_(u"Frontend Link"),
+        title=_(u"Front-end Link"),
         value_type=schema.TextLine(),
         default=[],
         unique=True,
@@ -20,7 +20,7 @@ class ISmartlinkConfig(Interface):
     )
     
     backendlink = schema.List(
-        title=_(u"Backend Link"),
+        title=_(u"Back-end Link"),
         value_type=schema.TextLine(),
         default=[],
         unique=True,
