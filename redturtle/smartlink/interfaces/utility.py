@@ -8,6 +8,7 @@ class ISmartlinkConfig(Interface):
     
     relativelink = schema.Bool(
         title=_(u"Relative link"),
+        description=_(u"If selected, all links in the site will have a relative URL, rather than absolute."),
         required=False
     )
     
@@ -31,5 +32,5 @@ class ISmartlinkConfig(Interface):
     def otherFilledIfSelected(smartlink):
 
         if len(smartlink.frontendlink) != len(smartlink.backendlink):
-            raise Invalid("Ad un link di front end deve corrispondere un solo link di backend")
+            raise Invalid(_(u"Front-end link must correspond to a single back-end link"))
     
