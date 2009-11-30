@@ -116,7 +116,7 @@ msgstr "Link interno"
 #. Default: "Update the existing link"
 #: ./browser/configlet.py:44
 msgid "label_update_links"
-msgstr "Modifica i link esistenti"
+msgstr "Aggiorna i link esistenti"
 
 #. Default: "URL"
 #: ./content/link.py:39
