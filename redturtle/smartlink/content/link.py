@@ -181,9 +181,17 @@ class SmartLink(ATLink):
 
         if not remote: remote = '' # ensure we have a string
         backendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").backendlink
-        if remote in backendlinks:
-            frontendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").frontendlink
-            remote = frontendlinks[backendlinks.index(remote)]
+        for backendlink in backendlinks:
+            if backendlink[backendlink.__len__()-1:]=='/':
+                blink = backendlink[:-1]
+            else:
+                blink = backendlink
+            if remote.find(blink) == 0:
+                frontendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").frontendlink
+                frontendlink = frontendlinks[backendlinks.index(backendlink)]
+                if frontendlink[frontendlink.__len__()-1:]=='/':
+                    frontendlink = frontendlink[:-1]
+                remote = frontendlink + remote[blink.__len__():]
         return quote(remote, safe='?$#@/:=+;$,&%')
 
     security.declarePrivate('cmf_edit')
