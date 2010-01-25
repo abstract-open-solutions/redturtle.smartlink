@@ -186,12 +186,12 @@ class SmartLink(ATLink):
                 blink = backendlink[:-1]
             else:
                 blink = backendlink
-            if remote.find(blink) == 0:
+            if remote.startswith(blink):
                 frontendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").frontendlink
                 frontendlink = frontendlinks[backendlinks.index(backendlink)]
                 if frontendlink[frontendlink.__len__()-1:]=='/':
                     frontendlink = frontendlink[:-1]
-                remote = frontendlink + remote[blink.__len__():]
+                remote = remote.replace(blink,frontendlink)
         return quote(remote, safe='?$#@/:=+;$,&%')
 
     security.declarePrivate('cmf_edit')
