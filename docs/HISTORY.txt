@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.5.0
+-----
+
 * Added configuration panel to transform back-end links in front-end links [fdelia]
 * Added configuration panel to have internal links relative and not absolute [fdelia]
 
