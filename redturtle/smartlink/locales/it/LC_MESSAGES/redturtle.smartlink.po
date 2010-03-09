@@ -30,10 +30,10 @@ msgstr "Modifiche effettuate."
 msgid "Configuration Panel links"
 msgstr "Pannello di configurazione dei collegamenti"
 
-#. Default: "Configuration Tool links"
+#. Default: "Configure Smart Link"
 #: ./profiles/default/controlpanel.xml
-msgid "Configuration Tool links"
-msgstr "Strumento di configurazione dei collegamenti"
+msgid "Configure Smart Link"
+msgstr "Configura Smart Link"
 
 #: ./browser/configlet.py:19
 msgid "Enter a list of front-end links and a list of their appropriate back-end links. Each front-end link matches to the link that occupies the same position in the list of back-end. The number of elements of the lists must be the same."

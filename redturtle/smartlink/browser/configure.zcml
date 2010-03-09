@@ -19,4 +19,9 @@
         permission="cmf.ManagePortal"
         />
 
+ 	<browser:resource
+      name="link.png"
+      file="link.png"
+      />
+      
 </configure>

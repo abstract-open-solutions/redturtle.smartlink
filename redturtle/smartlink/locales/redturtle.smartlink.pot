@@ -33,9 +33,9 @@ msgstr ""
 msgid "Configuration Panel links"
 msgstr ""
 
-#. Default: "Configuration Tool links"
+#. Default: "Configure Smart Link"
 #: ./profiles/default/controlpanel.xml
-msgid "Configuration Tool links"
+msgid "Configure Smart Link"
 msgstr ""
 
 #: ./browser/configlet.py:19
