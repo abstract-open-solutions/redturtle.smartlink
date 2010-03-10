@@ -1,8 +1,14 @@
 Changelog
 =========
 
-0.6.0
+0.6.1
 -----
+
+* Fixed egg format [keul]
+* README updated [keul]
+
+0.6.0 (Unreleased)
+------------------
 
 * Changed name of tool [fdelia]
 * Added icon for tool [fdelia]

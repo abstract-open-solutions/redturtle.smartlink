@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.6.0'
+version = '0.6.1'
 
 tests_require=['zope.testing']
 
@@ -28,7 +28,7 @@ setup(name='redturtle.smartlink',
       keywords='plone link internal-link content',
       author='RedTurtle Technology',
       author_email='sviluppoplone@redturtle.net',
-      url='http://svn.plone.org/svn/collective/redturtle.smartlink',
+      url='http://plone.org/products/smart-link',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['redturtle', ],
@@ -42,11 +42,6 @@ setup(name='redturtle.smartlink',
       test_suite = 'redturtle.smartlink.tests.test_docs.test_suite',
       entry_points="""
       # -*- entry_points -*- 
-      [distutils.setup_keywords]
-      paster_plugins = setuptools.dist:assert_string_list
-
-      [egg_info.writers]
-      paster_plugins.txt = setuptools.command.egg_info:write_arg
       """,
       paster_plugins = ["ZopeSkel"],
       )
