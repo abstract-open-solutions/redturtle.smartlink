@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.6.1'
+version = '0.7.0'
 
 tests_require=['zope.testing']
 
@@ -35,13 +35,14 @@ setup(name='redturtle.smartlink',
       include_package_data=True,
       zip_safe=False,
       install_requires=['setuptools',
-                        # -*- Extra requirements: -*-
+                        'Plone>=3.3',
                         ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),
       test_suite = 'redturtle.smartlink.tests.test_docs.test_suite',
       entry_points="""
-      # -*- entry_points -*- 
+      [z3c.autoinclude.plugin]
+      target = plone
       """,
       paster_plugins = ["ZopeSkel"],
       )

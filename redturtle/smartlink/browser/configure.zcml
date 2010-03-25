@@ -11,7 +11,14 @@
       template="smartlink_view.pt"
       permission="zope2.View"
       />
-      
+
+    <browser:page
+      for="..interfaces.ISmartLink"
+      name="link_redirect_view"
+	  class=".link_redirect_view.LinkRedirectView"
+      permission="zope2.View"
+      />
+
     <browser:page
         for="Products.CMFPlone.Portal.PloneSite"
         name="smartlink-config"
