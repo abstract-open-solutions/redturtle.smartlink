@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.7.1
+-----
+
+* Version 0.7 had a stupid, unused dependency [keul]
+
 0.7.0
 -----
 

@@ -8,8 +8,6 @@ from Products.CMFCore.utils import getToolByName
 
 from plone.memoize.instance import memoize
 
-from redturtle.video.interfaces import IVideoEmbedCode
-
 class LinkRedirectView(BrowserView):
     """Simulate what the link_redirect_view.py script does for ATLink"""
     
