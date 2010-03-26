@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.7.2 (Unreleased)
+------------------
+
+* The "*smartLink*" was using *directlyProvides* instead of *alsoProvides*... this was
+  corrupting some target objects (like: it was impossible to internally link a file that use blobs) [keul]
+
 0.7.1
 -----
 

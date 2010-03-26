@@ -9,7 +9,7 @@ def smartLink(object, event):
     target = object.getInternalLink()
     
     if target and not ISmartLinked.providedBy(target):
-        interface.directlyProvides(target, ISmartLinked)
+        interface.alsoProvides(target, ISmartLinked)
 
 def keepLink(object, event):
     """ISmartLinked object has been modified/renamed.
