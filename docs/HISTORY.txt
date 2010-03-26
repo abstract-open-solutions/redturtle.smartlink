@@ -7,7 +7,7 @@ Changelog
 * Added z3c.autoinclude support [keul]
 * From this version the minimun requirement is Plone *3.3* [keul]
 * Aligned with changes done to ATLink from Plone 3.3 [keul]
-* Added a fake link_redirect_view [keul]
+* Added a fake *link_redirect_view* [keul]
 
 0.6.1
 -----
