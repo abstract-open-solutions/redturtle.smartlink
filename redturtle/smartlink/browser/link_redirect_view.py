@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
-from urlparse import urlparse
-from zope import interface
-from zope.component import getMultiAdapter
 
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
-
-from plone.memoize.instance import memoize
 
 class LinkRedirectView(BrowserView):
     """Simulate what the link_redirect_view.py script does for ATLink"""
@@ -24,4 +19,3 @@ class LinkRedirectView(BrowserView):
         else:
             # link_view.pt is a template in the plone_content skin layer
             return context.restrictedTraverse('@@smartlink_view')()
-

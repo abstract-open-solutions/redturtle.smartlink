@@ -8,7 +8,6 @@ from zope import interface
 from AccessControl import ClassSecurityInfo
 
 from Products.Archetypes import atapi
-from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 from Products.Archetypes.atapi import AnnotationStorage
 
@@ -22,12 +21,9 @@ from redturtle.smartlink.interfaces import ISmartLink, ISmartLinked
 from redturtle.smartlink.config import PROJECTNAME
 
 from Products.ATContentTypes.configuration import zconf
-from Products.validation.config import validation
-from Products.validation.validators.SupplValidators import MaxSizeValidator
 from Products.validation import V_REQUIRED
 from zope.component import queryUtility
 from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
-from Products.CMFPlone.utils import getToolByName
 
 LinkSchema = ATLinkSchema.copy() + atapi.Schema((
 
@@ -60,7 +56,9 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                    widget=ATReferenceBrowserWidget.ReferenceBrowserWidget(
                         label= _(u'label_smartlink_internallink', default='Internal link'),
                         description = _(u'help_smartlink_internallink',
-                                        default=u"Browse to find the internal page to which you wish to link. If this field is used, then any entry in the external link field will be ignored. You cannot have both an internal and external link."),
+                                        default=(u"Browse to find the internal page to which you wish to link. "
+                                                 u"If this field is used, then any entry in the external link field will be ignored. "
+                                                 u"You cannot have both an internal and external link.")),
                         force_close_on_insert = True,
                         i18n_domain='redturtle.smartlink',
                     )
@@ -82,7 +80,8 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
         validators = (('isNonEmptyFile', V_REQUIRED),
                       ('checkNewsImageMaxSize', V_REQUIRED)),
         widget = atapi.ImageWidget(
-            description = _(u'help_smartlink_image', default=u"Will be shown views that render content's images and in the link view itself"),
+            description = _(u'help_smartlink_image',
+                            default=u"Will be shown views that render content's images and in the link view itself"),
             label= _(u'label_smartlink_image', default=u'Image'),
             i18n_domain='redturtle.smartlink',
             show_content_type = False)
@@ -179,7 +178,8 @@ class SmartLink(ATLink):
         else:
             remote = self.getExternalLink()
 
-        if not remote: remote = '' # ensure we have a string
+        if not remote:
+            remote = ''  # ensure we have a string
         backendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").backendlink
         for backendlink in backendlinks:
             if backendlink[backendlink.__len__()-1:]=='/':
@@ -207,16 +207,18 @@ class SmartLink(ATLink):
             xlink=REQUEST.get('externalLink', None)
             ilink=REQUEST.get('internalLink', None)
             if (not xlink and not ilink):
-                errors['externalLink'] = _("label_internallink_externallink",default=u'You must either select an internal link or enter an external link. You cannot have both.')
+                errors['externalLink'] = _("label_internallink_externallink",
+                                           default=u'You must either select an internal link or enter an external link. You cannot have both.')
             return errors
         if REQUEST.form.get('externalLink') and REQUEST.form.get('internalLink'):
-            errors['externalLink'] = _("label_internallink_externallink",default=u'You must either select an internal link or enter an external link. You cannot have both.')
+            errors['externalLink'] = _("label_internallink_externallink",
+                                       default=u'You must either select an internal link or enter an external link. You cannot have both.')
             return errors
 
     security.declarePrivate('_processForm')
     def _processForm(self, data=1, metadata=None, REQUEST=None, values=None):
         """BBB: I need to check old value before change it...
-        I don't find a good place where to put this code. Zope3 Event don't help me"""
+        I don't find a good place where to put this code. Zope3 events don't help me"""
         form = self.REQUEST.form
         target = self.getInternalLink()
         if target and target.UID()!=form.get('internalLink') and ISmartLinked.providedBy(target):

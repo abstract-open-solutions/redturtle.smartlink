@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from zope import component
-from Products.CMFCore.utils import getToolByName
-
 INDEXES_TO_ADD = (
                   ('getRawInternalLink', 'FieldIndex', {'indexed_attrs': 'getRawInternalLink', }, ),
                   )
@@ -10,15 +7,15 @@ INDEXES_TO_ADD = (
 
 def setupVarious(context):
     portal = context.getSite()
-    
-    if context.readDataFile('redturtle.smartlink_various.txt') is None: 
+
+    if context.readDataFile('redturtle.smartlink_various.txt') is None:
         return
     addKeyToCatalog(portal)
-    
+
 
 def addKeyToCatalog(portal):
     '''Takes portal_catalog and adds a key to it
-    @param context: context providing portal_catalog 
+    @param context: context providing portal_catalog
     '''
     pc = portal.portal_catalog
     pl = portal.plone_log
