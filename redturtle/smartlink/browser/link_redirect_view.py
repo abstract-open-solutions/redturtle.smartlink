@@ -3,9 +3,10 @@
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 
+
 class LinkRedirectView(BrowserView):
     """Simulate what the link_redirect_view.py script does for ATLink"""
-    
+
     def __call__(self, request=None, response=None):
         context = self.context
         ptool = getToolByName(context, 'portal_properties')

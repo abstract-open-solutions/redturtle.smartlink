@@ -46,5 +46,5 @@ setup(name='redturtle.smartlink',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      paster_plugins = ["ZopeSkel"],
+      paster_plugins=["ZopeSkel"],
       )
