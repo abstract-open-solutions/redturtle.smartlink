@@ -1,11 +1,14 @@
 Changelog
 =========
 
-0.7.2 (Unreleased)
-------------------
+0.7.2
+-----
 
 * The "*smartLink*" was using *directlyProvides* instead of *alsoProvides*... this was
-  corrupting some target objects (like: it was impossible to internally link a file that use blobs) [keul]
+  corrupting some target objects (like: it was impossible to internally link a file that
+  use blobs) [keul]
+* Removed the Plone 3.3+ dependency because Smart Link is providing the same feature
+  given by Plone 3.3 also on older Plone versions [keul]
 
 0.7.1
 -----
