@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.7.3
+-----
+
+* fix #2 - error upgrading from 0.4.* to 0.7.* (missing utility) [mauro]
+
 0.7.2
 -----
 

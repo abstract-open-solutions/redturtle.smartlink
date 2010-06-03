@@ -162,6 +162,8 @@ class SmartLink(ATLink):
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
         
+        smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
+
         # We need to check if the self object has the reference_catalog attribute. It's an integration problem
         # with p4a that call this method when we don't have an internal link.
         if hasattr(self, 'reference_catalog'):
@@ -169,29 +171,30 @@ class SmartLink(ATLink):
         else:
             ilink = None
         if ilink:
-            if queryUtility(ISmartlinkConfig,name="smartlink_config").relativelink:            
-                object = self.getField('internalLink').get(self)
-                remote = '/'.join(object.getPhysicalPath())
-                return quote(remote, safe='?$#@/:=+;$,&%')
-            else:
-                remote = ilink.absolute_url()
+            if smartlink_config:
+                if smartlink_config.relativelink:            
+                    object = self.getField('internalLink').get(self)
+                    remote = '/'.join(object.getPhysicalPath())
+                    return quote(remote, safe='?$#@/:=+;$,&%')
+            remote = ilink.absolute_url()
         else:
             remote = self.getExternalLink()
 
         if not remote:
             remote = ''  # ensure we have a string
-        backendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").backendlink
-        for backendlink in backendlinks:
-            if backendlink[backendlink.__len__()-1:]=='/':
-                blink = backendlink[:-1]
-            else:
-                blink = backendlink
-            if remote.startswith(blink):
-                frontendlinks = queryUtility(ISmartlinkConfig,name="smartlink_config").frontendlink
-                frontendlink = frontendlinks[backendlinks.index(backendlink)]
-                if frontendlink[frontendlink.__len__()-1:]=='/':
-                    frontendlink = frontendlink[:-1]
-                remote = remote.replace(blink,frontendlink)
+        if smartlink_config:
+            backendlinks = getattr(smartlink_config, 'backendlink', [])
+            for backendlink in backendlinks:
+                if backendlink[backendlink.__len__()-1:]=='/':
+                    blink = backendlink[:-1]
+                else:
+                    blink = backendlink
+                if remote.startswith(blink):
+                    frontendlinks = smartlink_config.frontendlink
+                    frontendlink = frontendlinks[backendlinks.index(backendlink)]
+                    if frontendlink[frontendlink.__len__()-1:]=='/':
+                        frontendlink = frontendlink[:-1]
+                    remote = remote.replace(blink,frontendlink)
         return quote(remote, safe='?$#@/:=+;$,&%')
 
     security.declarePrivate('cmf_edit')
