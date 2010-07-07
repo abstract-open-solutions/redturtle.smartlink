@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from zope.interface import Interface
-from Products.ATContentTypes.interface import IATLink
+from Products.ATContentTypes.interface import IATLink, IImageContent
 
-class ISmartLink(IATLink):
+class ISmartLink(IATLink, IImageContent):
     """A link to an internal or external resource."""
 
 class ISmartLinked(Interface):

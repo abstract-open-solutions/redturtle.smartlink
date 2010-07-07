@@ -5,11 +5,7 @@ This module contains the tool of redturtle.smartlink
 import os
 from setuptools import setup, find_packages
 
-
-def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
-
-version = '0.7.3'
+version = '0.7.4'
 
 tests_require = ['zope.testing']
 
@@ -21,13 +17,11 @@ setup(name='redturtle.smartlink',
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Framework :: Plone',
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         ],
-      keywords='plone link internal-link content',
+      keywords='plone link internal-link content plonegov',
       author='RedTurtle Technology',
       author_email='sviluppoplone@redturtle.net',
       url='http://plone.org/products/smart-link',

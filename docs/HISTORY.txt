@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.7.4 (Unreleased)
+------------------
+
+* *ISmartLink* also extends the *IImageContent* interface, needed for operations like
+  create from scratch resized image formats. 
+
 0.7.3 (2010-06-03)
 ------------------
 

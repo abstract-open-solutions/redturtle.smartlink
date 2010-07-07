@@ -1,12 +1,10 @@
-Smart Link
-==========
+Smart Link manual
+=================
 
 An enhanced version of the base Plone link content type.
 
-After intalling this you'll see that the Plone link will have a new **image field** and **caption**
+After intalling this you'll see that the Plone link will have a new *image field* and *caption*
 like the News Item content type.
-
-As News Item do, the Link now behave **image resize** feature.
 
 Also the new Link type can handle internal (to Plone contents) and external links. You can use the
 internal link field to automatically attach the link value to an internal content of the portal
@@ -27,13 +25,14 @@ This will lead to problems when you are using this product for site where you ha
 backend/frontend URLs. For this reason you must use the "*Configure Smart Link*" control panel
 to handle URL transformation.
 
-You can also use a control that say to Smart Link to store relative URLs but this will also
-include the Plone site id (and you must rewrite this from Apache if you don't like this). 
+You can also use an option that says to Smart Link to store relative URLs, but this will also
+include the Plone site id in every link (and you must rewrite this from Apache if you don't
+like this). 
 
 Warning 1
 ---------
 
-Smart Link shapechange itself and hide from portal_types tool the basic Plone Link type!
+Smart Link shapechange itself and hide from portal_types tool the basic Plone Link type.
 
 Warning 2
 ---------
@@ -43,7 +42,6 @@ backend or frontend ones (for example: using a tunnel).
 
 If you run the update from (for example) "localhost:8090/site" and this URL is not the public
 or backend URL, all your internal links will be changed to this hostname!
-
 Another catalog update (from the right URL) will fix this.
 
 FileSystemStorage
@@ -53,14 +51,6 @@ The product try to register the link image field onto `iw.fss`__ if it's install
 
 __ http://pypi.python.org/pypi/iw.fss
 
-Credits
--------
-
-Part of the code of Smart Link was taken from the `ComboLink`__ Plone (and Plonegov) product.
-This project was giving the same internal link feature in old 2.1/2.5 Plone releases.
-
-__ http://plone.org/products/combolink/
-
 TODO
 ----
 
@@ -69,11 +59,45 @@ TODO
 * An anchor field. It seems useless for external resources, but can be usefull for internal link
   to Plone contents with anchors inside
 * A better clean-uninstall that really remove all stuff (like marker interfaces applyed)
+* Drop FileSystemStorage support and move to plone.app.blob.
 
-References
-----------
+Credits
+=======
 
-* Code repository: http://svn.plone.org/svn/collective/redturtle.smartlink/
-* Questions? Comments? *sviluppoplone AT redturtle.net*
-* Any great idea? Found a bug? http://plone.org/products/smart-link/issues
+Developed with the support of:
+
+* `Camera di Commercio di Ferrara`__
+  
+  .. image:: http://www.fe.camcom.it/logo_cciafe.jpg
+     :alt: CCIAA Ferrara logo
+
+* `Azienda USL Ferrara`__
+  
+  .. image:: http://www.ausl.fe.it/logo_ausl.gif
+     :alt: Azienda USL's logo
+  
+All of them supports the `PloneGov initiative`__.
+
+__ http://www.fe.camcom.it/
+__ http://www.ausl.fe.it/
+__ http://www.plonegov.it/
+
+Authors
+=======
+
+This product was developed by RedTurtle Technology team.
+
+.. image:: http://www.redturtle.net/redturtle_banner.png
+   :alt: RedTurtle Technology Site
+   :target: http://www.redturtle.net/
+
+Special thanks to *Mauro Amico* (mamico) for fixing some issues.
+
+Before this: ComboLink
+----------------------
+
+Part of the code of Smart Link was taken from the `ComboLink`__ Plone (and Plonegov) product.
+This project was giving the same internal link feature in old 2.1/2.5 Plone releases.
+
+__ http://plone.org/products/combolink/
 
