@@ -5,13 +5,13 @@ This module contains the tool of redturtle.smartlink
 import os
 from setuptools import setup, find_packages
 
-version = '0.7.4'
+version = '1.0.0rc1'
 
 tests_require = ['zope.testing']
 
 setup(name='redturtle.smartlink',
       version=version,
-      description=("An advanced ATLink version, "
+      description=("An advanced Link content type for Plone, "
                    "with image field and internal link feature"),
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
@@ -21,7 +21,7 @@ setup(name='redturtle.smartlink',
         'Framework :: Plone',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         ],
-      keywords='plone link internal-link content plonegov',
+      keywords='plone archetype link internal content plonegov',
       author='RedTurtle Technology',
       author_email='sviluppoplone@redturtle.net',
       url='http://plone.org/products/smart-link',
@@ -40,5 +40,4 @@ setup(name='redturtle.smartlink',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      paster_plugins=["ZopeSkel"],
       )

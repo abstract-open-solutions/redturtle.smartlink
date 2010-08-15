@@ -1,9 +1,10 @@
-Smart Link manual
-=================
+========================
+Smart Link Documentation
+========================
 
 An enhanced version of the base Plone link content type.
 
-After intalling this you'll see that the Plone link will have a new *image field* and *caption*
+After intalling this you'll see that the Plone link will have a new *image* and *caption* fields
 like the News Item content type.
 
 Also the new Link type can handle internal (to Plone contents) and external links. You can use the
@@ -32,7 +33,7 @@ like this).
 Warning 1
 ---------
 
-Smart Link shapechange itself and hide from portal_types tool the basic Plone Link type.
+Smart Link shapechange itself to be the Link content type, and hide the basic Plone Link type.
 
 Warning 2
 ---------
@@ -55,11 +56,6 @@ TODO
 ----
 
 * Fix this ugly error: *WARNING SecurityInfo Conflicting security declarations for setId*
-* Add more control on content icon. For remote site can be pretty the remote site favicon
-* An anchor field. It seems useless for external resources, but can be usefull for internal link
-  to Plone contents with anchors inside
-* A better clean-uninstall that really remove all stuff (like marker interfaces applyed)
-* Drop FileSystemStorage support and move to plone.app.blob.
 
 Credits
 =======
@@ -91,7 +87,7 @@ This product was developed by RedTurtle Technology team.
    :alt: RedTurtle Technology Site
    :target: http://www.redturtle.net/
 
-Special thanks to *Mauro Amico* (mamico) for fixing some issues.
+Special thanks to *Mauro Amico* (mamico) for providing support and fixing issues.
 
 Before this: ComboLink
 ----------------------

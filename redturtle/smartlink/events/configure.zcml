@@ -14,9 +14,4 @@
               handler=".linker.keepLink"
             />
 
-  <subscriber for="..interfaces.ISmartLinked
-                   zope.app.container.interfaces.IObjectRemovedEvent"
-              handler=".linker.unLink"
-            />
-
 </configure>

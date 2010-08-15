@@ -1,11 +1,19 @@
 Changelog
 =========
 
-0.7.4 (Unreleased)
-------------------
+1.0.0rc1 (Unreleased)
+---------------------
 
-* *ISmartLink* also extends the *IImageContent* interface, needed for operations like
-  create from scratch resized image formats. 
+* *ISmartLink* also extends the *IImageContent* interface [keul] 
+* A better uninstall procedure, that remove Plone UI stuff and restore original linked object status [keul]
+* Added the *favicon* field, that drive the icon's link [keul]
+* Moved secondary fields in the *Advanced* fieldset [keul]
+* Added the *anchor* field, for manage anchor in internal links [keul] 
+* The "unlink" event when deleting a referenced object has been removed: keeping an additional index only for
+  this feature was not a soo good idea. Now the internal link will display the latest memoized link [keul]
+* Aligned the *smartlink_view* with the latest Plone *link_view*, so now will also display the message
+  when you are not redirected to the target URL [keul]
+* Added tests [keul]
 
 0.7.3 (2010-06-03)
 ------------------
@@ -15,7 +23,7 @@ Changelog
 0.7.2
 -----
 
-* The "*smartLink*" was using *directlyProvides* instead of *alsoProvides*... this was
+* The "*smartLink*" event was using *directlyProvides* instead of *alsoProvides*... this was
   corrupting some target objects (like: it was impossible to internally link a file that
   use blobs) [keul]
 * Removed the Plone 3.3+ dependency because Smart Link is providing the same feature

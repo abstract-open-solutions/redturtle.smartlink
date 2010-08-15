@@ -6,6 +6,7 @@ happens at module level, which makes it faster to run each test, but
 slows down test runner startup.
 """
 
+import os
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 
@@ -76,3 +77,10 @@ class FunctionalTestCase(ptc.FunctionalTestCase):
         self.portal.portal_membership.addMember('contributor',
                                                 'secret',
                                                 roles, [])
+    def getImage(self):
+        image = '/'.join(os.path.realpath( __file__ ).split(os.path.sep )[:-2])
+        image = '%s/tests/plone_logo.png' % image
+        fd = open(image, 'rb')
+        data = fd.read()
+        fd.close()
+        return data

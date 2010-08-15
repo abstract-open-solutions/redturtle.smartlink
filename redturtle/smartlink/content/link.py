@@ -12,8 +12,10 @@ from Products.ATContentTypes.content import schemata
 from Products.Archetypes.atapi import AnnotationStorage
 
 from Products.CMFCore import permissions
+from Products.CMFCore.utils import getToolByName
 
 from Products.ATContentTypes.content.link import ATLink, ATLinkSchema
+from Products.ATContentTypes.interface import IImageContent
 from Products.ATReferenceBrowserWidget import ATReferenceBrowserWidget
 
 from redturtle.smartlink import smartlinkMessageFactory as _
@@ -64,11 +66,29 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                     )
     ),
 
+    # ******* Advanced tab *******
+    
+    atapi.StringField('anchor',
+        required = False,
+        searchable = False,
+        default='',
+        schemata=_(u"Advanced"),
+        widget = atapi.StringWidget(
+            label = _(u'label_image_anchor', default=u'Internal anchor'),
+            description = _(u'help_image_anchor',
+                            default=(u'Used only when the link is internal to the site. '
+                                     u'Use this field to obtain an internal link to a section of the target document')),
+            i18n_domain='redturtle.smartlink',
+            size = 30)
+        ),
+
+
     atapi.ImageField('image',
         required = False,
         storage = AnnotationStorage(migrate=True),
         languageIndependent = True,
         max_size = zconf.ATNewsItem.max_image_dimension,
+        schemata=_(u"Advanced"),
         sizes= {'large'   : (768, 768),
                 'preview' : (400, 400),
                 'mini'    : (200, 200),
@@ -90,12 +110,31 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
     atapi.StringField('imageCaption',
         required = False,
         searchable = True,
+        schemata=_(u"Advanced"),
         widget = atapi.StringWidget(
             description = '',
             label = _(u'label_image_caption', default=u'Image Caption'),
             i18n_domain='redturtle.smartlink',
             size = 40)
         ),
+
+    atapi.ImageField('favicon',
+        required = False,
+        storage = AnnotationStorage(migrate=True),
+        languageIndependent = True,
+        max_size = (16, 16),
+        schemata=_(u"Advanced"),
+        validators = (('isNonEmptyFile', V_REQUIRED),
+                      ('checkNewsImageMaxSize', V_REQUIRED)),
+        widget = atapi.ImageWidget(
+            description = _(u'help_smartlink_favicon',
+                            default=(u'You can customize there the content icon. '
+                                     u'You can use this for provide the icon of the remote site')),
+            label= _(u'label_smartlink_favicon', default=u'Icon'),
+            i18n_domain='redturtle.smartlink',
+            show_content_type = False)
+        ),
+
 
 ))
 
@@ -106,7 +145,7 @@ schemata.finalizeATCTSchema(LinkSchema, moveDiscussion=False)
 
 class SmartLink(ATLink):
     """A link to an internal or external resource."""
-    interface.implements(ISmartLink)
+    interface.implements(ISmartLink, IImageContent)
 
     meta_type = "ATLink"
     schema = LinkSchema
@@ -140,6 +179,12 @@ class SmartLink(ATLink):
             if image is not None and not isinstance(image, basestring):
                 # image might be None or '' for empty images
                 return image
+        elif name=='favicon':
+            field = self.getField('favicon')
+            image = field.getScale(self)
+            if image is not None and not isinstance(image, basestring):
+                # image might be None or '' for empty images
+                return image            
 
         return ATLink.__bobo_traverse__(self, REQUEST, name)
 
@@ -171,12 +216,15 @@ class SmartLink(ATLink):
         else:
             ilink = None
         if ilink:
+            anchor = self.getAnchor() or ''
+            if anchor and not anchor.startswith("#"):
+                anchor = '#'+anchor
             if smartlink_config:
                 if smartlink_config.relativelink:            
                     object = self.getField('internalLink').get(self)
                     remote = '/'.join(object.getPhysicalPath())
-                    return quote(remote, safe='?$#@/:=+;$,&%')
-            remote = ilink.absolute_url()
+                    return quote(remote + anchor, safe='?$#@/:=+;$,&%')
+            remote = ilink.absolute_url() + anchor
         else:
             remote = self.getExternalLink()
 
@@ -195,6 +243,9 @@ class SmartLink(ATLink):
                     if frontendlink[frontendlink.__len__()-1:]=='/':
                         frontendlink = frontendlink[:-1]
                     remote = remote.replace(blink,frontendlink)
+        # If we have not remote value now, let's return the "normal" field value
+        if not remote:
+            remote = self.getField('remoteUrl').get(self)
         return quote(remote, safe='?$#@/:=+;$,&%')
 
     security.declarePrivate('cmf_edit')
@@ -205,7 +256,6 @@ class SmartLink(ATLink):
 
     def post_validate(self, REQUEST, errors):
         """Check to make sure that either an internal or external link was supplied."""
-
         if not REQUEST.form.get('externalLink') and not REQUEST.form.get('internalLink'):
             xlink=REQUEST.get('externalLink', None)
             ilink=REQUEST.get('internalLink', None)
@@ -227,5 +277,20 @@ class SmartLink(ATLink):
         if target and target.UID()!=form.get('internalLink') and ISmartLinked.providedBy(target):
             interface.noLongerProvides(target, ISmartLinked)
         ATLink._processForm(self, data=data, metadata=metadata, REQUEST=REQUEST, values=values)
+
+    security.declareProtected(permissions.View, 'getIcon')
+    def getIcon(self, relative_to_portal=0):
+        """If a favicon was provided, show it"""
+        if not self.getFavicon():
+            return ATLink.getIcon(self, relative_to_portal)
+
+        utool = getToolByName(self, 'portal_url')
+        if relative_to_portal:
+            return self.absolute_url().replace(utool()+'/',"") + '/favicon'
+        # Relative to REQUEST['BASEPATH1']
+        res = utool(relative=1) + self.absolute_url().replace(utool(),"") + '/favicon'
+        while res[:1] == '/':
+            res = res[1:]
+        return res
 
 atapi.registerType(SmartLink, PROJECTNAME)

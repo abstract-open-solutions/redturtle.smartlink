@@ -18,5 +18,4 @@ class LinkRedirectView(BrowserView):
         if redirect_links and not can_edit:
             return context.REQUEST.RESPONSE.redirect(context.getRemoteUrl())
         else:
-            # link_view.pt is a template in the plone_content skin layer
             return context.restrictedTraverse('@@smartlink_view')()

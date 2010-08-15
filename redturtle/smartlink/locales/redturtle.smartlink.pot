@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-11-30 10:35+0000\n"
+"POT-Creation-Date: 2010-08-14 12:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,28 +17,31 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
 
+#: ./content/link.py:74
+msgid "Advanced"
+msgstr ""
+
 #: ./interfaces/utility.py:24
 msgid "Back-end Link"
 msgstr ""
 
-#: ./browser/configlet.py:37
+#: ./browser/configlet.py:42
 msgid "Changes canceled."
 msgstr ""
 
-#: ./browser/configlet.py:26
+#: ./browser/configlet.py:29
 msgid "Changes saved."
 msgstr ""
 
-#: ./browser/configlet.py:18
+#: ./browser/configlet.py:19
 msgid "Configuration Panel links"
 msgstr ""
 
-#. Default: "Configure Smart Link"
 #: ./profiles/default/controlpanel.xml
 msgid "Configure Smart Link"
 msgstr ""
 
-#: ./browser/configlet.py:19
+#: ./browser/configlet.py:20
 msgid "Enter a list of front-end links and a list of their appropriate back-end links. Each front-end link matches to the link that occupies the same position in the list of back-end. The number of elements of the lists must be the same."
 msgstr ""
 
@@ -54,7 +57,7 @@ msgstr ""
 msgid "If selected, all links in the site will have a relative URL, rather than absolute."
 msgstr ""
 
-#: ./browser/configlet.py:29
+#: ./browser/configlet.py:32
 msgid "No changes made."
 msgstr ""
 
@@ -62,67 +65,87 @@ msgstr ""
 msgid "Relative link"
 msgstr ""
 
-#: ./browser/configlet.py:20
+#: ./browser/configlet.py:23
 msgid "Settings"
 msgstr ""
 
+#. Default: "Used only when the link is internal to the site. Use this field to obtain an internal link to a section of the target document"
+#: ./content/link.py:77
+msgid "help_image_anchor"
+msgstr ""
+
 #. Default: "Enter the web address for a page which is not located on this server."
-#: ./content/link.py:49
+#: ./content/link.py:46
 msgid "help_smartlink_externallink"
 msgstr ""
 
+#. Default: "You can customize there the content icon. You can use this for provide the icon of the remote site"
+#: ./content/link.py:129
+msgid "help_smartlink_favicon"
+msgstr ""
+
 #. Default: "Will be shown views that render content's images and in the link view itself"
-#: ./content/link.py:85
+#: ./content/link.py:102
 msgid "help_smartlink_image"
 msgstr ""
 
 #. Default: "Browse to find the internal page to which you wish to link. If this field is used, then any entry in the external link field will be ignored. You cannot have both an internal and external link."
-#: ./content/link.py:62
+#: ./content/link.py:59
 msgid "help_smartlink_internallink"
 msgstr ""
 
 #. Default: "Cancel"
-#: ./browser/configlet.py:35
+#: ./browser/configlet.py:38
 msgid "label_cancel_links"
 msgstr ""
 
+#. Default: "Internal anchor"
+#: ./content/link.py:76
+msgid "label_image_anchor"
+msgstr ""
+
 #. Default: "Image Caption"
-#: ./content/link.py:96
+#: ./content/link.py:115
 msgid "label_image_caption"
 msgstr ""
 
 #. Default: "You must either select an internal link or enter an external link. You cannot have both."
-#: ./content/link.py:202
+#: ./content/link.py:262
 msgid "label_internallink_externallink"
 msgstr ""
 
 #. Default: "Save"
-#: ./browser/configlet.py:31
+#: ./browser/configlet.py:34
 msgid "label_save_links"
 msgstr ""
 
 #. Default: "External Link"
-#: ./content/link.py:48
+#: ./content/link.py:45
 msgid "label_smartlink_externallink"
 msgstr ""
 
+#. Default: "Icon"
+#: ./content/link.py:132
+msgid "label_smartlink_favicon"
+msgstr ""
+
 #. Default: "Image"
-#: ./content/link.py:86
+#: ./content/link.py:104
 msgid "label_smartlink_image"
 msgstr ""
 
 #. Default: "Internal link"
-#: ./content/link.py:61
+#: ./content/link.py:58
 msgid "label_smartlink_internallink"
 msgstr ""
 
 #. Default: "Update the existing link"
-#: ./browser/configlet.py:44
+#: ./browser/configlet.py:49
 msgid "label_update_links"
 msgstr ""
 
 #. Default: "URL"
-#: ./content/link.py:39
+#: ./content/link.py:36
 msgid "label_url"
 msgstr ""
 
