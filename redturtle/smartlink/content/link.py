@@ -43,7 +43,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
               searchable=True,
               required=False,
               widget=atapi.StringWidget(
-                    label= _(u'label_smartlink_externallink', default='External Link'),
+                    label= _(u'label_smartlink_externallink', default='External link'),
                     description = _(u'help_smartlink_externallink',
                                     default=u"Enter the web address for a page which is not located on this server."),
                     i18n_domain='redturtle.smartlink',

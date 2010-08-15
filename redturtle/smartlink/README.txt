@@ -2,6 +2,8 @@
 How to use Smart Link - documentation
 =====================================
 
+.. contents:: **Table of contents**
+
 Before beginning our tour, let's configure some underlying stuff.
 
     >>> from Products.Five.testbrowser import Browser
@@ -30,13 +32,12 @@ And we ensure that we get the friendly logged-in message:
 Basic use of Smart Link
 =======================
 
-First of all, Smart Link wanna be a replacement of the basic Plone ATLink content type, so
-it must work as the ATLlink does.
+First af all, explore the Smart Link features as new Plone content type.
 
 Use Smart Link as ATLink replacement
 ------------------------------------
 
-We use the 'Add new' menu to add a new content item.
+We use the "*Add new*" menu to add a new content item.
 
     >>> browser.getLink('Add new').click()
 
@@ -45,8 +46,6 @@ Then we select the type of item we want to add. In this case we select
 
     >>> browser.getControl('Link').click()
     >>> browser.getControl(name='form.button.Add').click()
-    >>> 'Link' in browser.contents
-    True
 
 We select **Link** because Smart Link replace the basic ATLink completly, stealing it's name and
 underlying type infos.
@@ -62,9 +61,9 @@ field, you can save the link only providing at least a remote or internal link.
     >>> 'You must either select an internal link or enter an external link' in browser.contents
     True
 
-In this first example we fill the *External Link* field:
+In this first example we fill the *External link* field:
 
-    >>> browser.getControl('External Link').value = portal_url + '/contact-info'
+    >>> browser.getControl('External link').value = portal_url + '/contact-info'
     >>> browser.getControl('Save').click()
     >>> 'Changes saved' in browser.contents
     True
@@ -113,8 +112,8 @@ We can now continue all other tests with our Manager user.
     >>> 'You are now logged in' in browser.contents
     True
 
-Additional fields
------------------
+Additional image fields
+-----------------------
 
 Smart link give to the contributor some additional fields, better described in the `product documentation`__.
 
@@ -192,4 +191,170 @@ information:
     <img width="16" height="16" src=".../remote-link-sample-1/favicon" alt="Link" />
     ...
     ...</html>
-    
+
+Smart Link main feature: internal link
+======================================
+
+The new features above are only minor features that cover some specific needs. The main feature of Smart
+Link (that lead to it's name, so a Plone Link that is smart, because it maintain the linked URL) is when
+it's used for *internal link to the Plone site*.
+
+You can use your Link content type and reference (without manually write down its URL) another content
+of the site.
+
+First of all we need a new content, and we will put it inside a Folder:
+
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Folder').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl('Title').value = 'Foo folder'
+    >>> browser.getControl('Save').click()
+    >>> browser.url == portal_url + '/foo-folder/'
+    True
+    >>> browser.getLink('Publish').click()
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Page').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl('Title').value = 'My manual'
+    >>> browser.getControl('Body Text').value = """<h2>Welcome!</h2>
+    ... <h3><a name="section-1"></a>Section 1</h3>
+    ... <p>Lorem ipsum...</p>"""
+    >>> browser.getControl('Save').click()
+    >>> browser.url == portal_url + '/foo-folder/my-manual'
+    True
+    >>> browser.getLink('Publish').click()
+
+Use the internal link
+---------------------
+
+Now we can create a new internal link to our page:
+
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Link').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl(name='title').value = 'Internal link: sample 2'
+
+In a Javascript-enabled browser you can use the **Internal link** field to navigate the site and find
+what you want to link.
+
+    >>> mmanual = portal.unrestrictedTraverse("foo-folder/my-manual")
+    >>> browser.getControl('Internal link').value = mmanual.UID()
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved.' in browser.contents
+    True
+    >>> mmanual.absolute_url() in browser.contents
+    True
+    >>> browser.getLink('Publish').click()
+
+Keep the internal link reference
+--------------------------------
+
+In early releases Smart Link wanted only to help users to create internal links, so the referenced document
+was deleted or moved after the link procedure, you were not helped in keeping this reference.
+
+Now a more permanent relation is kept between the two contents. To prove this let's first create another
+Smart Link that refer to the same document, but in a different way:
+
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Link').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl(name='title').value = 'Almost internal link: sample 3'
+    >>> browser.getControl('External link').value = portal_url + '/foo-folder/my-manual'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved.' in browser.contents
+    True
+    >>> mmanual.absolute_url() in browser.contents
+    True
+    >>> browser.getLink('Publish').click()
+
+We created an internal link in the basic Plone way, creating an external link to a site content's URL.
+
+To prove that, for the user point of view, this don't change anything, we can log-off then test links
+as anonymous user.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Internal link: sample 2').click()
+    >>> browser.url == portal_url + '/foo-folder/my-manual'
+    True
+    >>> browser.getLink('Almost internal link: sample 3').click()
+    >>> browser.url == portal_url + '/foo-folder/my-manual'
+    True
+
+Ok, but what really change also for the user point of view is a mechanism thats keep a sort of link
+integrity. Let's log-in again as site administrator.
+
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+
+First of all, when a site content is "*smart linked*" from a Smart Link content, it is marked with a
+special interface.
+
+    >>> from redturtle.smartlink.interfaces import ISmartLinked
+    >>> ISmartLinked.providedBy(mmanual)
+    True
+
+This marker make the magic. A set of events are related to actions taken on contents that behave those
+markers.
+
+For example what's happen when you move (or rename, it's the same...) the referenced content?
+
+    >>> browser.open(portal_url + '/foo-folder/my-manual')
+    >>> browser.getLink('Rename').click()
+    >>> browser.getControl('New Short Name').value = 'my-foo-manual'
+    >>> browser.getControl('Rename All').click()
+    >>> "Renamed 'my-manual' to 'my-foo-manual'." in browser.contents
+    True
+
+But before test this, let me do something I will explain later. I create a new fake content with the same
+id of the one we renamed:
+
+    >>> browser.open(portal_url + '/foo-folder')
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Page').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl('Title').value = 'My manual'
+    >>> browser.getControl('Body Text').value = "I'm not the REAL manual, just a fake!"
+    >>> browser.getControl('Save').click()
+    >>> browser.getLink('Publish').click()
+
+Ok. Now: to show what can be bad with basic Plone ATLink used for internal link (or also with Smart Link,
+but used in a bad way), we log-off again.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Internal link: sample 2').click()
+    >>> browser.url == portal_url + '/foo-folder/my-foo-manual'
+    True
+
+Wow, the first test is ok. The internal link has kept the URL change of the linked page!
+And the "normal link"?
+
+    >>> browser.getLink('Almost internal link: sample 3').click()
+    >>> browser.url == portal_url + '/foo-folder/my-foo-manual'
+    False
+    >>> browser.url == portal_url + '/foo-folder/my-manual'
+    True
+    >>> ""I'm not the REAL manual, just a fake!" in browser.contents
+    True
+
+As expected, it not works. We are now on the new content, the fake document. Why we created it above?
+
+In facts, the normal links *can* works normaly even for internal link and if the target object is renamed,
+because Plone has an internal mechanism that automatically make aliases for content that changed their URLs
+(the `plone.app.redirector`__ package manage this feature).
+
+__ http://pypi.python.org/pypi/plone.app.redirector
+
+This is a good solution that Plone give us, but it's not perfect:
+
+* you will have problems if you loose the data inside the Redirection utility
+* more probable, you will have problem if another content will use the same URL in future.
+
+For a good reason, if you old URL will be taken by a new content, the URL will be taken and used to
+reach this content. Obviously the *real* object with the same URL wins on *fake* object that held this
+URL some time ago...
+

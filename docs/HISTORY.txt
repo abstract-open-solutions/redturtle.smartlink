@@ -4,11 +4,13 @@ Changelog
 1.0.0rc1 (Unreleased)
 ---------------------
 
+* The explicit use of *iw.fss* has been removed. The *fss.zcml* is still there and you can include it if
+  you like [keul]
 * *ISmartLink* also extends the *IImageContent* interface [keul] 
 * A better uninstall procedure, that remove Plone UI stuff and restore original linked object status [keul]
 * Added the *favicon* field, that drive the icon's link [keul]
-* Moved secondary fields in the *Advanced* fieldset [keul]
 * Added the *anchor* field, for manage anchor in internal links [keul] 
+* Moved new and old secondary fields to the *Advanced* fieldset [keul]
 * The "unlink" event when deleting a referenced object has been removed: keeping an additional index only for
   this feature was not a soo good idea. Now the internal link will display the latest memoized link [keul]
 * Aligned the *smartlink_view* with the latest Plone *link_view*, so now will also display the message
@@ -75,7 +77,7 @@ Changelog
 0.3.1
 -----
 
-* Restored the original **remoteUrl** StringField , due to continuous bad integration with 3rd party
+* Restored the original *remoteUrl* StringField , due to continuous bad integration with 3rd party
   products (like p4a and collective.flowplayer) [keul]
 
 0.3.0

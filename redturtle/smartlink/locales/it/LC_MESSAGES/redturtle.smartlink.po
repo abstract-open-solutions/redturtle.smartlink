@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2010-08-14 12:27+0000\n"
+"POT-Creation-Date: 2010-08-15 21:50+0000\n"
 "PO-Revision-Date: 2009-11-30 12:52+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
 
-#: ./content/link.py:74
+#: ./content/link.py:75
 msgid "Advanced"
 msgstr "Avanzate"
 
@@ -68,27 +68,27 @@ msgid "Settings"
 msgstr "Impostazioni"
 
 #. Default: "Used only when the link is internal to the site. Use this field to obtain an internal link to a section of the target document"
-#: ./content/link.py:77
+#: ./content/link.py:78
 msgid "help_image_anchor"
 msgstr ""
 
 #. Default: "Enter the web address for a page which is not located on this server."
-#: ./content/link.py:46
+#: ./content/link.py:47
 msgid "help_smartlink_externallink"
 msgstr "Inserisci l'indirizzo web di una pagina non presente su questo server"
 
 #. Default: "You can customize there the content icon. You can use this for provide the icon of the remote site"
-#: ./content/link.py:129
+#: ./content/link.py:130
 msgid "help_smartlink_favicon"
 msgstr ""
 
 #. Default: "Will be shown views that render content's images and in the link view itself"
-#: ./content/link.py:102
+#: ./content/link.py:103
 msgid "help_smartlink_image"
 msgstr "Sarà visualizzata nelle viste che permettono di mostrare le immagini contenute"
 
 #. Default: "Browse to find the internal page to which you wish to link. If this field is used, then any entry in the external link field will be ignored. You cannot have both an internal and external link."
-#: ./content/link.py:59
+#: ./content/link.py:60
 msgid "help_smartlink_internallink"
 msgstr "Sfoglia per trovare la pagina interna che si desidera linkare. Se questo campo e' usato, il campo del link esterno verra' ignorato. Non e' possibile avere sia un collegamento interno che uno esterno"
 
@@ -98,17 +98,17 @@ msgid "label_cancel_links"
 msgstr "Cancella"
 
 #. Default: "Internal anchor"
-#: ./content/link.py:76
+#: ./content/link.py:77
 msgid "label_image_anchor"
 msgstr ""
 
 #. Default: "Image Caption"
-#: ./content/link.py:115
+#: ./content/link.py:116
 msgid "label_image_caption"
 msgstr "Didascalia dell'immagine"
 
 #. Default: "You must either select an internal link or enter an external link. You cannot have both."
-#: ./content/link.py:262
+#: ./content/link.py:263
 msgid "label_internallink_externallink"
 msgstr "Devi selezionare un link interno oppure un link esterno, ma non entrambi."
 
@@ -117,23 +117,23 @@ msgstr "Devi selezionare un link interno oppure un link esterno, ma non entrambi
 msgid "label_save_links"
 msgstr "Salva"
 
-#. Default: "External Link"
-#: ./content/link.py:45
+#. Default: "External link"
+#: ./content/link.py:46
 msgid "label_smartlink_externallink"
 msgstr "Link esterno"
 
 #. Default: "Icon"
-#: ./content/link.py:132
+#: ./content/link.py:133
 msgid "label_smartlink_favicon"
 msgstr "Icona"
 
 #. Default: "Image"
-#: ./content/link.py:104
+#: ./content/link.py:105
 msgid "label_smartlink_image"
 msgstr "Immagine"
 
 #. Default: "Internal link"
-#: ./content/link.py:58
+#: ./content/link.py:59
 msgid "label_smartlink_internallink"
 msgstr "Link interno"
 
@@ -143,7 +143,7 @@ msgid "label_update_links"
 msgstr "Aggiorna i link esistenti"
 
 #. Default: "URL"
-#: ./content/link.py:36
+#: ./content/link.py:37
 msgid "label_url"
 msgstr ""
 
