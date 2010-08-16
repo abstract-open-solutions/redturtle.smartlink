@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-08-15 21:50+0000\n"
+"POT-Creation-Date: 2010-08-16 20:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,6 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
-
-#: ./content/link.py:75
-msgid "Advanced"
-msgstr ""
 
 #: ./interfaces/utility.py:24
 msgid "Back-end Link"

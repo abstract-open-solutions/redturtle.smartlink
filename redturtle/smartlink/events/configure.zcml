@@ -9,9 +9,15 @@
               handler=".linker.smartLink"
             />
 
+  <subscriber for="..interfaces.ISmartLink
+                   zope.app.container.interfaces.IObjectRemovedEvent"
+              handler=".linker.cleanSmartLinked"
+            />
+
   <subscriber for="..interfaces.ISmartLinked
                    zope.app.container.interfaces.IObjectMovedEvent"
               handler=".linker.keepLink"
             />
+
 
 </configure>

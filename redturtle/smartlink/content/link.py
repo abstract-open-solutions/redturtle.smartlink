@@ -72,7 +72,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
         required = False,
         searchable = False,
         default='',
-        schemata=_(u"Advanced"),
+        schemata="Advanced",
         widget = atapi.StringWidget(
             label = _(u'label_image_anchor', default=u'Internal anchor'),
             description = _(u'help_image_anchor',
@@ -88,7 +88,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
         storage = AnnotationStorage(migrate=True),
         languageIndependent = True,
         max_size = zconf.ATNewsItem.max_image_dimension,
-        schemata=_(u"Advanced"),
+        schemata="Advanced",
         sizes= {'large'   : (768, 768),
                 'preview' : (400, 400),
                 'mini'    : (200, 200),
@@ -110,7 +110,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
     atapi.StringField('imageCaption',
         required = False,
         searchable = True,
-        schemata=_(u"Advanced"),
+        schemata="Advanced",
         widget = atapi.StringWidget(
             description = '',
             label = _(u'label_image_caption', default=u'Image Caption'),
@@ -123,7 +123,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
         storage = AnnotationStorage(migrate=True),
         languageIndependent = True,
         max_size = (16, 16),
-        schemata=_(u"Advanced"),
+        schemata="Advanced",
         validators = (('isNonEmptyFile', V_REQUIRED),
                       ('checkNewsImageMaxSize', V_REQUIRED)),
         widget = atapi.ImageWidget(
@@ -204,6 +204,7 @@ class SmartLink(ATLink):
         self.getField('internalLink').set(self, value, **kwargs)
         self.setRemoteUrl(self.getRemoteUrl())
 
+    security.declareProtected(permissions.View, 'getInternalLinkPath')
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
         
@@ -292,5 +293,23 @@ class SmartLink(ATLink):
         while res[:1] == '/':
             res = res[1:]
         return res
+
+
+    security.declareProtected(permissions.View, 'getInternalLinkPath')
+    def getInternalLinkPath(self):
+        """Get database path to the internally linked content"""
+        ilink = self.getInternalLink()
+        if ilink:
+            return '/'.join(ilink.getPhysicalPath())
+        if not ilink and not self.getExternalLink():
+            # Try this way... this seems the only way to get the referenced object when we are deleting
+            # No event will help us... neither OFS.interfaces.IObjectWillBeRemovedEvent
+            portal_url = getToolByName(self, 'portal_url')
+            internalPath = self.getRemoteUrl().replace(portal_url(), '')
+            if not internalPath.startswith('/'+portal_url.getPortalObject().getId()):
+                internalPath = '/' + portal_url.getPortalObject().getId() + internalPath
+            return internalPath
+        return None
+        
 
 atapi.registerType(SmartLink, PROJECTNAME)

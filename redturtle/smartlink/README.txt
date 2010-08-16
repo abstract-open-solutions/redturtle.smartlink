@@ -4,7 +4,7 @@ How to use Smart Link - documentation
 
 .. contents:: **Table of contents**
 
-Before beginning our tour, let's configure some underlying stuff.
+Before beginning our tour, let's configure some of the underlying stuff.
 
     >>> from Products.Five.testbrowser import Browser
     >>> from Products.PloneTestCase.setup import portal_owner, default_password
@@ -13,7 +13,7 @@ Before beginning our tour, let's configure some underlying stuff.
     >>> self.portal.error_log._ignored_exceptions = ()
     >>> browser.open(portal_url)
 
-We have the login portlet, so let's use that.
+We have the login portlet, so let's use it.
 
     >>> browser.getControl(name='__ac_name').value = portal_owner
     >>> browser.getControl(name='__ac_password').value = default_password
@@ -32,7 +32,7 @@ And we ensure that we get the friendly logged-in message:
 Basic use of Smart Link
 =======================
 
-First af all, explore the Smart Link features as new Plone content type.
+First of all, explore the Smart Link features as new Plone content type.
 
 Use Smart Link as ATLink replacement
 ------------------------------------
@@ -47,14 +47,14 @@ Then we select the type of item we want to add. In this case we select
     >>> browser.getControl('Link').click()
     >>> browser.getControl(name='form.button.Add').click()
 
-We select **Link** because Smart Link replace the basic ATLink completly, stealing it's name and
+We select **Link** because Smart Link replace the basic ATLink completely, stealing it's name and
 underlying type infos.
 
 Now we fill the form and submit it.
 
     >>> browser.getControl(name='title').value = 'Remote link: sample 1'
 
-We can't only provide the content title; even if the Plone UI display only the 'title' as required
+We can't only provide the content title; even if the Plone UI display only the "*Title*" as required
 field, you can save the link only providing at least a remote or internal link.
 
     >>> browser.getControl('Save').click()
@@ -159,10 +159,10 @@ The link icon
 Another minor feature is related to the customization of the link icon. Normally a Plone ATLink will show a
 standard type image for all links, and the same is for Smart Link contents.
 
-But with Smart Link, if you want to show another customized icon, you can. The icon image choosen as icon will
-override the one from the Plone *getIcon* method, so it wil be used in Plone views.
+But with Smart Link, if you want to show another customized icon, you can. The icon image chosen as icon
+will override the one from the Plone *getIcon* method, so it will be used in Plone views.
 
-Use this, for example, to show the favicon of the remote site. Let's personalize the icon of our link:
+Use this, for example, to show the *favicon* of the remote site. Let's personalize the icon of our link:
 
     >>> browser.getLink('Edit').click()
     >>> imagefile = cStringIO.StringIO(self.getImage())
@@ -181,7 +181,7 @@ replaced and saved with a 16x16 ones. Smart Link will not allow you to put there
     >>> favicon.height
     16
 
-To see that the favicon choosen is also used as Plone content icon, let's go on a view that use this
+To see that the favicon chosen is also used as Plone content icon, let's go on a view that use this
 information:
 
     >>> browser.open(portal_url + '/folder_listing')
@@ -250,11 +250,12 @@ what you want to link.
 Keep the internal link reference
 --------------------------------
 
-In early releases Smart Link wanted only to help users to create internal links, so the referenced document
-was deleted or moved after the link procedure, you were not helped in keeping this reference.
+In early releases Smart Link wanted only to help users to create internal links without manually copy/paste
+URLs, so if the referenced document was deleted or moved after the linking action, you were not helped
+in keeping this reference.
 
-Now a more permanent relation is kept between the two contents. To prove this let's first create another
-Smart Link that refer to the same document, but in a different way:
+Recently a more permanent relation is kept between the two contents. To prove this let's first create
+another Smart Link that refer to the same document, but in a different way:
 
     >>> browser.open(portal_url)
     >>> browser.getLink('Add new').click()
@@ -270,8 +271,9 @@ Smart Link that refer to the same document, but in a different way:
     >>> browser.getLink('Publish').click()
 
 We created an internal link in the basic Plone way, creating an external link to a site content's URL.
+Apart the boring procedure you must follow doing this, we can have broken link problem.
 
-To prove that, for the user point of view, this don't change anything, we can log-off then test links
+To prove that, from the visitor point of view, this don't change anything, we can log-off then test links
 as anonymous user.
 
     >>> browser.getLink('Log out').click()
@@ -283,22 +285,22 @@ as anonymous user.
     >>> browser.url == portal_url + '/foo-folder/my-manual'
     True
 
-Ok, but what really change also for the user point of view is a mechanism thats keep a sort of link
-integrity. Let's log-in again as site administrator.
+Ok, but what really change also is a mechanism thats keep a sort of link integrity. Let's log-in again
+as site administrator.
 
     >>> browser.getControl(name='__ac_name').value = portal_owner
     >>> browser.getControl(name='__ac_password').value = default_password
     >>> browser.getControl(name='submit').click()
 
-First of all, when a site content is "*smart linked*" from a Smart Link content, it is marked with a
-special interface.
+First of all, when a site content is "*smart linked*" from a Smart Link, it's marked with a special
+interface.
 
     >>> from redturtle.smartlink.interfaces import ISmartLinked
     >>> ISmartLinked.providedBy(mmanual)
     True
 
-This marker make the magic. A set of events are related to actions taken on contents that behave those
-markers.
+This marker make some of the magic. A set of events are related to actions taken on contents that
+behave those markers.
 
 For example what's happen when you move (or rename, it's the same...) the referenced content?
 
@@ -309,15 +311,24 @@ For example what's happen when you move (or rename, it's the same...) the refere
     >>> "Renamed 'my-manual' to 'my-foo-manual'." in browser.contents
     True
 
-But before test this, let me do something I will explain later. I create a new fake content with the same
-id of the one we renamed:
+See that Smart Link keep the relation alive:
+
+    >>> browser.getLink('Internal link: sample 2').click()
+    >>> slink = portal['internal-link-sample-2']
+    >>> slink.getRemoteUrl() == portal_url + '/foo-folder/my-foo-manual'
+    True
+    >>> slink.getField('remoteUrl').get(slink) == portal_url + '/foo-folder/my-foo-manual'
+    True
+
+But before test this as anonymous, let me do something I will explain later.
+I create a new fake content with the same id of the one we renamed:
 
     >>> browser.open(portal_url + '/foo-folder')
     >>> browser.getLink('Add new').click()
     >>> browser.getControl('Page').click()
     >>> browser.getControl(name='form.button.Add').click()
     >>> browser.getControl('Title').value = 'My manual'
-    >>> browser.getControl('Body Text').value = "I'm not the REAL manual, just a fake!"
+    >>> browser.getControl('Body Text').value = "<p>I'm not the REAL manual, just a fake!</p>"
     >>> browser.getControl('Save').click()
     >>> browser.getLink('Publish').click()
 
@@ -338,14 +349,16 @@ And the "normal link"?
     False
     >>> browser.url == portal_url + '/foo-folder/my-manual'
     True
-    >>> ""I'm not the REAL manual, just a fake!" in browser.contents
+    >>> "I'm not the REAL manual, just a fake!" in browser.contents
     True
 
-As expected, it not works. We are now on the new content, the fake document. Why we created it above?
+As expected, it not works. We are now on the new content, the fake document.
 
-In facts, the normal links *can* works normaly even for internal link and if the target object is renamed,
-because Plone has an internal mechanism that automatically make aliases for content that changed their URLs
-(the `plone.app.redirector`__ package manage this feature).
+But why we created it?
+
+In facts, the normal links approach *can* work normally even for internal link and if the target object
+is moved, because Plone has an internal mechanism that automatically make aliases for content that changed
+their URLs (the `plone.app.redirector`__ package manage this feature).
 
 __ http://pypi.python.org/pypi/plone.app.redirector
 
@@ -358,3 +371,24 @@ For a good reason, if you old URL will be taken by a new content, the URL will b
 reach this content. Obviously the *real* object with the same URL wins on *fake* object that held this
 URL some time ago...
 
+The relation from the linked content back to the Smart Link
+-----------------------------------------------------------
+
+Some action are taken also when you touch Smart Link. If you delete a Smart Link that held an internal
+link to a site's content, the referenced object is "cleaned", and the marker interface removed.
+
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.getLink('Internal link: sample 2').click()
+    >>> browser.getLink('Delete').click()
+    >>> browser.getControl('Delete').click()
+    >>> 'Internal link: sample 2 has been deleted.' in browser.contents
+    True
+    >>> ISmartLinked.providedBy(mmanual)
+    False
+
+In the same way, if I create a Smart Link for an internal reference, then I change it to link another
+content or to a remote URL, all interfaces must always be removed.
+
+XXX

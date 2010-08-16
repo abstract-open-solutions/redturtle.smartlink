@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2010-08-15 21:50+0000\n"
+"POT-Creation-Date: 2010-08-16 20:13+0000\n"
 "PO-Revision-Date: 2009-11-30 12:52+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -13,10 +13,6 @@ msgstr ""
 "Language-Name: Italian\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
-
-#: ./content/link.py:75
-msgid "Advanced"
-msgstr "Avanzate"
 
 #: ./interfaces/utility.py:24
 msgid "Back-end Link"

@@ -60,7 +60,6 @@ TODO
 * Warn the user if he used a remote URL for an internal content
 * Show title and description of an internal link
 * Evaluate a more general approach to icon substitution
-* Remove the ISmartLinked interface if we remove the Smart link
 
 Credits
 =======
