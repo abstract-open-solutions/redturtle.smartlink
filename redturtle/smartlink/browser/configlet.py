@@ -16,7 +16,7 @@ class SmartlinkConfigForm(ControlPanelForm):
 
     form_fields = form.Fields(ISmartlinkConfig)
 
-    label = _(u"Configuration Panel links")
+    label = _(u"Smart Link configuration")
     description = _((u"Enter a list of front-end links and a list of their appropriate back-end links. "
                      u"Each front-end link matches to the link that occupies the same position in the list of back-end. "
                      u"The number of elements of the lists must be the same."))
@@ -46,7 +46,7 @@ class SmartlinkConfigForm(ControlPanelForm):
         self.request.response.redirect(url + '/@@smartlink-config')
         return ''
 
-    @form.action(_(u'label_update_links', default=u'Update the existing link'), name=u'update_links')
+    @form.action(_(u'label_update_links', default=u'Update existing links'), name=u'update_links')
     def action_update(self, action, data):
         results = self.context.portal_catalog(object_provides=ISmartLink.__identifier__)
         for res in results:

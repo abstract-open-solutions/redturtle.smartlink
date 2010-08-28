@@ -58,12 +58,25 @@ We can't only provide the content title; even if the Plone UI display only the "
 field, you can save the link only providing at least a remote or internal link.
 
     >>> browser.getControl('Save').click()
-    >>> 'You must either select an internal link or enter an external link' in browser.contents
+    >>> 'Please provide the external URL, or fill the "Internal link" field' in browser.contents
+    True
+    >>> 'Please provide the internal link, or fill the "External link" field' in browser.contents
     True
 
-In this first example we fill the *External link* field:
+In the same time, we can't provide both internal or external data. Smart Link will be confused, not able
+to understand what to use.
 
     >>> browser.getControl('External link').value = portal_url + '/contact-info'
+    >>> news = portal.unrestrictedTraverse('news')
+    >>> browser.getControl('Internal link').value = news.UID()
+    >>> browser.getControl('Save').click()
+    >>> 'You must select an internal link or enter an external link. You cannot have both.' in browser.contents
+    True
+
+In this first example we provide the *External link* information (so we need to empty the *Internal link*):
+
+    >>> browser.getControl('External link').value = portal_url + '/contact-info'
+    >>> browser.getControl('Internal link').value = ''
     >>> browser.getControl('Save').click()
     >>> 'Changes saved' in browser.contents
     True
@@ -270,8 +283,9 @@ another Smart Link that refer to the same document, but in a different way:
     True
     >>> browser.getLink('Publish').click()
 
-We created an internal link in the basic Plone way, creating an external link to a site content's URL.
-Apart the boring procedure you must follow doing this, we can have broken link problem.
+We created an internal link in the basic Plone way: creating an external link to a site content's URL.
+Apart the boring procedure you must follow doing this (you need to remember and copy/paste the content's
+URL), we can have broken link problem.
 
 To prove that, from the visitor point of view, this don't change anything, we can log-off then test links
 as anonymous user.
@@ -332,8 +346,8 @@ I create a new fake content with the same id of the one we renamed:
     >>> browser.getControl('Save').click()
     >>> browser.getLink('Publish').click()
 
-Ok. Now: to show what can be bad with basic Plone ATLink used for internal link (or also with Smart Link,
-but used in a bad way), we log-off again.
+Ok. Now: to show what can be bad with basic Plone ATLink used for internal link, we log-off again and we
+use our Smart Link.
 
     >>> browser.getLink('Log out').click()
     >>> browser.open(portal_url)
@@ -341,8 +355,8 @@ but used in a bad way), we log-off again.
     >>> browser.url == portal_url + '/foo-folder/my-foo-manual'
     True
 
-Wow, the first test is ok. The internal link has kept the URL change of the linked page!
-And the "normal link"?
+Wow, the first test is ok. The internal link was aware of the URL change of the linked page!
+And the "normal" link?
 
     >>> browser.getLink('Almost internal link: sample 3').click()
     >>> browser.url == portal_url + '/foo-folder/my-foo-manual'
@@ -352,7 +366,7 @@ And the "normal link"?
     >>> "I'm not the REAL manual, just a fake!" in browser.contents
     True
 
-As expected, it not works. We are now on the new content, the fake document.
+As expected, it didn't work. We are now on the new content, the fake document.
 
 But why we created it?
 
@@ -365,11 +379,10 @@ __ http://pypi.python.org/pypi/plone.app.redirector
 This is a good solution that Plone give us, but it's not perfect:
 
 * you will have problems if you loose the data inside the Redirection utility
-* more probable, you will have problem if another content will use the same URL in future.
+* more probable, you will have problem if another content will use the same URL in future
 
-For a good reason, if you old URL will be taken by a new content, the URL will be taken and used to
-reach this content. Obviously the *real* object with the same URL wins on *fake* object that held this
-URL some time ago...
+For a good reason, if your old URL will be taken by a new content, you will reach the new content using it.
+Obviously the *real* object with the same URL wins on *fake* object that held this URL some time ago...
 
 The relation from the linked content back to the Smart Link
 -----------------------------------------------------------
@@ -391,4 +404,149 @@ link to a site's content, the referenced object is "cleaned", and the marker int
 In the same way, if I create a Smart Link for an internal reference, then I change it to link another
 content or to a remote URL, all interfaces must always be removed.
 
-XXX
+So, we create a new Smart Link to see this in action.
+
+    >>> browser.open(portal_url + '/foo-folder')
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Link').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl('Title').value = 'Yet another internal link: sample 4'
+    >>> ffolder = portal.unrestrictedTraverse("foo-folder")
+    >>> browser.getControl('Internal link').value = ffolder.UID()
+    >>> browser.getControl('Save').click()
+    >>> ffolder.absolute_url() in browser.contents
+    True
+    >>> browser.getLink('Publish').click()
+    >>> ISmartLinked.providedBy(ffolder)
+    True
+
+The first test: we simply smart link something else.
+
+    >>> browser.getLink('Edit').click()
+    >>> index = portal.unrestrictedTraverse("front-page")
+    >>> browser.getControl('Internal link').value = index.UID()
+    >>> browser.getControl('Save').click()
+    >>> index.absolute_url() in browser.contents
+    True
+    >>> ISmartLinked.providedBy(ffolder)
+    False
+    >>> ISmartLinked.providedBy(index)
+    True
+
+We see that the unlink procedure also remove the marker.
+
+We can also change the internal link to an external, remote URL. Let's try this.
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Internal link').value = ''
+    >>> browser.getControl('External link').value = 'http://planet.plone.org/'
+    >>> browser.getControl('Save').click()
+    >>> 'http://planet.plone.org/' in browser.contents
+    True
+    >>> ISmartLinked.providedBy(index)
+    False
+
+Administrative features: handle front-end/back-end URLs
+=======================================================
+
+The use of Link in Plone became problematic when your site handle different host domain. Many structured
+companies can manage a web site using different URLs from the front-end (the URL that site's visitors
+use) and back-end (also know as back-office, the URL used only internally, for managing the site itself).
+
+Basic Plone ATLink are not good in those cases. The site contributor not only need to manually copy the
+link resource, but also need to change it from the back-end version to the one that will be seen in
+the front-end.
+
+As said above Smart Link is only something more that a Plone ATLink so it suffer the same plague. But even
+if the Link content type itself will not help you in this, we provided a configuration tool that will help
+you preventing those possible errors.
+
+Using and configuring the "*Configure Smart Link*" section will make you site contributors happy again.
+
+    >>> browser.getLink('Site Setup').click()
+    >>> browser.getLink('Configure Smart Link').click()    
+    >>> 'Smart Link configuration' in browser.contents
+    True
+
+Back-end/fron-end transformation
+--------------------------------
+
+First of all we need to provide a list of back-end URLs. They must be all the URLs we know that are used
+in back-end. Let's say that our first back-end URL will be "*http://backend*" and the hostname we used
+right now.
+
+Can we also add two or more times the same URL?
+
+    >>> browser.getControl('Add Back-end Link').click()
+    >>> browser.getControl(name='form.backendlink.0.').value = 'http://backend'
+    >>> browser.getControl('Add Back-end Link').click()
+    >>> browser.getControl(name='form.backendlink.1.').value = 'http://backend'
+    >>> browser.getControl('Save').click()    
+    >>> 'One or more entries of sequence are not unique.' in browser.contents
+    True
+
+Well... no. A back-end link will be unique and transformed only in a front-end ones. However front-end
+links can be duplicated.
+
+    >>> browser.getControl(name='form.backendlink.1.').value = portal.REQUEST['URL']
+    >>> browser.getControl('Save').click()
+    >>> 'There were errors' in browser.contents
+    True
+
+We still have error because for every back-end link we must provide a front-end transformation (even if
+duplicated)
+
+    >>> browser.getControl('Add Front-end Link').click()
+    >>> browser.getControl(name='form.frontendlink.0.').value = 'http://127.0.0.1'
+    >>> browser.getControl('Save').click()
+    >>> 'There were errors' in browser.contents
+    True
+    >>> browser.getControl('Add Front-end Link').click()
+    >>> browser.getControl(name='form.frontendlink.1.').value = 'http://127.0.0.1'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved.' in browser.contents
+    True
+
+Ok. Those changes are valid only from now to the future, but if you wanna update all already present
+Smart Link, you can use the configuration panel itself: the "*Update existing links*" button.
+
+    **Be aware** that this will index again all Smart Link in the site. This is not dangerous, but
+    remember to perform this from a back-end URL.
+    If you run this (for example) from "http://localhost..." because you are accessing the site using
+    an SSH tunnel, and the URL you are using is not in the back-end list, all your internal Smart Link
+    will use "localhost"!
+
+    >>> browser.getControl('Update existing links').click()
+
+Now let's see what is changed in our links all around the site, going back to our third example.
+
+    >>> browser.getLink('Almost internal link: sample 3').click()
+    >>> 'http://127.0.0.1/plone/foo-folder/my-manual' in browser.contents
+    True
+
+As you can see there also our fake internal link is changed. The configuration tool changed *all*
+Smart Link where the transformation can be applied, without looking at the internal/external status.
+
+This is good, because also users that don't know how to handle internal link are helped.
+
+Obviously we don't need to run the migration tool when adding new links.
+
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Link').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl('Title').value = 'Transformed internal link: sample 5'
+    >>> browser.getControl('Internal link').value = ffolder.UID()
+    >>> browser.getControl('Save').click()
+    >>> 'http://127.0.0.1/plone/foo-folder' in browser.contents
+    True
+
+As said above, all new added links will feel the configuration settings.
+
+The site-root based approach
+----------------------------
+
+The Smart Link configuration have another control we skipped above. Here we explain how it work and when
+you can use it safely.
+
+XXXX

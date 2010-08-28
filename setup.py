@@ -17,7 +17,7 @@ setup(name='redturtle.smartlink',
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Framework :: Plone',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         ],

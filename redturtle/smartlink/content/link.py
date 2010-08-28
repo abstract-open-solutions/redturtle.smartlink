@@ -261,12 +261,14 @@ class SmartLink(ATLink):
             xlink=REQUEST.get('externalLink', None)
             ilink=REQUEST.get('internalLink', None)
             if (not xlink and not ilink):
-                errors['externalLink'] = _("label_internallink_externallink",
-                                           default=u'You must either select an internal link or enter an external link. You cannot have both.')
+                errors['externalLink'] = _("error_externallink_internallink_required",
+                                           default=u'Please provide the external URL, or fill the "Internal link" field')
+                errors['internalLink'] = _("error_internallink_externallink_required",
+                                           default=u'Please provide the internal link, or fill the "External link" field')
             return errors
         if REQUEST.form.get('externalLink') and REQUEST.form.get('internalLink'):
-            errors['externalLink'] = _("label_internallink_externallink",
-                                       default=u'You must either select an internal link or enter an external link. You cannot have both.')
+            errors['externalLink'] = _("error_internallink_externallink_doubled",
+                                       default=u'You must select an internal link or enter an external link. You cannot have both.')
             return errors
 
     security.declarePrivate('_processForm')
