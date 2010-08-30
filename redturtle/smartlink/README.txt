@@ -521,7 +521,7 @@ Smart Link, you can use the configuration panel itself: the "*Update existing li
 Now let's see what is changed in our links all around the site, going back to our third example.
 
     >>> browser.getLink('Almost internal link: sample 3').click()
-    >>> 'http://127.0.0.1/plone/foo-folder/my-manual' in browser.contents
+    >>> '<a href="http://127.0.0.1/plone/foo-folder/my-manual">http://127.0.0.1/plone/foo-folder/my-manual</a>' in browser.contents
     True
 
 As you can see there also our fake internal link is changed. The configuration tool changed *all*
@@ -538,7 +538,7 @@ Obviously we don't need to run the migration tool when adding new links.
     >>> browser.getControl('Title').value = 'Transformed internal link: sample 5'
     >>> browser.getControl('Internal link').value = ffolder.UID()
     >>> browser.getControl('Save').click()
-    >>> 'http://127.0.0.1/plone/foo-folder' in browser.contents
+    >>> '<a href="http://127.0.0.1/plone/foo-folder">http://127.0.0.1/plone/foo-folder</a>' in browser.contents
     True
 
 As said above, all new added links will feel the configuration settings.
@@ -549,4 +549,41 @@ The site-root based approach
 The Smart Link configuration have another control we skipped above. Here we explain how it work and when
 you can use it safely.
 
-XXXX
+We are talking of the "*Relative links*" check.
+
+When using this you can go over the back-end/front-end problem above.
+
+    >>> browser.getLink('Site Setup').click()
+    >>> browser.getLink('Configure Smart Link').click()
+    >>> browser.getControl('Relative links').click()
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved.' in browser.contents
+    True
+
+As the last configuration option, this change will be applied to all future links, or also to current
+ones if we use the "*Update existing links*" command again. This option however make differences only
+to internal link.
+
+    >>> browser.getControl('Update existing links').click()
+    >>> browser.getLink('Transformed internal link: sample 5').click()
+    >>> '<a href="/plone/foo-folder">/plone/foo-folder</a>' in browser.contents
+    True
+
+So all internal link are now relative link based on the Plone portal root.
+
+We see also that this option override all other options we have added to the "*Back-end Link*" and
+"*Front-end Link*" sections.
+
+This configuration has a *drawback*. Whatever is you portal URL, if you use a *virtual_hosting* or not,
+links will be always like this, with the "/*portalid" in front of it.
+
+You can fix this problem (no one want to see URL like "http://myhost.com/uselessid/foo"), but you are
+forced to configure your Apache to perform some URL rewrite.
+
+Also this option break a little the Smart Link idea: keep the new Link content type a simple URL
+container like the ATLink is.
+
+----
+
+That's all!
+

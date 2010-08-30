@@ -9,9 +9,15 @@ An enhanced version of the base Plone link content type.
 After installing this you'll see that the Plone link will have a new *image* and *caption* fields
 like the News Item content type.
 
+.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc1-2.png
+   :alt: Advanced fields tab
+
 Also the new Link type can handle internal (to Plone contents) and external links. You can use the
 internal link field to automatically attach the link value to an internal content of the portal
 (in a similar way used for related contents).
+
+.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc1-1.png
+   :alt: The Smart Link edit form
 
 An event-based system will also keep URLs updated even when you move/rename target document.
 
@@ -29,6 +35,9 @@ backend/frontend URLs; those problems are the same you have when you don't use t
 
 For this reason you must use the "*Configure Smart Link*" control panel to handle URL transformation.
 
+.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc1-3.png
+   :alt: The 'Configure Smart Link' panel
+
 You can also use an option that says to Smart Link to store relative URLs, but this will also
 include the Plone site id in every link (and you must rewrite this from Apache if you don't
 like this). 
@@ -36,16 +45,18 @@ like this).
 Warning 1
 ---------
 
-Smart Link shapechange itself to be the Link content type, and hide the basic Plone Link type.
+Smart Link shapechange itself to be the Link content type, and hide the basic Plone Link type. Old ATLink
+already created will continue working normally, but only new created link will behave the Smart Link
+features.
 
 Warning 2
 ---------
 
 **Pay attention** when you update the whole portal_catalog using ZMI from URLs different from
-backend or frontend ones (for example: using a tunnel).
+back-end or front-end ones (for example: using a SSH tunnel).
 
 If you run the update from (for example) "localhost:8090/site" and this URL is not the public
-or backend URL, all your internal links will be changed to this hostname!
+or one of the back-end URLs, all your internal links will be changed to this hostname!
 Another catalog update (from the right URL) will fix this.
 
 TODO
@@ -66,15 +77,17 @@ Developed with the support of:
   
   .. image:: http://www.fe.camcom.it/logo_cciafe.jpg
      :alt: CCIAA Ferrara logo
-
+  
+* `Regione Emilia Romagna`__
 * `Azienda USL Ferrara`__
   
   .. image:: http://www.ausl.fe.it/logo_ausl.gif
      :alt: Azienda USL's logo
-  
+
 All of them supports the `PloneGov initiative`__.
 
 __ http://www.fe.camcom.it/
+__ http://www.regione.emilia-romagna.it/
 __ http://www.ausl.fe.it/
 __ http://www.plonegov.it/
 

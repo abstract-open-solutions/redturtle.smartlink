@@ -255,6 +255,7 @@ class SmartLink(ATLink):
             remote_url = kwargs.get('remote_url', None)
         self.update(externalLink = remote_url, **kwargs)
 
+    security.declareProtected(permissions.View, 'post_validate')
     def post_validate(self, REQUEST, errors):
         """Check to make sure that either an internal or external link was supplied."""
         if not REQUEST.form.get('externalLink') and not REQUEST.form.get('internalLink'):
