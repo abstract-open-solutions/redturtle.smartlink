@@ -5,7 +5,7 @@
            i18n_domain="redturtle.smartlink">
  
   <subscriber for="..interfaces.ISmartLink
-                   zope.app.event.interfaces.IObjectModifiedEvent"
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".linker.smartLink"
             />
 
