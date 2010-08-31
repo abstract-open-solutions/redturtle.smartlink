@@ -4,6 +4,9 @@ Smart Link Documentation
 
 .. contents:: **Table of contents**
 
+Introduction
+============
+
 An enhanced version of the base Plone link content type.
 
 After installing this you'll see that the Plone link will have a new *image* and *caption* fields
@@ -58,6 +61,19 @@ back-end or front-end ones (for example: using a SSH tunnel).
 If you run the update from (for example) "localhost:8090/site" and this URL is not the public
 or one of the back-end URLs, all your internal links will be changed to this hostname!
 Another catalog update (from the right URL) will fix this.
+
+Safe re-install, clean uninstall
+--------------------------------
+
+You can *re-install* Smart Link safely for upgrade task or for restore changes, without any problem.
+
+If you *uninstall* it all data from Smart Link will be removed. This means that if you re-install it after
+all you internal links will not be linked to target contents.
+
+At uninstall time Smart Link restore the Plone ATLink content. However all created Smart Link are still
+Smart Link and all of theme need the product code to continue working (even if not installed).
+
+So: the uninstall is not 100% perfect.
 
 TODO
 ----
