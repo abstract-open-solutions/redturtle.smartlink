@@ -14,6 +14,7 @@ from Testing import ZopeTestCase as ztc
 
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import onsetup
+from Products.PloneTestCase.setup import default_password
 
 # When ZopeTestCase configures Zope, it will *not* auto-load products
 # in Products/. Instead, we have to use a statement such as:
@@ -73,10 +74,10 @@ class FunctionalTestCase(ptc.FunctionalTestCase):
     """
 
     def afterSetUp(self):
-        roles = ('Member', 'Contributor')
         self.portal.portal_membership.addMember('contributor',
-                                                'secret',
-                                                roles, [])
+                                                default_password,
+                                                ('Member', 'Contributor'), [])
+
     def getImage(self):
         image = '/'.join(os.path.realpath( __file__ ).split(os.path.sep )[:-2])
         image = '%s/tests/plone_logo.png' % image

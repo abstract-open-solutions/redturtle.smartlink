@@ -105,6 +105,8 @@ Let's publish the link, then change user.
     >>> browser.getLink('Log out').click()
     >>> 'You are now logged out' in browser.contents
     True
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = 'contributor'
     >>> browser.getControl('Password').value = default_password
     >>> browser.getControl('Log in').click()
@@ -120,6 +122,8 @@ Let's now move to the link:
 We can now continue all other tests with our Manager user.
 
     >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = portal_owner
     >>> browser.getControl('Password').value = default_password
     >>> browser.getControl('Log in').click()

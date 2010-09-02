@@ -84,6 +84,13 @@ TODO
 * Show title and description of an internal link
 * Evaluate a more general approach to icon substitution
 
+Additional documentation
+========================
+
+You can find more documentation on the `project's home page`__
+
+__ http://plone.org/products/smart-link/documentation/
+
 Credits
 =======
 
