@@ -13,8 +13,9 @@ Before beginning our tour, let's configure some of the underlying stuff.
     >>> self.portal.error_log._ignored_exceptions = ()
     >>> browser.open(portal_url)
 
-We have the login portlet, so let's use it.
+Let's log in. 
 
+    >>> browser.getLink('Log in').click()
     >>> browser.getControl(name='__ac_name').value = portal_owner
     >>> browser.getControl(name='__ac_password').value = default_password
     >>> browser.getControl(name='submit').click()
