@@ -307,6 +307,7 @@ as anonymous user.
 Ok, but what really change also is a mechanism thats keep a sort of link integrity. Let's log-in again
 as site administrator.
 
+    >>> browser.getLink('Log in').click()
     >>> browser.getControl(name='__ac_name').value = portal_owner
     >>> browser.getControl(name='__ac_password').value = default_password
     >>> browser.getControl(name='submit').click()
@@ -395,6 +396,7 @@ The relation from the linked content back to the Smart Link
 Some action are taken also when you touch Smart Link. If you delete a Smart Link that held an internal
 link to a site's content, the referenced object is "cleaned", and the marker interface removed.
 
+    >>> browser.getLink('Log in').click()
     >>> browser.getControl(name='__ac_name').value = portal_owner
     >>> browser.getControl(name='__ac_password').value = default_password
     >>> browser.getControl(name='submit').click()

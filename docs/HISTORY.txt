@@ -4,6 +4,7 @@ Changelog
 1.0.0rc1 (Unreleased)
 ---------------------
 
+* Plone 4 compatibility [keul]
 * The explicit use of *iw.fss* has been removed. The *fss.zcml* is still there and you can still include
   it if you like, but you must do this manually [keul]
 * *ISmartLink* also extends the *IImageContent* interface [keul] 

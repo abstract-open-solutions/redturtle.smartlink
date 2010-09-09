@@ -75,11 +75,16 @@ Smart Link and all of theme need the product code to continue working (even if n
 
 So: the uninstall is not 100% perfect.
 
+Requirements
+------------
+
+Smart Link has been tested on Plone 3.3 and 4.0. Is possible that also older Plone 3.x version can be
+used safely.
+
 TODO
 ----
 
 * Fix this ugly error: *WARNING SecurityInfo Conflicting security declarations for setId*
-* Tests on Plone 4
 * Warn the user if he used a remote URL for an internal content
 * Show title and description of an internal link
 * Evaluate a more general approach to icon substitution
