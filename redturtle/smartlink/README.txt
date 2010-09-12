@@ -304,7 +304,7 @@ as anonymous user.
     >>> browser.url == portal_url + '/foo-folder/my-manual'
     True
 
-Ok, but what really change also is a mechanism thats keep a sort of link integrity. Let's log-in again
+Ok, but what really change also is a mechanism that keep a sort of link integrity. Let's log-in again
 as site administrator.
 
     >>> browser.getLink('Log in').click()

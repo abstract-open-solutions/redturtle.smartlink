@@ -24,8 +24,8 @@ internal link field to automatically attach the link value to an internal conten
 
 An event-based system will also keep URLs updated even when you move/rename target document.
 
-Handle backend/frontend URLs
-----------------------------
+Handle back-end/front-end URLs
+------------------------------
 
 The Smart Link structure is nothing more that a ATLink content, so the way used to store URL
 in the object or in the site's catalog is the same as Plone. There is no magic behind.
@@ -34,7 +34,7 @@ For this reason, when you are using Smart Link for internal references, the *sta
 stored and used.
 
 This will lead to problems when you are using this product for site where you have different
-backend/frontend URLs; those problems are the same you have when you don't use this product!
+back-end/front-end URLs; those problems are the same you have when you don't use this product!
 
 For this reason you must use the "*Configure Smart Link*" control panel to handle URL transformation.
 
@@ -48,7 +48,7 @@ like this).
 Warning 1
 ---------
 
-Smart Link shapechange itself to be the Link content type, and hide the basic Plone Link type. Old ATLink
+Smart Link shape-change itself to be the Link content type, and hide the basic Plone Link type. Old ATLink
 already created will continue working normally, but only new created link will behave the Smart Link
 features.
 
