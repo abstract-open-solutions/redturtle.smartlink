@@ -582,7 +582,7 @@ We see also that this option override all other options we have added to the "*B
 "*Front-end Link*" sections.
 
 This configuration has a *drawback*. Whatever is you portal URL, if you use a *virtual_hosting* or not,
-links will be always like this, with the "/*portalid" in front of it.
+links will be always like this, with the "/*portalid*" in front of it.
 
 You can fix this problem (no one want to see URL like "http://myhost.com/uselessid/foo"), but you are
 forced to configure your Apache to perform some URL rewrite.

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.0rc2 (Unreleased)
+---------------------
+
+* reStructured text fixes [keul]
+
 1.0.0rc1 (2010-09-12)
 ---------------------
 
