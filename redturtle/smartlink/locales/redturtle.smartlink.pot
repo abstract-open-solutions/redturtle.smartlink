@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-08-28 13:17+0000\n"
+"POT-Creation-Date: 2010-10-29 11:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
 
-#: ./interfaces/utility.py:19
-msgid "Back-end Link"
+#: ./interfaces/utility.py:28
+msgid "Back-end URLs"
 msgstr ""
 
-#: ./browser/configlet.py:42
+#: ./browser/configlet.py:45
 msgid "Changes canceled."
 msgstr ""
 
-#: ./browser/configlet.py:29
+#: ./browser/configlet.py:32
 msgid "Changes saved."
 msgstr ""
 
@@ -33,27 +33,27 @@ msgstr ""
 msgid "Configure Smart Link"
 msgstr ""
 
-#: ./browser/configlet.py:20
-msgid "Enter a list of front-end links and a list of their appropriate back-end links. Each front-end link matches to the link that occupies the same position in the list of back-end. The number of elements of the lists must be the same."
+#: ./interfaces/utility.py:39
+msgid "Front-end URLs"
 msgstr ""
 
-#: ./interfaces/utility.py:30
-msgid "Front-end Link"
-msgstr ""
-
-#: ./interfaces/utility.py:42
+#: ./interfaces/utility.py:51
 msgid "Front-end link must correspond to a single back-end link"
 msgstr ""
 
-#: ./browser/configlet.py:32
+#: ./interfaces/utility.py:18
+msgid "Front-end main URL"
+msgstr ""
+
+#: ./browser/configlet.py:35
 msgid "No changes made."
 msgstr ""
 
-#: ./interfaces/utility.py:10
+#: ./interfaces/utility.py:9
 msgid "Relative links"
 msgstr ""
 
-#: ./browser/configlet.py:23
+#: ./browser/configlet.py:26
 msgid "Settings"
 msgstr ""
 
@@ -62,27 +62,32 @@ msgid "Smart Link configuration"
 msgstr ""
 
 #. Default: "Please provide the external URL, or fill the \"Internal link\" field"
-#: ./content/link.py:264
+#: ./content/link.py:265
 msgid "error_externallink_internallink_required"
 msgstr ""
 
 #. Default: "You must select an internal link or enter an external link. You cannot have both."
-#: ./content/link.py:270
+#: ./content/link.py:271
 msgid "error_internallink_externallink_doubled"
 msgstr ""
 
 #. Default: "Please provide the internal link, or fill the \"External link\" field"
-#: ./content/link.py:266
+#: ./content/link.py:267
 msgid "error_internallink_externallink_required"
 msgstr ""
 
 #. Default: "Put there all your possible back-office URLs you want to transform. URLs there must be unique"
-#: ./interfaces/utility.py:20
+#: ./interfaces/utility.py:29
 msgid "help_backendlink"
 msgstr ""
 
+#. Default: "Put there the site main URL you want to expone to visitors. All Smart Link that starts with the current URL of the portal will be transformed to use this URL."
+#: ./interfaces/utility.py:19
+msgid "help_frontend_main_link"
+msgstr ""
+
 #. Default: "Fill there URLs in which you want to change the relative back-end ones."
-#: ./interfaces/utility.py:31
+#: ./interfaces/utility.py:40
 msgid "help_frontendlink"
 msgstr ""
 
@@ -92,7 +97,7 @@ msgid "help_image_anchor"
 msgstr ""
 
 #. Default: "If selected, all links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
-#: ./interfaces/utility.py:11
+#: ./interfaces/utility.py:10
 msgid "help_relativelink"
 msgstr ""
 
@@ -117,7 +122,7 @@ msgid "help_smartlink_internallink"
 msgstr ""
 
 #. Default: "Cancel"
-#: ./browser/configlet.py:38
+#: ./browser/configlet.py:41
 msgid "label_cancel_links"
 msgstr ""
 
@@ -132,7 +137,7 @@ msgid "label_image_caption"
 msgstr ""
 
 #. Default: "Save"
-#: ./browser/configlet.py:34
+#: ./browser/configlet.py:37
 msgid "label_save_links"
 msgstr ""
 
@@ -157,12 +162,17 @@ msgid "label_smartlink_internallink"
 msgstr ""
 
 #. Default: "Update existing links"
-#: ./browser/configlet.py:49
+#: ./browser/configlet.py:52
 msgid "label_update_links"
 msgstr ""
 
 #. Default: "URL"
 #: ./content/link.py:37
 msgid "label_url"
+msgstr ""
+
+#. Default: "Fill this configuration panel for production settings; choose if use relative paths, an unified front-end URL, or manually enter many back-end/front-end URL (for advanced installation).\nEvery configuration option take precedence on the one that follows.\nAfter changes you (probably) want to run the \"Update existing links\" task."
+#: ./browser/configlet.py:20
+msgid "setting_description"
 msgstr ""
 

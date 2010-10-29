@@ -9,6 +9,7 @@ Changelog
 * URL utility description updated with latests features added in 1.0 version [keul]
 * fixed duplicated icon when using (or not using anymore) this product on Plone 4 (close `#4`__).
   To make those additional icon disappear from Plone UI you may need a catalog update. [keul]
+* Configuration icon was not displayed properly on Plone 4 [keul]
 
 __ http://plone.org/products/smart-link/issues/5
 __ http://plone.org/products/smart-link/issues/4

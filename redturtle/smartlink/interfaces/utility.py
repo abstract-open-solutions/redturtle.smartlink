@@ -15,17 +15,17 @@ class ISmartlinkConfig(Interface):
     )
 
     frontend_main_link = schema.TextLine(
-        title=_(u"Front-end main Link"),
+        title=_(u"Front-end main URL"),
         description=_(u'help_frontend_main_link',
                       default=(u'Put there the site main URL you want to expone to visitors. '
-                               u'All Smart Link that will start with the current URL of the portal '
-                               u'will be transformed, to use this URL. ')),
+                               u'All Smart Link that starts with the current URL of the portal '
+                               u'will be transformed to use this URL.')),
         default=u'',
         required=False
     )
 
     backendlink = schema.List(
-        title=_(u"Back-end Link"),
+        title=_(u"Back-end URLs"),
         description=_(u'help_backendlink',
                       default=(u'Put there all your possible back-office URLs you want to transform. '
                                u'URLs there must be unique')),
@@ -36,7 +36,7 @@ class ISmartlinkConfig(Interface):
     )
     
     frontendlink = schema.List(
-        title=_(u"Front-end Link"),
+        title=_(u"Front-end URLs"),
         description=_(u'help_frontendlink',
                       default=u'Fill there URLs in which you want to change the relative back-end ones.'),
         value_type=schema.TextLine(),

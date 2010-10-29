@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2010-08-28 13:17+0000\n"
+"POT-Creation-Date: 2010-10-29 11:23+0000\n"
 "PO-Revision-Date: 2010-08-27 12:31+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -14,15 +14,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
 
-#: ./interfaces/utility.py:19
-msgid "Back-end Link"
-msgstr "Collegamenti Back-end"
+#: ./interfaces/utility.py:28
+msgid "Back-end URLs"
+msgstr "URL di back-end"
 
-#: ./browser/configlet.py:42
+#: ./browser/configlet.py:45
 msgid "Changes canceled."
 msgstr "Modifiche annullate."
 
-#: ./browser/configlet.py:29
+#: ./browser/configlet.py:32
 msgid "Changes saved."
 msgstr "Modifiche effettuate."
 
@@ -31,27 +31,27 @@ msgstr "Modifiche effettuate."
 msgid "Configure Smart Link"
 msgstr "Configura Smart Link"
 
-#: ./browser/configlet.py:20
-msgid "Enter a list of front-end links and a list of their appropriate back-end links. Each front-end link matches to the link that occupies the same position in the list of back-end. The number of elements of the lists must be the same."
-msgstr "Inserisci una lista di collegamenti di front-end e la lista dei rispettivi collegamenti di back-end. Ciascun collegamento di front-end corrisponde al collegamento che occupa la stessa posizione nella lista di back-end. Il numero degli elementi delle due liste deve quindi essere lo stesso."
+#: ./interfaces/utility.py:39
+msgid "Front-end URLs"
+msgstr "URL di front-end"
 
-#: ./interfaces/utility.py:30
-msgid "Front-end Link"
-msgstr "Collegamenti Front-end"
-
-#: ./interfaces/utility.py:42
+#: ./interfaces/utility.py:51
 msgid "Front-end link must correspond to a single back-end link"
 msgstr "Ad un link di front end deve corrispondere un solo link di backend"
 
-#: ./browser/configlet.py:32
+#: ./interfaces/utility.py:18
+msgid "Front-end main URL"
+msgstr "URL di front-end primario"
+
+#: ./browser/configlet.py:35
 msgid "No changes made."
 msgstr "Nessuna modifica effettuata."
 
-#: ./interfaces/utility.py:10
+#: ./interfaces/utility.py:9
 msgid "Relative links"
 msgstr "Link relativi"
 
-#: ./browser/configlet.py:23
+#: ./browser/configlet.py:26
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -60,27 +60,32 @@ msgid "Smart Link configuration"
 msgstr "Configurazione di Smart Link"
 
 #. Default: "Please provide the external URL, or fill the \"Internal link\" field"
-#: ./content/link.py:264
+#: ./content/link.py:265
 msgid "error_externallink_internallink_required"
 msgstr "Prego fornisci un URL esterno, o compila il campo \"Link interno\""
 
 #. Default: "You must select an internal link or enter an external link. You cannot have both."
-#: ./content/link.py:270
+#: ./content/link.py:271
 msgid "error_internallink_externallink_doubled"
 msgstr "Devi selezionare un link interno o un link esterno. Non puoi fornirli entrambi."
 
 #. Default: "Please provide the internal link, or fill the \"External link\" field"
-#: ./content/link.py:266
+#: ./content/link.py:267
 msgid "error_internallink_externallink_required"
 msgstr "Prego fornisci un link interno, o compila il campo \"Link esterno\""
 
 #. Default: "Put there all your possible back-office URLs you want to transform. URLs there must be unique"
-#: ./interfaces/utility.py:20
+#: ./interfaces/utility.py:29
 msgid "help_backendlink"
 msgstr "Inserisci qui tutti i possibili URL di back-office che vuoi trasformare. Gli URL devono essere unici"
 
+#. Default: "Put there the site main URL you want to expone to visitors. All Smart Link that starts with the current URL of the portale will be transformed to use this URL."
+#: ./interfaces/utility.py:19
+msgid "help_frontend_main_link"
+msgstr "Immetti qui l'URL principale del sito che vuoi esporre al pubblico. Tutti gli Smart Link che iniziano con l'URL corrente del portale verranno trasformati per usare questo URL."
+
 #. Default: "Fill there URLs in which you want to change the relative back-end ones."
-#: ./interfaces/utility.py:31
+#: ./interfaces/utility.py:40
 msgid "help_frontendlink"
 msgstr "Inserisci qui gli URL nei quali vuoi transformare i relativi di back-office."
 
@@ -90,7 +95,7 @@ msgid "help_image_anchor"
 msgstr "Usato solo quanto il link è interno al sito. Usa questo campo per ottenere un link interno alla sezione del documento di riferimento"
 
 #. Default: "If selected, all links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
-#: ./interfaces/utility.py:11
+#: ./interfaces/utility.py:10
 msgid "help_relativelink"
 msgstr "Se selezionato, tutti i link del sito salveranno URL relativi alla radice del portal, piuttosto che assoluti. Esempio: non \"http://miohost/plone/foo\" ma \"/plone/foo\""
 
@@ -115,7 +120,7 @@ msgid "help_smartlink_internallink"
 msgstr "Sfoglia per trovare la pagina interna che si desidera linkare. Se questo campo e' usato, il campo del link esterno verra' ignorato. Non e' possibile avere sia un collegamento interno che uno esterno"
 
 #. Default: "Cancel"
-#: ./browser/configlet.py:38
+#: ./browser/configlet.py:41
 msgid "label_cancel_links"
 msgstr "Annulla"
 
@@ -130,7 +135,7 @@ msgid "label_image_caption"
 msgstr "Didascalia dell'immagine"
 
 #. Default: "Save"
-#: ./browser/configlet.py:34
+#: ./browser/configlet.py:37
 msgid "label_save_links"
 msgstr "Salva"
 
@@ -155,7 +160,7 @@ msgid "label_smartlink_internallink"
 msgstr "Link interno"
 
 #. Default: "Update existing links"
-#: ./browser/configlet.py:49
+#: ./browser/configlet.py:52
 msgid "label_update_links"
 msgstr "Aggiorna i link esistenti"
 
@@ -163,4 +168,9 @@ msgstr "Aggiorna i link esistenti"
 #: ./content/link.py:37
 msgid "label_url"
 msgstr ""
+
+#. Default: "Fill this configuration panel for production settings; choose if use relative paths, an unified front-end URL, or manually enter many back-end/front-end URL (for advanced installation).\nEvery configuration option take precedence on the one that follows.\nAfter changes you (probably) want to run the \"Update existing links\" task."
+#: ./browser/configlet.py:20
+msgid "setting_description"
+msgstr "Compila questo pannello di configurazione per le impostazioni di produzione del sito; scegli se usare percorsi relativi, un URL di front-end unificato, o se gestire manualmente vary indirizzi di back-end/front-end (per installazioni avanzate).\nOgni opzione di configurazione ha la precedenza su quella che la segue.\nDopo le modifiche è probabile voler lanciare il processo \"Aggiorna i link esistenti\"."
 

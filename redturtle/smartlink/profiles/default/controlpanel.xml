@@ -5,6 +5,7 @@
         action_id="SmartlinkConfig" appId="SmartlinkConfig"
         category="Products"
         condition_expr=""
+		icon_expr="string:$portal_url/++resource++link.png"
         url_expr="string:${portal_url}/smartlink-config"
         visible="True"
         i18n:attributes="title">
