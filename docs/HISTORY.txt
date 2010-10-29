@@ -5,6 +5,14 @@ Changelog
 ---------------------
 
 * reStructured text fixes [keul]
+* uninstall was not working under Plone 4.0 (this close `#5`__) [keul]
+* URL utility description updated with latests features added in 1.0 version [keul]
+* fixed duplicated icon when using (or not using anymore) this product on Plone 4 (close `#4`__).
+  To make those additional icon disappear from Plone UI you may need a catalog update. [keul]
+
+__ http://plone.org/products/smart-link/issues/5
+__ http://plone.org/products/smart-link/issues/4
+
 
 1.0.0rc1 (2010-09-12)
 ---------------------

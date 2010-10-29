@@ -13,6 +13,7 @@ def rn_config_adapter(context):
 class SmartlinkConfig(SimpleItem):
     """Smartlink Utility"""
     implements(ISmartlinkConfig)
+    frontend_main_link = FieldProperty(ISmartlinkConfig['frontend_main_link'])
     relativelink = FieldProperty(ISmartlinkConfig['relativelink'])
     frontendlink = FieldProperty(ISmartlinkConfig['frontendlink'])
     backendlink = FieldProperty(ISmartlinkConfig['backendlink'])

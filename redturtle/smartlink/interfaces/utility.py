@@ -3,15 +3,24 @@ from zope import schema
 from redturtle.smartlink import smartlinkMessageFactory as _
 from zope.interface import invariant, Invalid
 
-
 class ISmartlinkConfig(Interface):
-    
+
     relativelink = schema.Bool(
         title=_(u"Relative links"),
         description=_(u'help_relativelink',
                       default=(u'If selected, all links in the site will store URLs relative to the portal root, '
                                u'rather than absolute save the complete absolute ones. '
                                u'For example: no "http://myhost/plone/foo" but "/plone/foo"')),
+        required=False
+    )
+
+    frontend_main_link = schema.TextLine(
+        title=_(u"Front-end main Link"),
+        description=_(u'help_frontend_main_link',
+                      default=(u'Put there the site main URL you want to expone to visitors. '
+                               u'All Smart Link that will start with the current URL of the portal '
+                               u'will be transformed, to use this URL. ')),
+        default=u'',
         required=False
     )
 

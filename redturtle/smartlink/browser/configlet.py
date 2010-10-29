@@ -17,9 +17,12 @@ class SmartlinkConfigForm(ControlPanelForm):
     form_fields = form.Fields(ISmartlinkConfig)
 
     label = _(u"Smart Link configuration")
-    description = _((u"Enter a list of front-end links and a list of their appropriate back-end links. "
-                     u"Each front-end link matches to the link that occupies the same position in the list of back-end. "
-                     u"The number of elements of the lists must be the same."))
+    description = _(u'setting_description',
+                    default=(u'Fill this configuration panel for production settings; '
+                             u'choose if use relative paths, an unified front-end URL, or manually '
+                             u'enter many back-end/front-end URL (for advanced installation).\n'
+                             u'Every configuration option take precedence on the one that follows.\n'
+                             u'After changes you (probably) want to run the "Update existing links" task.'))
     form_name = _(u"Settings")
 
     def saveFields(self, action, data):
