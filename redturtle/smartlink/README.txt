@@ -456,27 +456,41 @@ We can also change the internal link to an external, remote URL. Let's try this.
 Administrative features: handle front-end/back-end URLs
 =======================================================
 
-The use of Link in Plone became problematic when your site handle different host domain. Many structured
-companies can manage a web site using different URLs from the front-end (the URL that site's visitors
-use) and back-end (also know as back-office, the URL used only internally, for managing the site itself).
+The use of Link in Plone became problematic when your site handle different host domain. Commonly you know
+how your public site/intranet will be used from users. So: you know you have one common hostname
+(like: http://intranet.mycompany.com/). With Plone and ATLink you will have problem if you add to the site
+new link using a non-official/non-final hostname (e.g: you begin adding contents when you still developing
+in localhost).
 
-Basic Plone ATLink are not good in those cases. The site contributor not only need to manually copy the
-link resource, but also need to change it from the back-end version to the one that will be seen in
+Also: many structured companies can manage a web site using different URLs from the front-end (the URL
+that site's visitors use) and back-end (also know as back-office, the URL used only internally, for
+managing the site itself).
+
+Again, basic Plone ATLink are not good in those cases. The site contributor not only need to manually copy
+the link resource, but also need to change it from the back-end version to the one that will be seen in
 the front-end.
 
 As said above Smart Link is only something more that a Plone ATLink so it suffer the same plague. But even
 if the Link content type itself will not help you in this, we provided a configuration tool that will help
 you preventing those possible errors.
 
-Using and configuring the "*Configure Smart Link*" section will make you site contributors happy again.
+Using and configuring the "*Configure Smart Link*" section will make you site's contributors happy again.
 
     >>> browser.getLink('Site Setup').click()
     >>> browser.getLink('Configure Smart Link').click()    
     >>> 'Smart Link configuration' in browser.contents
     True
 
-Back-end/fron-end transformation
---------------------------------
+Simple case: you know your official site URL
+--------------------------------------------
+
+As said above, let's now suppose to be in an intranet that will be publishes as *http://intranet.mycompany.com/*.
+We know that, thatever internal link *must* begin with this URL.
+
+XXX
+
+Advanced case: back-end/fron-end transformation
+-----------------------------------------------
 
 First of all we need to provide a list of back-end URLs. They must be all the URLs we know that are used
 in back-end. Let's say that our first back-end URL will be "*http://backend*" and the hostname we used
@@ -484,9 +498,9 @@ right now.
 
 Can we also add two or more times the same URL?
 
-    >>> browser.getControl('Add Back-end Link').click()
+    >>> browser.getControl('Add Back-end URLs').click()
     >>> browser.getControl(name='form.backendlink.0.').value = 'http://backend'
-    >>> browser.getControl('Add Back-end Link').click()
+    >>> browser.getControl('Add Back-end URLs').click()
     >>> browser.getControl(name='form.backendlink.1.').value = 'http://backend'
     >>> browser.getControl('Save').click()    
     >>> 'One or more entries of sequence are not unique.' in browser.contents
@@ -503,12 +517,12 @@ links can be duplicated.
 We still have error because for every back-end link we must provide a front-end transformation (even if
 duplicated)
 
-    >>> browser.getControl('Add Front-end Link').click()
+    >>> browser.getControl('Add Front-end URLs').click()
     >>> browser.getControl(name='form.frontendlink.0.').value = 'http://127.0.0.1'
     >>> browser.getControl('Save').click()
     >>> 'There were errors' in browser.contents
     True
-    >>> browser.getControl('Add Front-end Link').click()
+    >>> browser.getControl('Add Front-end URLs').click()
     >>> browser.getControl(name='form.frontendlink.1.').value = 'http://127.0.0.1'
     >>> browser.getControl('Save').click()
     >>> 'Changes saved.' in browser.contents

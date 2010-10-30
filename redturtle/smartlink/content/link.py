@@ -210,12 +210,14 @@ class SmartLink(ATLink):
         
         smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
 
-        # We need to check if the self object has the reference_catalog attribute. It's an integration problem
-        # with p4a that call this method when we don't have an internal link.
+        # We need to check if the self object has the reference_catalog attribute.
+        # It's an integration problem with p4a that call this method when we don't have an internal link.
         if hasattr(self, 'reference_catalog'):
             ilink = self.getInternalLink()
         else:
             ilink = None
+
+        # If we are using an internal link
         if ilink:
             anchor = self.getAnchor() or ''
             if anchor and not anchor.startswith("#"):
@@ -229,22 +231,34 @@ class SmartLink(ATLink):
         else:
             remote = self.getExternalLink()
 
+        # Now check the tool configuration
         if not remote:
             remote = ''  # ensure we have a string
         if smartlink_config:
             backendlinks = getattr(smartlink_config, 'backendlink', [])
-            for backendlink in backendlinks:
-                if backendlink[backendlink.__len__()-1:]=='/':
-                    blink = backendlink[:-1]
-                else:
-                    blink = backendlink
-                if remote.startswith(blink):
-                    frontendlinks = smartlink_config.frontendlink
-                    frontendlink = frontendlinks[backendlinks.index(backendlink)]
-                    if frontendlink[frontendlink.__len__()-1:]=='/':
-                        frontendlink = frontendlink[:-1]
-                    remote = remote.replace(blink,frontendlink)
-        # If we have not remote value now, let's return the "normal" field value
+            frontend_main_link = getattr(smartlink_config, 'frontend_main_link', '')
+
+            # Unified front-end link
+            if frontend_main_link:
+                portal_url = getToolByName(self, 'portal_url')()
+                if remote.startswith(portal_url):
+                    remote = remote.replace(portal_url, frontend_main_link)
+            # Advanced back-end/front-end configuration
+            else:
+                for backendlink in backendlinks:
+                    if backendlink[-1]=='/':
+                        blink = backendlink[:-1]
+                    else:
+                        blink = backendlink
+                    if remote.startswith(blink):
+                        frontendlinks = smartlink_config.frontendlink
+                        frontendlink = frontendlinks[backendlinks.index(backendlink)]
+                        if frontendlink[-1]=='/':
+                            frontendlink = frontendlink[:-1]
+                        remote = remote.replace(blink,frontendlink)
+                        break
+
+        # If we still haven't remote value now, let's return the "normal" field value
         if not remote:
             remote = self.getField('remoteUrl').get(self)
         return quote(remote, safe='?$#@/:=+;$,&%')
