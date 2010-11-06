@@ -12,14 +12,14 @@ An enhanced version of the base Plone link content type.
 After installing this you'll see that the Plone link will have a new *image* and *caption* fields
 like the News Item content type.
 
-.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc1-2.png
+.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc2-1.png
    :alt: Advanced fields tab
 
 Also the new Link type can handle internal (to Plone contents) and external links. You can use the
 internal link field to automatically attach the link value to an internal content of the portal
 (in a similar way used for related contents).
 
-.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc1-1.png
+.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc2-2.png
    :alt: The Smart Link edit form
 
 An event-based system will also keep URLs updated even when you move/rename target document.
@@ -38,7 +38,7 @@ back-end/front-end URLs; those problems are the same you have when you don't use
 
 For this reason you must use the "*Configure Smart Link*" control panel to handle URL transformation.
 
-.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc1-3.png
+.. image:: http://keul.it/images/plone/redturtle.smartlink-1.0.0rc2-3.png
    :alt: The 'Configure Smart Link' panel
 
 You can also use an option that says to Smart Link to store relative URLs, but this will also
@@ -128,7 +128,10 @@ This product was developed by RedTurtle Technology team.
    :alt: RedTurtle Technology Site
    :target: http://www.redturtle.net/
 
-Special thanks to *Mauro Amico* (mamico) for providing support and fixing issues.
+Thanks to:
+
+* *Mauro Amico* (mamico) for providing support and fixing issues.
+* *Stefan Strasser* for testing the product on Plone 4, and reports problems
 
 Before this: ComboLink
 ----------------------

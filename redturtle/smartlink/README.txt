@@ -48,8 +48,9 @@ Then we select the type of item we want to add. In this case we select
     >>> browser.getControl('Link').click()
     >>> browser.getControl(name='form.button.Add').click()
 
-We select **Link** because Smart Link replace the basic ATLink completely, stealing it's name and
-underlying type infos.
+We select **Link** because Smart Link replace the basic ATLink completly, stealing it's name and
+underlying type infos. This is quite good, as every 3rd-party products that can behave integration
+with basic ATLink content, will also works well with Smart Link.
 
 Now we fill the form and submit it.
 
@@ -118,6 +119,8 @@ Let's now move to the link:
     >>> browser.getLink('Remote link: sample 1').click()
     >>> browser.url == portal_url + '/contact-info'
     True
+
+As you see now we are in the target page, not in the link context.
 
 We can now continue all other tests with our Manager user.
 
@@ -214,8 +217,8 @@ Smart Link main feature: internal link
 ======================================
 
 The new features above are only minor features that cover some specific needs. The main feature of Smart
-Link (that lead to it's name, so a Plone Link that is smart, because it maintain the linked URL) is when
-it's used for *internal link to the Plone site*.
+Link (that lead to it's name, so a Plone Link that is "smart and cool", because it maintain the linked URL)
+is when it's used for *internal link to a Plone site content*.
 
 You can use your Link content type and reference (without manually write down its URL) another content
 of the site.
@@ -268,7 +271,7 @@ what you want to link.
 Keep the internal link reference
 --------------------------------
 
-In early releases Smart Link wanted only to help users to create internal links without manually copy/paste
+In early releases, Smart Link wanted only to help users to create internal links without manually copy/paste
 URLs, so if the referenced document was deleted or moved after the linking action, you were not helped
 in keeping this reference.
 
@@ -376,7 +379,7 @@ As expected, it didn't work. We are now on the new content, the fake document.
 
 But why we created it?
 
-In facts, the normal links approach *can* work normally even for internal link and if the target object
+In facts, the normal links approach *can* works normally even for internal link and if the target object
 is moved, because Plone has an internal mechanism that automatically make aliases for content that changed
 their URLs (the `plone.app.redirector`__ package manage this feature).
 
@@ -453,14 +456,14 @@ We can also change the internal link to an external, remote URL. Let's try this.
     >>> ISmartLinked.providedBy(index)
     False
 
-Administrative features: handle front-end/back-end URLs
+Administrative features: handle back-end/front-end URLs
 =======================================================
 
 The use of Link in Plone became problematic when your site handle different host domain. Commonly you know
 how your public site/intranet will be used from users. So: you know you have one common hostname
 (like: http://intranet.mycompany.com/). With Plone and ATLink you will have problem if you add to the site
 new link using a non-official/non-final hostname (e.g: you begin adding contents when you still developing
-in localhost).
+in "localhost").
 
 Also: many structured companies can manage a web site using different URLs from the front-end (the URL
 that site's visitors use) and back-end (also know as back-office, the URL used only internally, for
@@ -485,14 +488,41 @@ Simple case: you know your official site URL
 --------------------------------------------
 
 As said above, let's now suppose to be in an intranet that will be publishes as *http://intranet.mycompany.com/*.
-We know that, thatever internal link *must* begin with this URL.
+We know that every internal link *must* begin with this URL.
 
-XXX
+Let now suppose that a user works onto this intranet from a staging URL as *localhost*.
+
+    >>> browser.getControl('Front-end main URL').value = 'http://intranet.mycompany.com'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved.' in browser.contents
+    True
+
+Now let's bo back to site root for making an internal link.
+
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Add new').click()
+    >>> browser.getControl('Link').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> browser.getControl('Title').value = 'Transformed official internal link: sample 5'
+    >>> browser.getControl('Internal link').value = ffolder.UID()
+    >>> browser.getControl('Save').click()
+    >>> '<a href="http://intranet.mycompany.com/foo-folder">http://intranet.mycompany.com/foo-folder</a>' in browser.contents
+    True
+
+So: without a not-so-complex configuration we have now a set-up that will automatically handle internal links.
 
 Advanced case: back-end/fron-end transformation
 -----------------------------------------------
 
-First of all we need to provide a list of back-end URLs. They must be all the URLs we know that are used
+Now we see the more advanced case.
+
+    >>> browser.getLink('Site Setup').click()
+    >>> browser.getLink('Configure Smart Link').click()    
+    >>> 'Smart Link configuration' in browser.contents
+    True
+    >>> browser.getControl('Front-end main URL').value = ''
+
+Now we need to provide a list of back-end URLs. They must be all the URLs we know that are used
 in back-end. Let's say that our first back-end URL will be "*http://backend*" and the hostname we used
 right now.
 
@@ -556,7 +586,7 @@ Obviously we don't need to run the migration tool when adding new links.
     >>> browser.getLink('Add new').click()
     >>> browser.getControl('Link').click()
     >>> browser.getControl(name='form.button.Add').click()
-    >>> browser.getControl('Title').value = 'Transformed internal link: sample 5'
+    >>> browser.getControl('Title').value = 'Transformed internal link: sample 6'
     >>> browser.getControl('Internal link').value = ffolder.UID()
     >>> browser.getControl('Save').click()
     >>> '<a href="http://127.0.0.1/plone/foo-folder">http://127.0.0.1/plone/foo-folder</a>' in browser.contents
@@ -586,7 +616,7 @@ ones if we use the "*Update existing links*" command again. This option however 
 to internal link.
 
     >>> browser.getControl('Update existing links').click()
-    >>> browser.getLink('Transformed internal link: sample 5').click()
+    >>> browser.getLink('Transformed internal link: sample 6').click()
     >>> '<a href="/plone/foo-folder">/plone/foo-folder</a>' in browser.contents
     True
 
@@ -603,6 +633,10 @@ forced to configure your Apache to perform some URL rewrite.
 
 Also this option break a little the Smart Link idea: keep the new Link content type a simple URL
 container like the ATLink is.
+
+However: this kind of configuration is never unconsistent; you will never find situations where the
+URL saved in the catalog is not what you expects. Instead this can happens if you badly configure options
+above (or forget to configure at all).
 
 ----
 

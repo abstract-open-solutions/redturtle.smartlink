@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.0rc2 (Unreleased)
+1.0.0rc2 (2010-11-06)
 ---------------------
 
 * reStructured text fixes [keul]
@@ -10,7 +10,7 @@ Changelog
 * fixed duplicated icon when using (or not using anymore) this product on Plone 4 (close `#4`__).
   To make those additional icon disappear from Plone UI you may need a catalog update. [keul]
 * configuration icon was not displayed properly on Plone 4 [keul]
-* added the "*Front-end main URL*" feature (close #3) [keul]
+* added the "*Front-end main URL*" feature (close `#3`__) [keul]
 
 __ http://plone.org/products/smart-link/issues/5
 __ http://plone.org/products/smart-link/issues/4
