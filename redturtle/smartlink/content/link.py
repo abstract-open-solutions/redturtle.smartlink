@@ -156,6 +156,26 @@ class SmartLink(ATLink):
     
     security = ClassSecurityInfo()
 
+    security.declareProtected(permissions.View, 'size')
+    def size(self):
+        """Get size of the content
+        """
+        return self.get_size()
+
+    security.declareProtected(permissions.View, 'get_size')
+    def get_size(self):
+        """ZMI / Plone get size method
+        Size is given from the sum of the two image field
+        """
+        size = 0
+        f = self.getField('image')
+        if f is not None:
+            size+=f.get_size(self)
+        f = self.getField('favicon')
+        if f is not None:
+            size+=f.get_size(self)        
+        return size
+
     security.declareProtected(permissions.View, 'tag')
     def tag(self, **kwargs):
         """Generate image tag using the api of the ImageField

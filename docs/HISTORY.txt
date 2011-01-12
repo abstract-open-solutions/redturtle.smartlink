@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1.0 (Unreleased)
+------------------
+
+* size of a smart link is the size of its image [keul]
+
 1.0.0rc2 (2010-11-06)
 ---------------------
 
