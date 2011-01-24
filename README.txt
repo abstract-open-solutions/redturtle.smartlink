@@ -103,14 +103,14 @@ Developed with the support of:
 
 * `Camera di Commercio di Ferrara`__
   
-  .. image:: http://www.fe.camcom.it/logo_cciafe.jpg
-     :alt: CCIAA Ferrara logo
+  .. image:: http://www.fe.camcom.it/cciaa-logo.png/
+     :alt: CCIAA Ferrara - logo
   
 * `Regione Emilia Romagna`__
 * `Azienda USL Ferrara`__
   
   .. image:: http://www.ausl.fe.it/logo_ausl.gif
-     :alt: Azienda USL's logo
+     :alt: Azienda USL - logo
 
 All of them supports the `PloneGov initiative`__.
 
