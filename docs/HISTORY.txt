@@ -49,8 +49,8 @@ __ http://plone.org/products/smart-link/issues/3
 
 * fix #2 - error upgrading from 0.4.* to 0.7.* (missing utility) [mauro]
 
-0.7.2
------
+0.7.2 (2010-04-06)
+------------------
 
 * The "*smartLink*" event was using *directlyProvides* instead of *alsoProvides*... this was
   corrupting some target objects (like: it was impossible to internally link a file that
@@ -58,21 +58,21 @@ __ http://plone.org/products/smart-link/issues/3
 * Removed the Plone 3.3+ dependency because Smart Link is providing the same feature
   given by Plone 3.3 also on older Plone versions [keul]
 
-0.7.1
------
+0.7.1 (2010-03-26)
+------------------
 
 * Version 0.7 had a stupid, unused dependency [keul]
 
-0.7.0
------
+0.7.0 (2010-03-26)
+------------------
 
 * Added z3c.autoinclude support [keul]
 * From this version the minimum requirement is Plone *3.3* [keul]
 * Aligned with changes done to ATLink from Plone 3.3 [keul]
 * Added a fake *link_redirect_view* [keul]
 
-0.6.1
------
+0.6.1 (2010-03-10)
+------------------
 
 * Fixed egg format [keul]
 * README updated [keul]
@@ -83,32 +83,32 @@ __ http://plone.org/products/smart-link/issues/3
 * Changed name of tool [fdelia]
 * Added icon for tool [fdelia]
 
-0.5.1
------
+0.5.1 (2010-02-02)
+------------------
 
 * Fix for the corrupted version 0.5.0 [fdelia]
 
-0.5.0
------
+0.5.0 (2010-01-25)
+------------------
 
 * Added configuration panel to transform back-end links in front-end links [fdelia]
 * Added configuration panel to have internal links relative and not absolute [fdelia]
 
-0.4.0
------
+0.4.0 (2009-09-12)
+------------------
 
 * Keep relations of internal link even if the target content is renamed/moved [keul]
 * Added a marker interface for internally linked contents [keul]
 * When target object is deleted, the internal relation became a normal absolute URL info [keul]
 
-0.3.1
------
+0.3.1 (2009-08-30)
+------------------
 
 * Restored the original *remoteUrl* StringField , due to continuous bad integration with 3rd party
   products (like p4a and collective.flowplayer) [keul]
 
-0.3.0
------
+0.3.0 (2009-08-02)
+------------------
 
 * Fixed syntax error on relation name ("internal_page" was "interal_page") [keul]
 * Disabled the backup of basic Plone ATLink [keul]
@@ -118,16 +118,16 @@ __ http://plone.org/products/smart-link/issues/3
 * Created italian translation [micecchi]
 * Clean uninstall (restoring the original ATLink in portal_types) [keul]
 
-0.2.0
------
+0.2.0beta (2009-04-03)
+----------------------
 
 * Added a lot of ATLink methods not migrated to the SmartLink class.
 * Fixed a bug that lead all reordering actions in folders with SmartLink inside to failure (or to chaotic results).
   After migrating to this version from the 0.1.0 you can also launch the **fix_meta_data** external method
   or your folder will remains broken.
 
-0.1.0
------
+0.1.0dev (2009-03-27)
+---------------------
 
 * Initial release
 
