@@ -70,7 +70,7 @@ to understand what to use.
 
     >>> browser.getControl('External link').value = portal_url + '/contact-info'
     >>> news = portal.unrestrictedTraverse('news')
-    >>> browser.getControl('Internal link').value = news.UID()
+    >>> browser.getControl(name='internalLink').value = news.UID()
     >>> browser.getControl('Save').click()
     >>> 'You must select an internal link or enter an external link. You cannot have both.' in browser.contents
     True
@@ -78,7 +78,7 @@ to understand what to use.
 In this first example we provide the *External link* information (so we need to empty the *Internal link*):
 
     >>> browser.getControl('External link').value = portal_url + '/contact-info'
-    >>> browser.getControl('Internal link').value = ''
+    >>> browser.getControl(name='internalLink').value = ''
     >>> browser.getControl('Save').click()
     >>> 'Changes saved' in browser.contents
     True
@@ -161,7 +161,7 @@ We need also to test if our link really behave an image now:
     
     >>> contactinfo_link = portal['remote-link-sample-1']
     >>> contactinfo_link.unrestrictedTraverse('image_large')
-    <Image at .../remote-link-sample-1/image_large>
+    <ImageScale at /plone/remote-link-sample-1/image_large>
 
 Now the Smart Link view also display the image and the caption under it in the item's view:
 
@@ -260,7 +260,7 @@ In a Javascript-enabled browser you can use the **Internal link** field to navig
 what you want to link.
 
     >>> mmanual = portal.unrestrictedTraverse("foo-folder/my-manual")
-    >>> browser.getControl('Internal link').value = mmanual.UID()
+    >>> browser.getControl(name='internalLink').value = mmanual.UID()
     >>> browser.getControl('Save').click()
     >>> 'Changes saved.' in browser.contents
     True
@@ -422,7 +422,7 @@ So, we create a new Smart Link to see this in action.
     >>> browser.getControl(name='form.button.Add').click()
     >>> browser.getControl('Title').value = 'Yet another internal link: sample 4'
     >>> ffolder = portal.unrestrictedTraverse("foo-folder")
-    >>> browser.getControl('Internal link').value = ffolder.UID()
+    >>> browser.getControl(name='internalLink').value = ffolder.UID()
     >>> browser.getControl('Save').click()
     >>> ffolder.absolute_url() in browser.contents
     True
@@ -434,7 +434,7 @@ The first test: we simply smart link something else.
 
     >>> browser.getLink('Edit').click()
     >>> index = portal.unrestrictedTraverse("front-page")
-    >>> browser.getControl('Internal link').value = index.UID()
+    >>> browser.getControl(name='internalLink').value = index.UID()
     >>> browser.getControl('Save').click()
     >>> index.absolute_url() in browser.contents
     True
@@ -448,7 +448,7 @@ We see that the unlink procedure also remove the marker.
 We can also change the internal link to an external, remote URL. Let's try this.
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Internal link').value = ''
+    >>> browser.getControl(name='internalLink').value = ''
     >>> browser.getControl('External link').value = 'http://planet.plone.org/'
     >>> browser.getControl('Save').click()
     >>> 'http://planet.plone.org/' in browser.contents
@@ -504,7 +504,7 @@ Now let's bo back to site root for making an internal link.
     >>> browser.getControl('Link').click()
     >>> browser.getControl(name='form.button.Add').click()
     >>> browser.getControl('Title').value = 'Transformed official internal link: sample 5'
-    >>> browser.getControl('Internal link').value = ffolder.UID()
+    >>> browser.getControl(name='internalLink').value = ffolder.UID()
     >>> browser.getControl('Save').click()
     >>> '<a href="http://intranet.mycompany.com/foo-folder">http://intranet.mycompany.com/foo-folder</a>' in browser.contents
     True
@@ -587,7 +587,7 @@ Obviously we don't need to run the migration tool when adding new links.
     >>> browser.getControl('Link').click()
     >>> browser.getControl(name='form.button.Add').click()
     >>> browser.getControl('Title').value = 'Transformed internal link: sample 6'
-    >>> browser.getControl('Internal link').value = ffolder.UID()
+    >>> browser.getControl(name='internalLink').value = ffolder.UID()
     >>> browser.getControl('Save').click()
     >>> '<a href="http://127.0.0.1/plone/foo-folder">http://127.0.0.1/plone/foo-folder</a>' in browser.contents
     True
