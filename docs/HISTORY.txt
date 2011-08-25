@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 * size of a smart link is the size of its image [keul]
+* finally removed the fss.zcml. It's time to blob man [keul]
 
 1.0.0rc2 (2010-11-06)
 ---------------------
