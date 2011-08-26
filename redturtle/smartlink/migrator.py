@@ -4,4 +4,4 @@ from plone.app.blob.migrations import migrate
 
 
 def migrateSmartLink(context):
-    return migrate(context, 'ATLink')
+    return migrate(context, 'Link','ATLink')
