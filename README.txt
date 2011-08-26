@@ -45,6 +45,19 @@ You can also use an option that says to Smart Link to store relative URLs, but t
 include the Plone site id in every link (and you must rewrite this from Apache if you don't
 like this). 
 
+Blob and Blob migration tool
+----------------------------
+SmartLink supports (starting from 1.0.0 revision) the use of blob for the image field.
+In this way we doesn't increases the size of Data.fs .
+
+The Blob support for SmartLink is activated only if plone.app.blob is installed.
+Plone 4 has Blob as storage default for the images and the files.
+Into Plone 3.x you have to install it by yourself.
+
+If you have already created some SmarkLink with an old version without Bolb you have to launch the 
+migration script (blob-smartlink-migration). 
+Eg: http://localhost:8090/site/blob-smartlink-migration
+
 Warning 1
 ---------
 

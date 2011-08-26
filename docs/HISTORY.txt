@@ -6,6 +6,8 @@ Changelog
 
 * size of a smart link is the size of its image [keul]
 * finally removed the fss.zcml. It's time to blob man [keul]
+* added the blob extension for 'image' filed [mircoangelini]
+* added blob migration script [mircoangelini]
 
 1.0.0rc2 (2010-11-06)
 ---------------------
