@@ -127,11 +127,17 @@ Developed with the support of:
   .. image:: http://www.ausl.fe.it/logo_ausl.gif
      :alt: Azienda USL - logo
 
+* `Rete Civica Mo-Net - Comune di Modena`__
+  
+  .. image:: http://www.comune.modena.it/grafica/logoComune/logoComunexweb.jpg 
+     :alt: Comune di Modena - logo
+
 All of them supports the `PloneGov initiative`__.
 
 __ http://www.fe.camcom.it/
 __ http://www.regione.emilia-romagna.it/
 __ http://www.ausl.fe.it/
+__ http://www.comune.modena.it/
 __ http://www.plonegov.it/
 
 Authors
