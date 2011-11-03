@@ -3,9 +3,9 @@
 import os, sys
 from setuptools import setup, find_packages
 
-version = '1.0.0dev'
+version = '1.0.0'
 
-tests_require = ['zope.testing']
+tests_require = ['zope.testing', 'Products.PloneTestCase']
 
 install_requires = ['setuptools', ]
 # what I read there seems not working propery for Plone 3.3

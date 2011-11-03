@@ -20,7 +20,7 @@ internal link field to automatically attach the link value to an internal conten
 
 An event-based system will also keep URLs updated even when you move/rename target document.
 
-You can also customize the link icon, so you can show a different icon from the default Plone ones.
+You can also customize the link icon for being able to use a different icon from the default Plone ones.
 Due to changes between Plone 3 and Plone 4 themes, we need to keep the Plone 3 approach for displaying icons
 (not using CSS sprite. To restore the Plone 4 default way, disable the ``smart_link.css`` resource
 and remove the "*Icon (Expression)*" value from ``portal_types`` tool).
