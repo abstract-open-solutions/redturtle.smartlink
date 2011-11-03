@@ -13,16 +13,16 @@
                     tal:define="kssClassesView context/@@kss_field_decorator_view;
                                 getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;">
 
-	    <dl class="portalMessage info"
+        <dl class="portalMessage info"
             tal:define="redirect_links context/portal_properties/site_properties/redirect_links|nothing"
             tal:condition="python: redirect_links and checkPermission('Modify portal content', context)">
             <dt i18n:translate="">Info</dt>
             <dd i18n:translate="message_permissions_blocking_link_redirect">
               You see this page because you have permission to edit this link.
-			  Others will be immediately redirected to the link's target URL.
+              Others will be immediately redirected to the link's target URL.
             </dd>
         </dl>
-	
+    
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
         <h1 class="documentFirstHeading"> 
@@ -42,7 +42,7 @@
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <div tal:omit-tag=""
-		     tal:define="image_mini here/image_mini|nothing"
+             tal:define="image_mini here/image_mini|nothing"
              tal:condition="python:image_mini">
             <a href="#"
                tal:attributes="href string:${context/absolute_url}/image/image_view_fullscreen"
@@ -56,10 +56,23 @@
             </p>
         </div>
 
-        <p>
+        <p class="smartLinkNormalUrl" tal:condition="not:context/getInternalLinkPath">
             <span i18n:translate="link_address">The link address is:</span>
-            <a href="#" tal:attributes="href here/remote_url"
-                        tal:content="here/remote_url">remote url</a>
+            <a href="#"
+               tal:attributes="href here/remote_url"
+               rel="external"
+               tal:content="context/remote_url">remote url</a>
+        </p>
+        <p class="smartLinkTargetInfo" tal:condition="context/getInternalLinkPath"
+		   i18n:domain="redturtle.smartlink"
+           i18n:translate="internal_link_msg">
+            This is an internal link to &quot;<a tal:define="target context/getInternalLink"
+               tal:attributes="href context/remote_url;
+                               title target/Description"
+                               tal:content="target/Title"
+                               i18n:name="internal_link_target">
+                Foo document
+            </a>&quot;
         </p>
 
         <div metal:use-macro="here/document_relateditems/macros/relatedItems">

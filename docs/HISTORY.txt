@@ -4,10 +4,15 @@ Changelog
 1.0.0 (Unreleased)
 ------------------
 
+* Plone 4.1 compatibility
 * size of a smart link is the size of its image [keul]
-* finally removed the fss.zcml. It's time to blob man [keul]
-* added the blob extension for image field [mircoangelini]
-* added blob migration script [mircoangelini]
+* finally removed the fss.zcml. It's time to BLOB man! [keul]
+* added the BLOB extension for image field [mircoangelini]
+* added BLOB migration view: ``blob-smartlink-migration`` [mircoangelini]
+* fixed icon handling, going back to the Plone 3 icons, disabling
+  Sunburst CSS-sprite with a new ``smart_link.css`` resource [keul] 
+* when linking an internal content, do not display a simple URL
+  but a link using item's title [keul]
 
 1.0.0rc2 (2010-11-06)
 ---------------------

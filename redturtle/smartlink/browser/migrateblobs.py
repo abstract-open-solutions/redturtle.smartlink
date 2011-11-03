@@ -23,10 +23,10 @@ class IMigrateBlobsSchema(Interface):
 
 class MigrateBlobs(formbase.PageForm):
     form_fields = form.FormFields(IMigrateBlobsSchema)
-    label = u'Blobs Migration'
-    description = u'Migrate SmartLink, making it use plone.app.blob'
+    label = _(u'BLOBs Migration')
+    description = _(u'Migrate Smart Link, making it use plone.app.blob')
 
-    @form.action(_(u'Migrate SmartLink'))
+    @form.action(_(u'Migrate images to BLOB'))
     def actionMigrate(self, action, data):
         if MIGRATION_MODULE:
             output = migrateSmartLink(self.context)
@@ -36,7 +36,7 @@ class MigrateBlobs(formbase.PageForm):
             output = _(u'migration_error_msg',
                        default=u'You need to install "Products.contentmigration" product for perform the task')
             IStatusMessage(self.request).addStatusMessage(output, type='error')
-            return self.request.response.redirect(self.context.absolute_url()+'/@@migrateblobs')
+            return self.request.response.redirect(self.context.absolute_url()+'/@@blob-smartlink-migration')
         
 
     @form.action(_(u'Cancel'))

@@ -8,8 +8,8 @@ def install(portal, reinstall=False):
     setup_tool = portal.portal_setup
     setup_tool.setBaselineContext('profile-redturtle.smartlink:default')
     setup_tool.runAllImportStepsFromProfile('profile-redturtle.smartlink:default')
-    if getFSVersionTuple()[0]>=4:
-        unregisterIcon(portal)
+    #if getFSVersionTuple()[0]>=4:
+    #    unregisterIcon(portal)
     
 
 def uninstall(portal, reinstall=False):

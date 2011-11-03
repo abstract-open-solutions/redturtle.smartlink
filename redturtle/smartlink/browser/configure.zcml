@@ -38,5 +38,10 @@
       name="link.png"
       file="link.png"
       />
-      
+
+ 	<browser:resource
+      name="smart_link.css"
+      file="smart_link.css"
+      />
+
 </configure>

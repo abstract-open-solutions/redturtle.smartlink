@@ -1,8 +1,8 @@
+.. contents:: **Table of contents**
+
 =====================================
 How to use Smart Link - documentation
 =====================================
-
-.. contents:: **Table of contents**
 
 Before beginning our tour, let's configure some of the underlying stuff.
 
@@ -506,7 +506,12 @@ Now let's bo back to site root for making an internal link.
     >>> browser.getControl('Title').value = 'Transformed official internal link: sample 5'
     >>> browser.getControl(name='internalLink').value = ffolder.UID()
     >>> browser.getControl('Save').click()
-    >>> '<a href="http://intranet.mycompany.com/foo-folder">http://intranet.mycompany.com/foo-folder</a>' in browser.contents
+    >>> '<a href="http://intranet.mycompany.com/foo-folder"...>Foo folder</a>' in browser.contents
+    False
+
+As the link is now internal, we don't have a raw URL but a pretty link on the title
+
+    >>> 'This is an internal link to &quot;<a href="http://intranet.mycompany.com/foo-folder" title="">Foo folder</a>&quot;' in browser.contents
     True
 
 So: without a not-so-complex configuration we have now a set-up that will automatically handle internal links.
@@ -572,7 +577,7 @@ Smart Link, you can use the configuration panel itself: the "*Update existing li
 Now let's see what is changed in our links all around the site, going back to our third example.
 
     >>> browser.getLink('Almost internal link: sample 3').click()
-    >>> '<a href="http://127.0.0.1/plone/foo-folder/my-manual">http://127.0.0.1/plone/foo-folder/my-manual</a>' in browser.contents
+    >>> '<a href="http://127.0.0.1/plone/foo-folder/my-manual" rel="external">http://127.0.0.1/plone/foo-folder/my-manual</a>' in browser.contents
     True
 
 As you can see there also our fake internal link is changed. The configuration tool changed *all*
@@ -589,7 +594,7 @@ Obviously we don't need to run the migration tool when adding new links.
     >>> browser.getControl('Title').value = 'Transformed internal link: sample 6'
     >>> browser.getControl(name='internalLink').value = ffolder.UID()
     >>> browser.getControl('Save').click()
-    >>> '<a href="http://127.0.0.1/plone/foo-folder">http://127.0.0.1/plone/foo-folder</a>' in browser.contents
+    >>> 'This is an internal link to &quot;<a href="http://127.0.0.1/plone/foo-folder" title="">Foo folder</a>&quot;' in browser.contents    
     True
 
 As said above, all new added links will feel the configuration settings.
@@ -617,7 +622,7 @@ to internal link.
 
     >>> browser.getControl('Update existing links').click()
     >>> browser.getLink('Transformed internal link: sample 6').click()
-    >>> '<a href="/plone/foo-folder">/plone/foo-folder</a>' in browser.contents
+    >>> 'This is an internal link to &quot;<a href="/plone/foo-folder" title="">Foo folder</a>&quot;' in browser.contents    
     True
 
 So all internal link are now relative link based on the Plone portal root.

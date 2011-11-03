@@ -1,7 +1,3 @@
-========================
-Smart Link Documentation
-========================
-
 .. contents:: **Table of contents**
 
 Introduction
@@ -23,6 +19,11 @@ internal link field to automatically attach the link value to an internal conten
    :alt: The Smart Link edit form
 
 An event-based system will also keep URLs updated even when you move/rename target document.
+
+You can also customize the link icon, so you can show a different icon from the default Plone ones.
+Due to changes between Plone 3 and Plone 4 themes, we need to keep the Plone 3 approach for displaying icons
+(not using CSS sprite. To restore the Plone 4 default way, disable the ``smart_link.css`` resource
+and remove the "*Icon (Expression)*" value from ``portal_types`` tool).
 
 Handle back-end/front-end URLs
 ------------------------------
@@ -47,6 +48,7 @@ like this).
 
 Blob and Blob migration tool
 ----------------------------
+
 SmartLink supports (starting from 1.0.0 revision) the use of blob for the image field.
 In this way we doesn't increases the size of Data.fs .
 
@@ -54,9 +56,10 @@ The Blob support for SmartLink is activated only if plone.app.blob is installed.
 Plone 4 has Blob as storage default for the images and the files.
 Into Plone 3.x you have to install it by yourself.
 
-If you have already created some SmarkLink with an old version without Bolb you have to launch the 
-migration script (blob-smartlink-migration). 
-Eg: http://localhost:8090/site/blob-smartlink-migration
+If you have already created some Smark Links with an old version without Bolb you have to launch the 
+migration view calling ``@@blob-smartlink-migration``. 
+
+E.g.: http://myhost/@@blob-smartlink-migration
 
 Warning 1
 ---------
@@ -89,17 +92,16 @@ Smart Link and all of theme need the product code to continue working (even if n
 So: the uninstall is not 100% perfect.
 
 Requirements
-------------
+============
 
-Smart Link has been tested on Plone 3.3 and 4.0. Is possible that also older Plone 3.x version can be
+Smart Link has been tested on Plone 3.3 and 4.1. Is possible that also older Plone 3.x version can be
 used safely.
 
 TODO
-----
+====
 
 * Fix this ugly error: *WARNING SecurityInfo Conflicting security declarations for setId*
 * Warn the user if he used a remote URL for an internal content
-* Show title and description of an internal link
 * Evaluate a more general approach to icon substitution
 
 Additional documentation
