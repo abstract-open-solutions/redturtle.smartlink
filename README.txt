@@ -94,7 +94,7 @@ So: the uninstall is not 100% perfect.
 Requirements
 ============
 
-Smart Link has been tested on Plone 3.3 and 4.1. Is possible that also older Plone 3.x version can be
+Smart Link has been tested on Plone 3.3, 4.0 and 4.1. Is possible that also older Plone 3.x version can be
 used safely.
 
 TODO
