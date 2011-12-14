@@ -34,6 +34,13 @@
         class=".migrateblobs.MigrateBlobs"
         permission="cmf.ManagePortal" />
 
+    <adapter
+        for="redturtle.smartlink.interfaces.utility.ISmartLinkControlPanelForm"
+        factory=".configlet.controlpanel_named_template_adapter"
+        name="default"
+        provides="zope.formlib.namedtemplate.INamedTemplate"
+      />
+
  	<browser:resource
       name="link.png"
       file="link.png"

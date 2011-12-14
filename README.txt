@@ -56,8 +56,8 @@ The Blob support for SmartLink is activated only if plone.app.blob is installed.
 Plone 4 has Blob as storage default for the images and the files.
 Into Plone 3.x you have to install it by yourself.
 
-If you have already created some Smark Links with an old version without Bolb you have to launch the 
-migration view calling ``@@blob-smartlink-migration``. 
+If you have already created Smark Link contents with an old version that doesn't support Blobs
+you have to launch a migration utility from the Smart Link control panel. 
 
 E.g.: http://myhost/@@blob-smartlink-migration
 

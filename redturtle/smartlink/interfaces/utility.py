@@ -3,6 +3,11 @@ from zope import schema
 from redturtle.smartlink import smartlinkMessageFactory as _
 from zope.interface import invariant, Invalid
 
+from plone.app.controlpanel.interfaces import IPloneControlPanelForm
+
+class ISmartLinkControlPanelForm(IPloneControlPanelForm):
+    """Interface for configuration panel inside SmartLink"""
+
 class ISmartlinkConfig(Interface):
 
     relativelink = schema.Bool(

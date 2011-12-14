@@ -1,18 +1,31 @@
 # -*- coding: utf-8 -*-
 
 from zope.formlib import form
+from zope.interface import implements
+
+try:
+    import plone.app.blob
+    BLOB = True
+except ImportError:
+    BLOB = False
+
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.app.form import named_template_adapter
 from plone.app.controlpanel.form import ControlPanelForm
-from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
-from redturtle.smartlink import smartlinkMessageFactory as _
 from plone.protect import CheckAuthenticator
 from plone.app.form.validators import null_validator
 from Products.statusmessages.interfaces import IStatusMessage
 from zope.component import getMultiAdapter
-from redturtle.smartlink.interfaces import ISmartLink
 
+from redturtle.smartlink.interfaces import ISmartLink
+from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
+from redturtle.smartlink import smartlinkMessageFactory as _
+from redturtle.smartlink.interfaces.utility import ISmartLinkControlPanelForm
 
 class SmartlinkConfigForm(ControlPanelForm):
     """Smartlink Control Panel Form"""
+    
+    implements(ISmartLinkControlPanelForm)
 
     form_fields = form.Fields(ISmartlinkConfig)
 
@@ -24,6 +37,10 @@ class SmartlinkConfigForm(ControlPanelForm):
                              u'Every configuration option take precedence on the one that follows.\n'
                              u'After changes you (probably) want to run the "Update existing links" task.'))
     form_name = _(u"Settings")
+
+    @property
+    def blob_installed(self):
+        return BLOB
 
     def saveFields(self, action, data):
         CheckAuthenticator(self.request)
@@ -57,3 +74,6 @@ class SmartlinkConfigForm(ControlPanelForm):
             object.setRemoteUrl(object.getRemoteUrl())
             object.reindexObject()
         return
+
+_template = ViewPageTemplateFile('controlpanel.pt')
+controlpanel_named_template_adapter = named_template_adapter(_template)
