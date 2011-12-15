@@ -24,7 +24,7 @@
         for="Products.CMFPlone.Portal.PloneSite"
         name="smartlink-config"
         class=".configlet.SmartlinkConfigForm"
-        permission="cmf.ManagePortal"
+        permission="redturtle.smartlink.ManageSmartLink"
         />
 		
 	<browser:page
@@ -32,7 +32,14 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="blob-smartlink-migration"
         class=".migrateblobs.MigrateBlobs"
-        permission="cmf.ManagePortal" />
+        permission="redturtle.smartlink.ManageSmartLink" />
+
+	<browser:page
+        for="*"
+        name="fix-fake-internal-links"
+        class=".utilities.FixFakeInternalLinkView"
+		template="fix-fake-internal-links.pt"
+        permission="redturtle.smartlink.ManageSmartLink" />
 
     <adapter
         for="redturtle.smartlink.interfaces.utility.ISmartLinkControlPanelForm"

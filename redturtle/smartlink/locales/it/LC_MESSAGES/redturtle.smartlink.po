@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2011-12-14 17:18+0000\n"
+"POT-Creation-Date: 2011-12-15 14:23+0000\n"
 "PO-Revision-Date: 2010-08-27 12:31+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -232,4 +232,9 @@ msgstr ""
 "Compila questo pannello di configurazione per le impostazioni di produzione del sito; scegli se usare percorsi relativi, un URL di front-end unificato, o se gestire manualmente vary indirizzi di back-end/front-end (per installazioni avanzate).\n"
 "Ogni opzione di configurazione ha la precedenza su quella che la segue.\n"
 "Dopo le modifiche è probabile voler lanciare il processo \"Aggiorna i link esistenti\"."
+
+#. Default: "Keep in mind that contents created with Smart Link are still using Smart Link code and they will be broken if you remove the product from your Plone installation."
+#: ../Extensions/install.py:26
+msgid "uninstall_warning"
+msgstr "Tieni presente che i contenuti creati con Smart Link stanno ancora usando il codice di Smart Link non saranno più funzionanti se rimuoverai il prodotto dalla tua installazione Plone."
 

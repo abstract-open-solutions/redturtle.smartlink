@@ -9,3 +9,11 @@
 .icons-on .contenttype-link {
     padding-left: 0 !important;
 }
+
+/**
+ * Other
+ */
+
+#smartLinkUtilities h2 {
+	border-bottom: none;
+}

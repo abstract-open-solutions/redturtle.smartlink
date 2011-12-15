@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from redturtle.smartlink import logger
 from zope import interface
-from redturtle.smartlink.interfaces import ISmartLinked
 from Products.CMFPlone.utils import getFSVersionTuple
+
+from redturtle.smartlink.interfaces import ISmartLinked
+from redturtle.smartlink import smartlinkMessageFactory as _
 
 def install(portal, reinstall=False):
     setup_tool = portal.portal_setup
@@ -20,23 +23,26 @@ def uninstall(portal, reinstall=False):
         unregisterIcon(portal)
     if not reinstall:
         removeSmartLinkMarks(portal)
+        portal.plone_utils.addPortalMessage(_('uninstall_warning',
+                                              default=u'Keep in mind that contents created with Smart Link are still using Smart Link code '
+                                                      u'and they will be broken if you remove the product from your Plone installation.'),
+                                            type='warning')
 
 
 def removeSmartLinkMarks(portal):
     """Remove all Smart Link marker interfaces all around the site"""
-    log = portal.plone_log
     catalog = portal.portal_catalog
     smartlinkeds = catalog(object_provides=ISmartLinked.__identifier__)
 
-    log("Uninstall Smart Link: removing flag to internally linked contents...")
+    logger.info("Uninstall Smart Link: removing flag to internally linked contents...")
     for linked in smartlinkeds:
         content = linked.getObject()
         # Bee lazy, so use the already developed procedure for the delete-events
         unLink(portal, content)
         interface.noLongerProvides(content, ISmartLinked)
         content.reindexObject(['object_provides'])
-        log("   unmarked %s" % '/'.join(content.getPhysicalPath()))
-    log("...done. Thanks you for using me!")
+        logger.info("   unmarked %s" % '/'.join(content.getPhysicalPath()))
+    logger.info("...done. Thanks you for using me!")
 
     # TODO: the perfect world is the one where SmartLink(s) are converted back to ATLink(s)
 
@@ -54,12 +60,11 @@ def unLink(portal, object):
 
 def unregisterIcon(portal):
     """Remove icon expression from Link type"""
-    log = portal.plone_log
     portal_types = portal.portal_types
     link = portal_types.getTypeInfo("Link")
     #link.icon_expr = ''
     link.content_icon = ''
     link.manage_changeProperties(content_icon='', icon_expr='')
-    log("Removing icon type info")
+    logger.info("Removing icon type info")
 
 

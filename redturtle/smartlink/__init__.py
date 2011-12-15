@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import logging
+
 from zope.i18nmessageid import MessageFactory
 from redturtle.smartlink import config
 
@@ -11,7 +13,7 @@ from Products.CMFCore import utils
 # like _(u"message") will then be extracted by i18n tools for translation.
 
 smartlinkMessageFactory = MessageFactory('redturtle.smartlink')
-
+logger = logging.getLogger('redturtle.smartlink')
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product.

@@ -9,6 +9,11 @@
   <five:registerPackage package="." initialize=".initialize" />
   <i18n:registerTranslations directory="locales" />
 
+  <permission
+        id="redturtle.smartlink.ManageSmartLink"
+        title="Smart Link: access configuration"
+     />
+
   <!-- Include the sub-packages that use their own configure.zcml files. -->
   <include package=".browser" />
   <include package=".content" />
@@ -31,7 +36,9 @@
       description="Remove Smart Link component"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-      
+
+  <include file="upgrades.zcml" />
+
   <adapter
   	  for="Products.CMFPlone.Portal.PloneSite"
   	  provides=".interfaces.utility.ISmartlinkConfig"
