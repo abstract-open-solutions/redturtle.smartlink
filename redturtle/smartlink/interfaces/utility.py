@@ -13,7 +13,7 @@ class ISmartlinkConfig(Interface):
     relativelink = schema.Bool(
         title=_(u"Relative links"),
         description=_(u'help_relativelink',
-                      default=(u'If selected, all links in the site will store URLs relative to the portal root, '
+                      default=(u'If selected, all internal links in the site will store URLs relative to the portal root, '
                                u'rather than absolute save the complete absolute ones. '
                                u'For example: no "http://myhost/plone/foo" but "/plone/foo"')),
         required=False

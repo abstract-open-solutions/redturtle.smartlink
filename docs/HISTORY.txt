@@ -5,10 +5,10 @@ Changelog
 ------------------
 
 * added a link to the view that migrate to blob from the control panel [keul]
-* added an utility to convert fake external link to became internal
-  IN PROGRESS [keul]
 * added a new ``Smart Link: access configuration`` permission for site configuration
   that "Site Administrator" role can handle [keul]
+* added an utility to convert fake external link to became internal
+  IN PROGRESS [keul]
 
 1.0.0 (2011-11-03)
 ------------------

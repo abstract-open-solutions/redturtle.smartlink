@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-15 14:23+0000\n"
+"POT-Creation-Date: 2011-12-15 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,10 @@ msgstr ""
 msgid "Configure Smart Link"
 msgstr ""
 
+#: ../browser/fix-fake-internal-links.pt:27
+msgid "Fake external links transformation"
+msgstr ""
+
 #: ../browser/controlpanel.pt:213
 msgid "Fix absolute URL to internal link"
 msgstr ""
@@ -69,6 +73,10 @@ msgstr ""
 msgid "Migrate to plone.app.blob"
 msgstr ""
 
+#: ../browser/fix-fake-internal-links.pt:87
+msgid "No Smart Link with bad configuration found"
+msgstr ""
+
 #: ../browser/configlet.py:52
 msgid "No changes made."
 msgstr ""
@@ -94,6 +102,11 @@ msgstr ""
 msgid "description_fix_fake_interna_link"
 msgstr ""
 
+#. Default: "Here follow all Smart Link contents that has been added as external links but are using URLs that refer to internal content. So, it seems that you can transform those external link to internal ones. You can transform those content automatically from this form."
+#: ../browser/fix-fake-internal-links.pt:39
+msgid "description_general_fix_fake_internal_link_form"
+msgstr ""
+
 #. Default: "If you used a version of Smart Link older that 1.0.0, you could like to ${migrate-url}."
 #: ../browser/controlpanel.pt:208
 msgid "description_migrate_to_blob"
@@ -112,6 +125,11 @@ msgstr ""
 #. Default: "Please provide the internal link, or fill the \"External link\" field"
 #: ../content/link.py:301
 msgid "error_internallink_externallink_required"
+msgstr ""
+
+#. Default: "the external URL is ${real-external-link} but it links to ${equiv-internal-link}."
+#: ../browser/fix-fake-internal-links.pt:80
+msgid "fake_link_explanation"
 msgstr ""
 
 #. Default: "Put there all your possible back-office URLs you want to transform. URLs there must be unique"
@@ -134,7 +152,7 @@ msgstr ""
 msgid "help_image_anchor"
 msgstr ""
 
-#. Default: "If selected, all links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
+#. Default: "If selected, all internal links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
 #: ../interfaces/utility.py:15
 msgid "help_relativelink"
 msgstr ""
@@ -202,6 +220,11 @@ msgstr ""
 #. Default: "Internal link"
 #: ../content/link.py:59
 msgid "label_smartlink_internallink"
+msgstr ""
+
+#. Default: "Up to Smart Link configuration"
+#: ../browser/fix-fake-internal-links.pt:32
+msgid "label_up_to_smart_link_setup"
 msgstr ""
 
 #. Default: "Update existing links"

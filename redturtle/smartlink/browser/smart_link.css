@@ -17,3 +17,8 @@
 #smartLinkUtilities h2 {
 	border-bottom: none;
 }
+
+#smartLinkFakeTranformation .links dd {
+	margin: 0;
+	padding: 0.5em 1em;
+}

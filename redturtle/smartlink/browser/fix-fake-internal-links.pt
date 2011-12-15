@@ -12,7 +12,7 @@
 
 <div metal:fill-slot="prefs_configlet_main">
 
-        <div id="viewspace">
+        <div id="smartLinkFakeTranformation">
         
             <dl tal:define="status view/status"
 			    i18n:domain="plone"
@@ -37,11 +37,58 @@
             </a>
 
             <p i18n:translate="description_general_fix_fake_internal_link_form">
-                Here follow all Smart Link contents that are external links
+                Here follow all Smart Link contents that has been added as external links
 				but are using URLs that refer to internal content.
 				So, it seems that you can transform those external link to
-				internal contents
+				internal ones.
+				You can transform those content automatically from this form.
             </p>
+			
+            <form action="."
+                  metal:define-macro="master"
+				  class="edit-form enableUnloadProtection"
+                  tal:attributes="action request/URL;
+                                  class python: False or default"
+				  tal:define="links view/getFakeLinks"
+                  method="post">
+            
+				<dl class="links"
+				    tal:condition="links">
+				    <dd>
+                    	<input type="checkbox" class="noborder" id="path_toggle" name="path_toggle"
+				               checked="checked"
+				               onclick="javascript:toggleSelect(this, 'path:list', true);"
+						       src="http://localhost:8080/test2/select_all_icon.gif">
+                    	<label for="path_toggle"
+						       i18n:domain="plone"
+						       i18n:translate="label_toggle">Select All/None</label>
+				    </dd>
+				<tal:links tal:repeat="link links">
+					<dd tal:define="even repeat/link/even"
+					    tal:attributes="class python:even and 'even' or 'odd'">
+						<input type="checkbox" name="path:list" checked="checked"
+						       tal:attributes="value link/path;
+							                   id string:fake-link-${repeat/link/number}" />
+						<label tal:attributes="for string:fake-link-${repeat/link/number}"
+						       tal:content="link/title" />
+						<a tal:attributes="href link/url"
+						   tal:content="link/absolute_url_path" /> <br/>
+						<div class="discreet" i18n:translate="fake_link_explanation">
+							the external URL is <a i18n:name="real-external-link"
+							                       tal:attributes="href link/external_link"
+												   tal:content="link/external_link">remote url</a>
+							but it links to <a i18n:name="equiv-internal-link"
+							                   tal:attributes="href python:'http://foo.org'"
+											   tal:content="python: 'Foo'">internal content</a>.
+						</div>
+					</dd>
+				</tal:links>
+				</dl>
+				<p tal:condition="not:links" i18n:translate="">
+					No Smart Link with bad configuration found
+				</p>
+			
+			</form>
 
 		</div>
 </div>
