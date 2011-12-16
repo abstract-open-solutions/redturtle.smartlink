@@ -67,26 +67,41 @@
 					<dd tal:define="even repeat/link/even"
 					    tal:attributes="class python:even and 'even' or 'odd'">
 						<input type="checkbox" name="path:list" checked="checked"
+						       tal:omit-tag="python:not link['internal_obj']"
 						       tal:attributes="value link/path;
-							                   id string:fake-link-${repeat/link/number}" />
+							                   id string:fake-link-${repeat/link/number};" />
+						<img alt="Warning" src="error_log_icon.gif " tal:condition="python:not link['internal_obj']"/>
 						<label tal:attributes="for string:fake-link-${repeat/link/number}"
 						       tal:content="link/title" />
 						<a tal:attributes="href link/url"
 						   tal:content="link/absolute_url_path" /> <br/>
-						<div class="discreet" i18n:translate="fake_link_explanation">
-							the external URL is <a i18n:name="real-external-link"
+
+						<div class="discreet" i18n:translate="fake_link_explanation"
+						     tal:condition="python:link['internal_obj']">
+							The external URL is <a i18n:name="real-external-link"
 							                       tal:attributes="href link/external_link"
 												   tal:content="link/external_link">remote url</a>
 							but it links to <a i18n:name="equiv-internal-link"
-							                   tal:attributes="href python:'http://foo.org'"
-											   tal:content="python: 'Foo'">internal content</a>.
+							                   tal:attributes="href link/internal_obj/absolute_url"
+											   tal:content="link/internal_obj/Title">internal content</a>.
 						</div>
+						<div class="discreet" i18n:translate="internal_unknow_link_explanation"
+						     tal:condition="python:not link['internal_obj']">
+							The external URL is <a i18n:name="real-external-link"
+							                       tal:attributes="href link/external_link"
+												   tal:content="link/external_link">remote url</a>.
+							This seems an internal link, but doesn't seem to link any internal content.
+						</div>
+
 					</dd>
 				</tal:links>
 				</dl>
 				<p tal:condition="not:links" i18n:translate="">
 					No Smart Link with bad configuration found
 				</p>
+			
+			<input type="submit" name="form.submit.transform" value="Transform"
+			       i18n:attributes="value"/>
 			
 			</form>
 
