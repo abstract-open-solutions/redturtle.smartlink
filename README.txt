@@ -97,6 +97,17 @@ Requirements
 Smart Link has been tested on Plone 3.3, 4.0 and 4.1. Is possible that also older Plone 3.x version can be
 used safely.
 
+Plone 3.3 limitations
+---------------------
+
+Starting from version 1.1 you will find some limitation if using Smart Link on Plone 3.3:
+
+* Missing translations (I mean: you *can't* translate some strings)
+* Missing related items in the view
+* Removing Smart Link will register a Plone-4-compliant basic ATLink configuration
+
+however: none of those limits are blocker
+
 TODO
 ====
 

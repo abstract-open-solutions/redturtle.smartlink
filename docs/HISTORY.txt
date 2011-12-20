@@ -9,6 +9,8 @@ Changelog
   that "Site Administrator" role can handle [keul]
 * added an utility to convert fake external link to became internal
   IN PROGRESS [keul]
+* Aligned all ``Link.xml`` files to be Plone 4 compliant [keul]
+* In Plone 4 the related items where duplicated (if used) [keul]
 
 1.0.0 (2011-11-03)
 ------------------
