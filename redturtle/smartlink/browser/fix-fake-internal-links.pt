@@ -100,7 +100,7 @@
 					No Smart Link with bad configuration found
 				</p>
 			
-			<input type="submit" name="form.submit.transform" value="Transform"
+			<input type="submit" name="form.submit.transform" value="Transform" class="context"
 			       i18n:attributes="value"/>
 			
 			</form>

@@ -8,6 +8,11 @@ from plone.app.controlpanel.interfaces import IPloneControlPanelForm
 class ISmartLinkControlPanelForm(IPloneControlPanelForm):
     """Interface for configuration panel inside SmartLink"""
 
+
+class ILinkNormalizerUtility(Interface):
+    """Utility for transform URLs to make them using valid internal hostnames"""
+
+
 class ISmartlinkConfig(Interface):
 
     relativelink = schema.Bool(

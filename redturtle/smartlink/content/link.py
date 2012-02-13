@@ -20,6 +20,7 @@ from Products.ATReferenceBrowserWidget import ATReferenceBrowserWidget
 
 from redturtle.smartlink import smartlinkMessageFactory as _
 from redturtle.smartlink.interfaces import ISmartLink, ISmartLinked
+from redturtle.smartlink.interfaces.utility import ILinkNormalizerUtility
 from redturtle.smartlink.config import PROJECTNAME
 
 from Products.ATContentTypes.configuration import zconf
@@ -227,8 +228,6 @@ class SmartLink(ATLink):
     security.declareProtected(permissions.View, 'getInternalLinkPath')
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
-        
-        smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
 
         # We need to check if the self object has the reference_catalog attribute.
         # It's an integration problem with p4a that call this method when we don't have an internal link.
@@ -251,32 +250,7 @@ class SmartLink(ATLink):
         else:
             remote = self.getExternalLink()
 
-        # Now check the tool configuration
-        if not remote:
-            remote = ''  # ensure we have a string
-        if smartlink_config:
-            backendlinks = getattr(smartlink_config, 'backendlink', [])
-            frontend_main_link = getattr(smartlink_config, 'frontend_main_link', '')
-
-            # Unified front-end link
-            if frontend_main_link:
-                portal_url = getToolByName(self, 'portal_url')()
-                if remote.startswith(portal_url):
-                    remote = remote.replace(portal_url, frontend_main_link)
-            # Advanced back-end/front-end configuration
-            else:
-                for backendlink in backendlinks:
-                    if backendlink[-1]=='/':
-                        blink = backendlink[:-1]
-                    else:
-                        blink = backendlink
-                    if remote.startswith(blink):
-                        frontendlinks = smartlink_config.frontendlink
-                        frontendlink = frontendlinks[backendlinks.index(backendlink)]
-                        if frontendlink[-1]=='/':
-                            frontendlink = frontendlink[:-1]
-                        remote = remote.replace(blink,frontendlink)
-                        break
+        remote = queryUtility(ILinkNormalizerUtility)(remote)
 
         # If we still haven't remote value now, let's return the "normal" field value
         if not remote:

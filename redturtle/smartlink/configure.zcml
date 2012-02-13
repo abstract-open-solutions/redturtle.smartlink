@@ -44,7 +44,11 @@
   	  provides=".interfaces.utility.ISmartlinkConfig"
   	  factory=".utility.rn_config_adapter"
    />
-   
+
+  <utility 
+      provides="redturtle.smartlink.interfaces.utility.ILinkNormalizerUtility"
+      factory=".utility.LinkNormalizerUtility" />
+
   <configure zcml:condition="installed plone.app.blob">
     <include package="archetypes.schemaextender" />
     <adapter factory=".extender.SmartLinkExtender" />

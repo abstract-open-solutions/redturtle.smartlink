@@ -15,9 +15,13 @@ class FixFakeInternalLinkView(BrowserView):
         request = self.request
         request.set('disable_border', True)
         
-        if not request.get('path', []):
-            return self.index()
-        return "Ciao"
+        if request.form.get('path', []):
+            self._fixURLs()
+        self.index()
+    
+    def _fixURLs(self, form):
+        paths = self.request.form['path']
+        return paths
     
     @property
     def status(self):
@@ -27,7 +31,8 @@ class FixFakeInternalLinkView(BrowserView):
         """
         Given an URL, check all Smart Link configuration options to be sure that
         we refer to the right hostname
-        """ 
+        """
+        
         return url
 
     def _findInternalByURL(self, url):

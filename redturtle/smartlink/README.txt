@@ -20,15 +20,14 @@ Let's log in.
     >>> browser.getControl(name='__ac_password').value = default_password
     >>> browser.getControl(name='submit').click()
 
-We then test that we are still on the portal front page:
-
-    >>> browser.url == portal_url
-    True
-
-And we ensure that we get the friendly logged-in message:
+We ensure that we get the friendly logged-in message:
 
     >>> "You are now logged in" in browser.contents
     True
+
+Let's go to the portal root.
+
+    >>> browser.getLink('Home').click()
 
 Basic use of Smart Link
 =======================

@@ -246,7 +246,7 @@ msgstr ""
 
 #: ../browser/controlpanel.pt:217
 msgid "migrate to be internal link"
-msgstr "migrate a link interni"
+msgstr "migrare a link interni"
 
 #: ../browser/controlpanel.pt:208
 msgid "migrate your image fields to Plone blobs"

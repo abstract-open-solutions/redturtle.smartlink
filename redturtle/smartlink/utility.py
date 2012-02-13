@@ -3,8 +3,9 @@
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.component import getUtility
-from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
+from redturtle.smartlink.interfaces.utility import ISmartlinkConfig, ILinkNormalizerUtility
 from OFS.SimpleItem import SimpleItem
+from zope.app.component.hooks import getSite
 
 
 def rn_config_adapter(context):
@@ -19,3 +20,40 @@ class SmartlinkConfig(SimpleItem):
     relativelink = FieldProperty(ISmartlinkConfig['relativelink'])
     frontendlink = FieldProperty(ISmartlinkConfig['frontendlink'])
     backendlink = FieldProperty(ISmartlinkConfig['backendlink'])
+
+
+class LinkNormalizerUtility(object):
+    """ See ILinkNormalizerUtility
+    """
+
+    implements(ILinkNormalizerUtility)
+
+    def __call__(self, remote):
+        """ normalize remote URL """
+        smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
+        portal = getSite()
+        remote = remote or ''
+        if smartlink_config:
+            backendlinks = getattr(smartlink_config, 'backendlink', [])
+            frontend_main_link = getattr(smartlink_config, 'frontend_main_link', '')
+
+            # Unified front-end link
+            if frontend_main_link:
+                portal_url = getToolByName(portal, 'portal_url')()
+                if remote.startswith(portal_url):
+                    remote = remote.replace(portal_url, frontend_main_link)
+            # Advanced back-end/front-end configuration
+            else:
+                for backendlink in backendlinks:
+                    if backendlink[-1]=='/':
+                        blink = backendlink[:-1]
+                    else:
+                        blink = backendlink
+                    if remote.startswith(blink):
+                        frontendlinks = smartlink_config.frontendlink
+                        frontendlink = frontendlinks[backendlinks.index(backendlink)]
+                        if frontendlink[-1]=='/':
+                            frontendlink = frontendlink[:-1]
+                        remote = remote.replace(blink,frontendlink)
+                        break
+        return remote
