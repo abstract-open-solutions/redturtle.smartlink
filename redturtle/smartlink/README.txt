@@ -159,7 +159,7 @@ Let's add a new image and caption to our link.
 We need also to test if our link really behave an image now:
     
     >>> contactinfo_link = portal['remote-link-sample-1']
-    >>> print contactinfo_link.unrestrictedTraverse('image_large')
+    >>> contactinfo_link.unrestrictedTraverse('image_large')
     <Image... at /plone/remote-link-sample-1/image_large>
 
 Now the Smart Link view also display the image and the caption under it in the item's view:
