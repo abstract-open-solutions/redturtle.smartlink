@@ -5,6 +5,7 @@ import urlparse
 from urllib import quote
 
 from zope import interface
+from zope.component import getUtility
 from AccessControl import ClassSecurityInfo
 
 from Products.Archetypes import atapi
@@ -235,6 +236,8 @@ class SmartLink(ATLink):
             ilink = self.getInternalLink()
         else:
             ilink = None
+
+        smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
 
         # If we are using an internal link
         if ilink:

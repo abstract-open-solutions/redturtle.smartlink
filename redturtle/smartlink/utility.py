@@ -30,7 +30,7 @@ class LinkNormalizerUtility(object):
 
     def __call__(self, remote):
         """ normalize remote URL """
-        smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
+        smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
         portal = getSite()
         remote = remote or ''
         if smartlink_config:
