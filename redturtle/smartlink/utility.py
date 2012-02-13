@@ -5,6 +5,7 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.component import getUtility
 from redturtle.smartlink.interfaces.utility import ISmartlinkConfig, ILinkNormalizerUtility
 from OFS.SimpleItem import SimpleItem
+from Products.CMFCore.utils import getToolByName
 from zope.app.component.hooks import getSite
 
 
