@@ -63,7 +63,7 @@
                rel="external"
                tal:content="context/remote_url">remote url</a>
         </p>
-        <p class="smartLinkTargetInfo" tal:condition="nocall:view/getInternalLink"
+        <p class="smartLinkTargetInfo" tal:condition="python:view.getInternalLink()"
 		   i18n:domain="redturtle.smartlink"
            i18n:translate="internal_link_msg">
             This is an internal link to &quot;<a tal:define="target view/getInternalLink"
