@@ -77,6 +77,7 @@ class FunctionalTestCase(ptc.FunctionalTestCase):
         self.portal.portal_membership.addMember('contributor',
                                                 default_password,
                                                 ('Member', 'Contributor'), [])
+        self.setRoles(('Manager', ))
 
     def getImage(self):
         image = '/'.join(os.path.realpath( __file__ ).split(os.path.sep )[:-2])
