@@ -14,14 +14,17 @@
 
         <div id="smartLinkFakeTranformation">
         
-            <dl tal:define="status view/status"
+            <dl tal:repeat="status view/status"
 			    i18n:domain="plone"
-                 tal:condition="status"
-                 class="portalMessage info">
-                <dt i18n:translate="">
+                 tal:condition="view/status"
+                 tal:attributes="class string:portalMessage ${status/type}">
+                <dt i18n:translate="" tal:condition="python:status['type']=='info'">
                     Info
                 </dt>
-                <dd tal:content="view/status" />
+                <dt i18n:translate="" tal:condition="python:status['type']=='error'">
+                    Error
+                </dt>
+                <dd tal:content="status/msg" />
             </dl>
 
             <h1 class="documentFirstHeading"
@@ -101,6 +104,7 @@
 				</p>
 			
 			<input type="submit" name="form.submit.transform" value="Transform" class="context"
+			       tal:condition="links"
 			       i18n:attributes="value"/>
 			
 			</form>

@@ -1,41 +1,68 @@
 # -*- coding: utf-8 -*-
 
+from zope.component import getUtility
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 
 from redturtle.smartlink.interfaces.link import ISmartLink
+from redturtle.smartlink.interfaces.utility import ILinkNormalizerUtility
+from redturtle.smartlink import smartlinkMessageFactory as _
 
 class FixFakeInternalLinkView(BrowserView):
     """
-    A view that look for all Smart Link content types defined as external link
+    A view that looks for all Smart Link content types defined as external link
     but that contain URL's that point to internal contents.
     """
     
+    def __init__(self, context, request):
+        BrowserView.__init__(self, context, request)
+        self._status = []
+
+
     def __call__(self):
         request = self.request
         request.set('disable_border', True)
         
         if request.form.get('path', []):
             self._fixURLs()
-        self.index()
-    
-    def _fixURLs(self, form):
+        return self.index()
+
+
+    def _fixURLs(self):
         paths = self.request.form['path']
+        context = self.context
+        for path in paths:
+            obj = context.restrictedTraverse(path, None)
+            if obj:
+                linkNormalizerUtility = getUtility(ILinkNormalizerUtility)
+                remote = linkNormalizerUtility.toCurrent(obj.getExternalLink())
+                linked = self.findInternalByURL(remote)
+                if linked:
+                    obj.edit(internalLink=linked.UID(),
+                             externalLink='')
+                    self._status.append({'msg': _('link_fixed_message',
+                                                  default=u'External link fixed: ${origin} now links ${linked}',
+                                                  mapping={'origin': obj.absolute_url_path(),
+                                                           'linked': linked.absolute_url_path()}),
+                                         'type': 'info'})
+                else:
+                    self._status.append({'msg': _('link_fixed_not_found_message',
+                                                  default=u'Cannot find internal content at ${linked}',
+                                                  mapping={'linked': remote}),
+                                         'type': 'error'})
+            else:
+                self._status.append({'msg': _('link_fixed_not_found_message',
+                                              default=u'Cannot find internal content at ${linked}',
+                                              mapping={'linked': path}),
+                                     'type': 'error'})
         return paths
     
     @property
     def status(self):
-        return None
+        return self._status or None
 
-    def _transformURL(self, url):
-        """
-        Given an URL, check all Smart Link configuration options to be sure that
-        we refer to the right hostname
-        """
-        
-        return url
 
-    def _findInternalByURL(self, url):
+    def findInternalByURL(self, url):
         """
         Given a valid site URL, return the linked internal content, if any
         """
@@ -49,11 +76,13 @@ class FixFakeInternalLinkView(BrowserView):
                               'depth': 0})
         return path and brain and brain[0].getObject() or None
 
+
     def getFakeLinks(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         portal_url = getToolByName(self.context, 'portal_url')()
         links = catalog(object_provides=ISmartLink.__identifier__,
                         sort_on='sortable_title')
+        linkNormalizerUtility = getUtility(ILinkNormalizerUtility)
         results = []
         for x in links:
             obj = x.getObject()
@@ -62,9 +91,9 @@ class FixFakeInternalLinkView(BrowserView):
             external_link = obj.getExternalLink() or \
                         (not obj.getInternalLink() and obj.getField('remoteUrl').get(obj))
             if external_link:
-                external_link = self._transformURL(obj.getExternalLink())
+                external_link = linkNormalizerUtility.toCurrent(obj.getExternalLink())
                 if external_link.startswith(portal_url):
-                    internalObj = self._findInternalByURL(external_link)
+                    internalObj = self.findInternalByURL(external_link)
                     results.append({'path': '/'.join(obj.getPhysicalPath()),
                                     'title': obj.Title(),
                                     'absolute_url_path': obj.absolute_url_path(), 

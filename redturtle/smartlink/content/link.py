@@ -26,7 +26,6 @@ from redturtle.smartlink.config import PROJECTNAME
 
 from Products.ATContentTypes.configuration import zconf
 from Products.validation import V_REQUIRED
-from zope.component import queryUtility
 from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
 
 LinkSchema = ATLinkSchema.copy() + atapi.Schema((
@@ -253,7 +252,7 @@ class SmartLink(ATLink):
         else:
             remote = self.getExternalLink()
 
-        remote = queryUtility(ILinkNormalizerUtility)(remote)
+        remote = getUtility(ILinkNormalizerUtility).toFrontEnd(remote)
 
         # If we still haven't remote value now, let's return the "normal" field value
         if not remote:

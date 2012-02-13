@@ -12,6 +12,11 @@ class ISmartLinkControlPanelForm(IPloneControlPanelForm):
 class ILinkNormalizerUtility(Interface):
     """Utility for transform URLs to make them using valid internal hostnames"""
 
+    def toFrontEnd(remote):
+        """Transform an URL to the proper frontend ones"""
+    
+    def toCurrent(remote):
+        """Tranform an URL to a compatible type, like the current ones"""
 
 class ISmartlinkConfig(Interface):
 

@@ -26,11 +26,9 @@ class SmartlinkConfig(SimpleItem):
 class LinkNormalizerUtility(object):
     """ See ILinkNormalizerUtility
     """
-
     implements(ILinkNormalizerUtility)
 
-    def __call__(self, remote):
-        """ normalize remote URL """
+    def toFrontEnd(self, remote):
         smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
         portal = getSite()
         remote = remote or ''
@@ -46,15 +44,38 @@ class LinkNormalizerUtility(object):
             # Advanced back-end/front-end configuration
             else:
                 for backendlink in backendlinks:
-                    if backendlink[-1]=='/':
-                        blink = backendlink[:-1]
-                    else:
-                        blink = backendlink
+                    blink = backendlink[-1]=='/' and backendlink[:-1] or backendlink
                     if remote.startswith(blink):
                         frontendlinks = smartlink_config.frontendlink
                         frontendlink = frontendlinks[backendlinks.index(backendlink)]
-                        if frontendlink[-1]=='/':
-                            frontendlink = frontendlink[:-1]
+                        frontendlink = frontendlink[-1]=='/' and frontendlink[:-1] or frontendlink
                         remote = remote.replace(blink,frontendlink)
                         break
+        return remote
+
+
+    def toCurrent(self, remote):
+        smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
+        portal = getSite()
+        remote = remote or ''
+        portal_url = getToolByName(portal, 'portal_url')()
+        if smartlink_config:
+            frontendlinks = getattr(smartlink_config, 'frontendlink', [])
+            frontend_main_link = getattr(smartlink_config, 'frontend_main_link', '')
+
+            # Unified front-end link
+            if frontend_main_link:
+                if remote.startswith(frontend_main_link):
+                    remote = remote.replace(frontend_main_link, portal_url)
+            # Advanced back-end/front-end configuration
+            else:
+                for frontendlink in frontendlinks:
+                    flink = frontendlink[-1]=='/' and frontendlink[:-1] or frontendlink
+                    if remote.startswith(flink):
+                        backendlinks = smartlink_config.backendlink
+                        backendlink = backendlinks[frontendlinks.index(frontendlink)]
+                        backendlink = backendlink[-1]=='/' and backendlink[:-1] or backendlink
+                        if backendlink.startswith(portal_url):
+                            remote = remote.replace(flink, backendlink)
+                            break
         return remote
