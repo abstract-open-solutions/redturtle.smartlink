@@ -18,7 +18,30 @@
   <include package=".browser" />
   <include package=".content" />
   <include package=".events" />
-  
+
+  <adapter
+  	  for="Products.CMFPlone.Portal.PloneSite"
+  	  provides=".interfaces.utility.ISmartlinkConfig"
+  	  factory=".utility.rn_config_adapter"
+   />
+
+  <utility 
+      provides="redturtle.smartlink.interfaces.utility.ILinkNormalizerUtility"
+      factory=".utility.LinkNormalizerUtility" />
+
+  <configure zcml:condition="installed plone.app.blob">
+    <include package="archetypes.schemaextender" />
+    <adapter factory=".extender.SmartLinkExtender" />
+  </configure>
+
+  <!-- Plone 3.3 compatibility with Plone 4 style related items viewlet -->
+  <configure zcml:condition="installed collective.relateditems">
+    <include package="collective.relateditems" />
+        <class class=".content.link.SmartLink">
+            <implements interface="collective.relateditems.interfaces.IRelatedItemsEnabledContent"/>
+        </class>
+  </configure>
+
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"
@@ -38,20 +61,5 @@
       />
 
   <include file="upgrades.zcml" />
-
-  <adapter
-  	  for="Products.CMFPlone.Portal.PloneSite"
-  	  provides=".interfaces.utility.ISmartlinkConfig"
-  	  factory=".utility.rn_config_adapter"
-   />
-
-  <utility 
-      provides="redturtle.smartlink.interfaces.utility.ILinkNormalizerUtility"
-      factory=".utility.LinkNormalizerUtility" />
-
-  <configure zcml:condition="installed plone.app.blob">
-    <include package="archetypes.schemaextender" />
-    <adapter factory=".extender.SmartLinkExtender" />
-  </configure>
  
 </configure>

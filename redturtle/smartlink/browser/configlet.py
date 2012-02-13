@@ -2,6 +2,7 @@
 
 from zope.formlib import form
 from zope.interface import implements
+from Products.CMFCore.utils import getToolByName
 
 try:
     import plone.app.blob
@@ -68,11 +69,18 @@ class SmartlinkConfigForm(ControlPanelForm):
 
     @form.action(_(u'label_update_links', default=u'Update existing links'), name=u'update_links')
     def action_update(self, action, data):
-        results = self.context.portal_catalog(object_provides=ISmartLink.__identifier__)
+        context = self.context
+        putils = getToolByName(context, 'plone_utils')
+        results = getToolByName(context, 'portal_catalog')(object_provides=ISmartLink.__identifier__)
+        cnt = 0
         for res in results:
+            cnt+=1
             object = res.getObject()
             object.setRemoteUrl(object.getRemoteUrl())
             object.reindexObject()
+        putils.addPortalMessage(_('update_count_message',
+                                  default=u"${count} elements updated",
+                                  mapping={'count': cnt}))
         return
 
 _template = ViewPageTemplateFile('controlpanel.pt')

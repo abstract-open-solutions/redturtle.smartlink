@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-13 11:59+0000\n"
+"POT-Creation-Date: 2012-02-13 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "BLOBs Migration"
 msgstr ""
 
-#: ../interfaces/utility.py:38
+#: ../interfaces/utility.py:43
 msgid "Back-end URLs"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Configure Smart Link"
 msgstr ""
 
-#: ../browser/fix-fake-internal-links.pt:27
+#: ../browser/fix-fake-internal-links.pt:30
 msgid "Fake external links transformation"
 msgstr ""
 
@@ -49,15 +49,15 @@ msgstr ""
 msgid "Fix absolute URL to internal link"
 msgstr ""
 
-#: ../interfaces/utility.py:49
+#: ../interfaces/utility.py:54
 msgid "Front-end URLs"
 msgstr ""
 
-#: ../interfaces/utility.py:61
+#: ../interfaces/utility.py:66
 msgid "Front-end link must correspond to a single back-end link"
 msgstr ""
 
-#: ../interfaces/utility.py:28
+#: ../interfaces/utility.py:33
 msgid "Front-end main URL"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Migrate to plone.app.blob"
 msgstr ""
 
-#: ../browser/fix-fake-internal-links.pt:99
+#: ../browser/fix-fake-internal-links.pt:102
 msgid "No Smart Link with bad configuration found"
 msgstr ""
 
@@ -85,7 +85,7 @@ msgstr ""
 msgid "Other Smart Link utilities"
 msgstr ""
 
-#: ../interfaces/utility.py:19
+#: ../interfaces/utility.py:24
 msgid "Relative links"
 msgstr ""
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Smart Link configuration"
 msgstr ""
 
-#: ../browser/fix-fake-internal-links.pt:103
+#: ../browser/fix-fake-internal-links.pt:106
 msgid "Transform"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid "description_fix_fake_interna_link"
 msgstr ""
 
 #. Default: "Here follow all Smart Link contents that has been added as external links but are using URLs that refer to internal content. So, it seems that you can transform those external link to internal ones. You can transform those content automatically from this form."
-#: ../browser/fix-fake-internal-links.pt:39
+#: ../browser/fix-fake-internal-links.pt:42
 msgid "description_general_fix_fake_internal_link_form"
 msgstr ""
 
@@ -132,22 +132,22 @@ msgid "error_internallink_externallink_required"
 msgstr ""
 
 #. Default: "The external URL is ${real-external-link} but it links to ${equiv-internal-link}."
-#: ../browser/fix-fake-internal-links.pt:84
+#: ../browser/fix-fake-internal-links.pt:87
 msgid "fake_link_explanation"
 msgstr ""
 
 #. Default: "Put there all your possible back-office URLs you want to transform. URLs there must be unique"
-#: ../interfaces/utility.py:39
+#: ../interfaces/utility.py:44
 msgid "help_backendlink"
 msgstr ""
 
 #. Default: "Put there the site main URL you want to expone to visitors. All Smart Link that starts with the current URL of the portal will be transformed to use this URL."
-#: ../interfaces/utility.py:29
+#: ../interfaces/utility.py:34
 msgid "help_frontend_main_link"
 msgstr ""
 
 #. Default: "Fill there URLs in which you want to change the relative back-end ones."
-#: ../interfaces/utility.py:50
+#: ../interfaces/utility.py:55
 msgid "help_frontendlink"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgid "help_image_anchor"
 msgstr ""
 
 #. Default: "If selected, all internal links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
-#: ../interfaces/utility.py:20
+#: ../interfaces/utility.py:25
 msgid "help_relativelink"
 msgstr ""
 
@@ -187,7 +187,7 @@ msgid "internal_link_msg"
 msgstr ""
 
 #. Default: "The external URL is ${real-external-link}. This seems an internal link, but doesn't seem to link any internal content."
-#: ../browser/fix-fake-internal-links.pt:90
+#: ../browser/fix-fake-internal-links.pt:93
 msgid "internal_unknow_link_explanation"
 msgstr ""
 
@@ -232,7 +232,7 @@ msgid "label_smartlink_internallink"
 msgstr ""
 
 #. Default: "Up to Smart Link configuration"
-#: ../browser/fix-fake-internal-links.pt:32
+#: ../browser/fix-fake-internal-links.pt:35
 msgid "label_up_to_smart_link_setup"
 msgstr ""
 
@@ -247,12 +247,12 @@ msgid "label_url"
 msgstr ""
 
 #. Default: "External link fixed: ${origin} now links ${linked}"
-#: ../browser/utilities.py:39
+#: ../browser/utilities.py:43
 msgid "link_fixed_message"
 msgstr ""
 
 #. Default: "Cannot find internal content at ${linked}"
-#: ../browser/utilities.py:45
+#: ../browser/utilities.py:49
 msgid "link_fixed_not_found_message"
 msgstr ""
 

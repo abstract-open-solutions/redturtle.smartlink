@@ -225,10 +225,9 @@ class SmartLink(ATLink):
         self.getField('internalLink').set(self, value, **kwargs)
         self.setRemoteUrl(self.getRemoteUrl())
 
-    security.declareProtected(permissions.View, 'getInternalLinkPath')
+    security.declareProtected(permissions.View, 'getRemoteUrl')
     def getRemoteUrl(self):
         """Return the URL of the link from the appropriate field, internal or external."""
-
         # We need to check if the self object has the reference_catalog attribute.
         # It's an integration problem with p4a that call this method when we don't have an internal link.
         if hasattr(self, 'reference_catalog'):
@@ -236,13 +235,12 @@ class SmartLink(ATLink):
         else:
             ilink = None
 
-        smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
-
         # If we are using an internal link
         if ilink:
             anchor = self.getAnchor() or ''
             if anchor and not anchor.startswith("#"):
                 anchor = '#'+anchor
+            smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
             if smartlink_config:
                 if smartlink_config.relativelink:            
                     object = self.getField('internalLink').get(self)
@@ -318,8 +316,8 @@ class SmartLink(ATLink):
             # Try this way... this seems the only way to get the referenced object when we are deleting
             # No event will help us... neither OFS.interfaces.IObjectWillBeRemovedEvent
             portal_url = getToolByName(self, 'portal_url')
-            internalPath = self.getRemoteUrl().replace(portal_url(), '')
-            if not internalPath.startswith('/'+portal_url.getPortalObject().getId()):
+            internalPath = self.getRemoteUrl().replace(getUtility(ILinkNormalizerUtility).toFrontEnd(portal_url()), '')
+            if not internalPath.startswith('/' + portal_url.getPortalObject().getId()):
                 internalPath = '/' + portal_url.getPortalObject().getId() + internalPath
             return internalPath
         return None

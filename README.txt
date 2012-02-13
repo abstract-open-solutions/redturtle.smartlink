@@ -52,9 +52,11 @@ Blob and Blob migration tool
 SmartLink supports (starting from 1.0.0 revision) the use of blob for the image field.
 In this way we doesn't increases the size of Data.fs .
 
-The Blob support for SmartLink is activated only if plone.app.blob is installed.
+The Blob support for SmartLink is activated only if ``plone.app.blob`` is installed.
 Plone 4 has Blob as storage default for the images and the files.
-Into Plone 3.x you have to install it by yourself.
+On Plone 3.x you have to install it by yourself.
+
+__ http://pypi.python.org/pypi/plone.app.blob
 
 If you have already created Smark Link contents with an old version that doesn't support Blobs
 you have to launch a migration utility from the Smart Link control panel. 
@@ -97,22 +99,11 @@ Requirements
 Smart Link has been tested on Plone 3.3, 4.0 and 4.1. Is possible that also older Plone 3.x version can be
 used safely.
 
-Plone 3.3 limitations
----------------------
-
-Starting from version 1.1 you will find some limitation if using Smart Link on Plone 3.3:
-
-* Missing translations (I mean: you *can't* translate some strings)
-* Missing related items in the view
-* Removing Smart Link will register a Plone-4-compliant basic ATLink configuration
-
-however: none of those limits are blocker
-
 TODO
 ====
 
 * Fix this ugly error: *WARNING SecurityInfo Conflicting security declarations for setId*
-* Warn the user if he used a remote URL for an internal content
+* Provide a proper uninstall step that transform all Smart Link back to original Plone ATLink
 * Evaluate a more general approach to icon substitution
 
 Additional documentation

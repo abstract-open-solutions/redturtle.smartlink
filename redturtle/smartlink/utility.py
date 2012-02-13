@@ -51,7 +51,7 @@ class LinkNormalizerUtility(object):
                         frontendlink = frontendlink[-1]=='/' and frontendlink[:-1] or frontendlink
                         remote = remote.replace(blink,frontendlink)
                         break
-        return remote
+        return str(remote)
 
 
     def toCurrent(self, remote):
@@ -78,4 +78,4 @@ class LinkNormalizerUtility(object):
                         if backendlink.startswith(portal_url):
                             remote = remote.replace(flink, backendlink)
                             break
-        return remote
+        return str(remote)

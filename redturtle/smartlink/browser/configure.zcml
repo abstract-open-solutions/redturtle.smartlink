@@ -9,6 +9,7 @@
     <browser:page
       for="..interfaces.ISmartLink"
       name="smartlink_view"
+	  class=".smartlink_view.SmartLinkView"
       template="smartlink_view.pt"
       permission="zope2.View"
       />

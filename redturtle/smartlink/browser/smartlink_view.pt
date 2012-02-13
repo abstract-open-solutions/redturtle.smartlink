@@ -56,21 +56,21 @@
             </p>
         </div>
 
-        <p class="smartLinkNormalUrl" tal:condition="not:context/getInternalLinkPath">
+        <p class="smartLinkNormalUrl" tal:condition="python:not view.getInternalLink()">
             <span i18n:translate="link_address">The link address is:</span>
             <a href="#"
                tal:attributes="href here/remote_url"
                rel="external"
                tal:content="context/remote_url">remote url</a>
         </p>
-        <p class="smartLinkTargetInfo" tal:condition="context/getInternalLinkPath"
+        <p class="smartLinkTargetInfo" tal:condition="nocall:view/getInternalLink"
 		   i18n:domain="redturtle.smartlink"
            i18n:translate="internal_link_msg">
-            This is an internal link to &quot;<a tal:define="target context/getInternalLink"
-               tal:attributes="href context/remote_url;
-                               title target/Description"
-                               tal:content="target/Title"
-                               i18n:name="internal_link_target">
+            This is an internal link to &quot;<a tal:define="target view/getInternalLink"
+                                                 tal:attributes="href context/remote_url;
+                                                                 title target/Description"
+                                                                 tal:content="target/Title"
+                                                                 i18n:name="internal_link_target">
                 Foo document
             </a>&quot;
         </p>

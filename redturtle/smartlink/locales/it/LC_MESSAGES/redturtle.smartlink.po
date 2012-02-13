@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2012-02-13 11:59+0000\n"
+"POT-Creation-Date: 2012-02-13 14:33+0000\n"
 "PO-Revision-Date: 2010-08-27 12:31+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "BLOBs Migration"
 msgstr "Migrazione ai BLOB"
 
-#: ../interfaces/utility.py:38
+#: ../interfaces/utility.py:43
 msgid "Back-end URLs"
 msgstr "URL di back-end"
 
@@ -39,23 +39,23 @@ msgstr "Modifiche effettuate."
 msgid "Configure Smart Link"
 msgstr "Configura Smart Link"
 
-#: ../browser/fix-fake-internal-links.pt:27
+#: ../browser/fix-fake-internal-links.pt:30
 msgid "Fake external links transformation"
-msgstr ""
+msgstr "Tranformazione dei falsi link esterni"
 
 #: ../browser/controlpanel.pt:213
 msgid "Fix absolute URL to internal link"
 msgstr "Correggi URL assoluti a link interni"
 
-#: ../interfaces/utility.py:49
+#: ../interfaces/utility.py:54
 msgid "Front-end URLs"
 msgstr "URL di front-end"
 
-#: ../interfaces/utility.py:61
+#: ../interfaces/utility.py:66
 msgid "Front-end link must correspond to a single back-end link"
 msgstr "Ad un link di front end deve corrispondere un solo link di backend"
 
-#: ../interfaces/utility.py:28
+#: ../interfaces/utility.py:33
 msgid "Front-end main URL"
 msgstr "URL di front-end primario"
 
@@ -71,9 +71,9 @@ msgstr "Migra immagini ai BLOB"
 msgid "Migrate to plone.app.blob"
 msgstr "Migrazione a plone.app.blob"
 
-#: ../browser/fix-fake-internal-links.pt:99
+#: ../browser/fix-fake-internal-links.pt:102
 msgid "No Smart Link with bad configuration found"
-msgstr ""
+msgstr "Nessun Smart Link con cattive configurazioni trovate"
 
 #: ../browser/configlet.py:52
 msgid "No changes made."
@@ -83,7 +83,7 @@ msgstr "Nessuna modifica effettuata."
 msgid "Other Smart Link utilities"
 msgstr "Altre utilità di Smart Link"
 
-#: ../interfaces/utility.py:19
+#: ../interfaces/utility.py:24
 msgid "Relative links"
 msgstr "Link relativi"
 
@@ -95,7 +95,7 @@ msgstr "Impostazioni"
 msgid "Smart Link configuration"
 msgstr "Configurazione di Smart Link"
 
-#: ../browser/fix-fake-internal-links.pt:103
+#: ../browser/fix-fake-internal-links.pt:106
 msgid "Transform"
 msgstr "Transforma"
 
@@ -105,9 +105,11 @@ msgid "description_fix_fake_interna_link"
 msgstr "A volte potresti avere link a contenuti interni inseriti come link esterni. Se ciò è vero, puoi ${fix-fake-internal} tutti i contenuti di questo tipo."
 
 #. Default: "Here follow all Smart Link contents that has been added as external links but are using URLs that refer to internal content. So, it seems that you can transform those external link to internal ones. You can transform those content automatically from this form."
-#: ../browser/fix-fake-internal-links.pt:39
+#: ../browser/fix-fake-internal-links.pt:42
 msgid "description_general_fix_fake_internal_link_form"
 msgstr ""
+"Segue una lista di Smart Link che sono stati aggiunti come link esterni ma che usano URL che sono riferiti a contenuti interni.\n"
+"Sembrerebbe tu possa transformare questi link esterni a link interni. Puoi trasformare questi elementi automaticamente, da questo modulo."
 
 #. Default: "If you used a version of Smart Link older that 1.0.0, you could like to ${migrate-url}."
 #: ../browser/controlpanel.pt:208
@@ -130,22 +132,22 @@ msgid "error_internallink_externallink_required"
 msgstr "Prego fornisci un link interno, o compila il campo \"Link esterno\""
 
 #. Default: "The external URL is ${real-external-link} but it links to ${equiv-internal-link}."
-#: ../browser/fix-fake-internal-links.pt:84
+#: ../browser/fix-fake-internal-links.pt:87
 msgid "fake_link_explanation"
 msgstr "L'URL remoto è ${real-external-link} ma punta a ${equiv-internal-link}."
 
 #. Default: "Put there all your possible back-office URLs you want to transform. URLs there must be unique"
-#: ../interfaces/utility.py:39
+#: ../interfaces/utility.py:44
 msgid "help_backendlink"
 msgstr "Inserisci qui tutti i possibili URL di back-office che vuoi trasformare. Gli URL devono essere unici"
 
 #. Default: "Put there the site main URL you want to expone to visitors. All Smart Link that starts with the current URL of the portal will be transformed to use this URL."
-#: ../interfaces/utility.py:29
+#: ../interfaces/utility.py:34
 msgid "help_frontend_main_link"
 msgstr "Immetti qui l'URL principale del sito che vuoi esporre al pubblico. Tutti gli Smart Link che iniziano con l'URL corrente del portale verranno trasformati per usare questo URL."
 
 #. Default: "Fill there URLs in which you want to change the relative back-end ones."
-#: ../interfaces/utility.py:50
+#: ../interfaces/utility.py:55
 msgid "help_frontendlink"
 msgstr "Inserisci qui gli URL nei quali vuoi transformare i relativi di back-office."
 
@@ -155,7 +157,7 @@ msgid "help_image_anchor"
 msgstr "Usato solo quanto il link è interno al sito. Usa questo campo per ottenere un link interno alla sezione del documento di riferimento"
 
 #. Default: "If selected, all internal links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
-#: ../interfaces/utility.py:20
+#: ../interfaces/utility.py:25
 msgid "help_relativelink"
 msgstr "Se selezionato, tutti i link interni del sito salveranno URL relativi alla radice del portale, piuttosto che assoluti. Esempio: non \"http://miohost/plone/foo\" ma \"/plone/foo\""
 
@@ -185,7 +187,7 @@ msgid "internal_link_msg"
 msgstr "Questo è un link interno a \"${internal_link_target}\""
 
 #. Default: "The external URL is ${real-external-link}. This seems an internal link, but doesn't seem to link any internal content."
-#: ../browser/fix-fake-internal-links.pt:90
+#: ../browser/fix-fake-internal-links.pt:93
 msgid "internal_unknow_link_explanation"
 msgstr "L'URL remoto è ${real-external-link}. Questo sembrerebbe un link interno, ma non è collegato a nessun contenuto."
 
@@ -230,9 +232,9 @@ msgid "label_smartlink_internallink"
 msgstr "Link interno"
 
 #. Default: "Up to Smart Link configuration"
-#: ../browser/fix-fake-internal-links.pt:32
+#: ../browser/fix-fake-internal-links.pt:35
 msgid "label_up_to_smart_link_setup"
-msgstr ""
+msgstr "Torna alla configurazione di Smart Link"
 
 #. Default: "Update existing links"
 #: ../browser/configlet.py:69
@@ -245,12 +247,12 @@ msgid "label_url"
 msgstr ""
 
 #. Default: "External link fixed: ${origin} now links ${linked}"
-#: ../browser/utilities.py:39
+#: ../browser/utilities.py:43
 msgid "link_fixed_message"
 msgstr "Link esterno modificato: ${origin} ora punta a ${linked}"
 
 #. Default: "Cannot find internal content at ${linked}"
-#: ../browser/utilities.py:45
+#: ../browser/utilities.py:49
 msgid "link_fixed_not_found_message"
 msgstr "Non trovato un contenuto al percorso ${linked}"
 

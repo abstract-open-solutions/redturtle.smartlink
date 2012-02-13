@@ -9,8 +9,11 @@ Changelog
   that "Site Administrator" role can handle [keul]
 * added an utility to convert fake external link to became internal [keul]
 * Aligned all ``Link.xml`` files to be Plone 4 compliant [keul]
-* In Plone 4 the related items where duplicated (if used) [keul]
-* Moved URL transformation to an ``ILinkNormalizerUtility`` utility [keul]
+* In Plone 4 the related items where duplicated (if used).
+  No Plone 3.3 requires `collective.relateditems`__ [keul]
+* Moved URL transformation features to an ``ILinkNormalizerUtility`` [keul]
+
+__ http://plone.org/products/collective.relateditems
 
 1.0.0 (2011-11-03)
 ------------------

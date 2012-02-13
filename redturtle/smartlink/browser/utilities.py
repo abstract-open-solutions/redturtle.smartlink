@@ -35,7 +35,9 @@ class FixFakeInternalLinkView(BrowserView):
             obj = context.restrictedTraverse(path, None)
             if obj:
                 linkNormalizerUtility = getUtility(ILinkNormalizerUtility)
-                remote = linkNormalizerUtility.toCurrent(obj.getExternalLink())
+                # use getRemoteUrl below, not getExternalLink; in this way we can fix
+                # also links that loose all internal/external information
+                remote = linkNormalizerUtility.toCurrent(obj.getRemoteUrl())
                 linked = self.findInternalByURL(remote)
                 if linked:
                     obj.edit(internalLink=linked.UID(),
@@ -91,14 +93,14 @@ class FixFakeInternalLinkView(BrowserView):
             external_link = obj.getExternalLink() or \
                         (not obj.getInternalLink() and obj.getField('remoteUrl').get(obj))
             if external_link:
-                external_link = linkNormalizerUtility.toCurrent(obj.getExternalLink())
+                external_link = linkNormalizerUtility.toCurrent(external_link)
                 if external_link.startswith(portal_url):
                     internalObj = self.findInternalByURL(external_link)
                     results.append({'path': '/'.join(obj.getPhysicalPath()),
                                     'title': obj.Title(),
                                     'absolute_url_path': obj.absolute_url_path(), 
                                     'url': obj.absolute_url(),
-                                    'external_link': obj.getExternalLink(),
+                                    'external_link': external_link,
                                     'internal_obj': internalObj,
                                     })
         return results
