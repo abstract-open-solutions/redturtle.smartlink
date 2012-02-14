@@ -73,7 +73,7 @@ msgstr "Migrazione a plone.app.blob"
 
 #: ../browser/fix-fake-internal-links.pt:102
 msgid "No Smart Link with bad configuration found"
-msgstr "Nessun Smart Link con cattive configurazioni trovate"
+msgstr "Nessun Smart Link con cattive configurazioni trovato"
 
 #: ../browser/configlet.py:52
 msgid "No changes made."

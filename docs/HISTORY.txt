@@ -14,9 +14,11 @@ Changelog
 * Moved URL transformation features to an ``ILinkNormalizerUtility`` [keul]
 * Fixed all tests to be compatible again with Plone 3.3.6 [keul]
 * Fixed bug when providing a non ASCII URL (close `#8`__) [keul]
+* Provide a count of updated links (close `#6`__) [keul]
 
 __ http://plone.org/products/collective.relateditems
 __ http://plone.org/products/smart-link/issues/8
+__ http://plone.org/products/smart-link/issues/6
 
 1.0.0 (2011-11-03)
 ------------------

@@ -72,6 +72,7 @@ class LinkNormalizerUtility(object):
             else:
                 for frontendlink in frontendlinks:
                     flink = frontendlink[-1]=='/' and frontendlink[:-1] or frontendlink
+                    flink = flink.encode('utf-8')
                     if remote.startswith(flink):
                         backendlinks = smartlink_config.backendlink
                         backendlink = backendlinks[frontendlinks.index(frontendlink)]

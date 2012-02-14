@@ -52,7 +52,7 @@ Blob and Blob migration tool
 SmartLink supports (starting from 1.0.0 revision) the use of blob for the image field.
 In this way we doesn't increases the size of Data.fs .
 
-The Blob support for SmartLink is activated only if ``plone.app.blob`` is installed.
+The Blob support for SmartLink is activated only if `plone.app.blob`__ is installed.
 Plone 4 has Blob as storage default for the images and the files.
 On Plone 3.x you have to install it by yourself.
 
