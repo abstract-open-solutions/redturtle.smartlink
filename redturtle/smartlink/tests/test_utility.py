@@ -20,7 +20,11 @@ class BasicTestSetup(TestCase):
         self.smartlink_config.frontendlink.append(u'http://nohost')
         self.assertEqual(self.utility.toFrontEnd('http://myhost.com/sostenibilit\xc3\xa0.pdf'),
                          'http://myhost.com/sostenibilit\xc3\xa0.pdf')
-
+        self.smartlink_config.backendlink = []
+        self.smartlink_config.frontendlink = []
+        self.smartlink_config.frontend_main_link = u'http://nohost/plone'
+        self.assertEqual(self.utility.toFrontEnd('http://myhost.com/sostenibilit\xc3\xa0.pdf'),
+                         'http://myhost.com/sostenibilit\xc3\xa0.pdf')
 
 def test_suite():
     suite = unittest.TestSuite()
