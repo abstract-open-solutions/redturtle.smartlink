@@ -45,11 +45,12 @@ class LinkNormalizerUtility(object):
             else:
                 for backendlink in backendlinks:
                     blink = backendlink[-1]=='/' and backendlink[:-1] or backendlink
+                    blink = blink.encode('utf-8')
                     if remote.startswith(blink):
                         frontendlinks = smartlink_config.frontendlink
                         frontendlink = frontendlinks[backendlinks.index(backendlink)]
                         frontendlink = frontendlink[-1]=='/' and frontendlink[:-1] or frontendlink
-                        remote = remote.replace(blink,frontendlink)
+                        remote = remote.replace(blink, frontendlink)
                         break
         return str(remote)
 

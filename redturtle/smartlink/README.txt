@@ -166,10 +166,10 @@ Now the Smart Link view also display the image and the caption under it in the i
 
     >>> browser.url == portal_url + '/remote-link-sample-1'
     True
-    >>> print browser.contents
+    >>> print browser.contents.strip() # please, don't laugh
     <!DOCTYPE html PUBLIC...
     ...
-    <img src=".../remote-link-sample-1/image_mini" alt="Remote link: sample 1" title="A not-so-remote link to our contact info form" ... />
+    <img src=".../remote-link-sample-1/image_mini" alt="Remote link: sample 1" title="A not-so-remote link to our contact info form" ... />...
     ...
     ...</html>
 
@@ -205,10 +205,10 @@ To see that the favicon chosen is also used as Plone content icon, let's go on a
 information:
 
     >>> browser.open(portal_url + '/folder_listing')
-    >>> print browser.contents
+    >>> print browser.contents.strip()
     <!DOCTYPE html PUBLIC...
     ...
-    <img width="16" height="16" src=".../remote-link-sample-1/favicon" alt="Link" />
+    <img ... width="16" height="16" src=".../remote-link-sample-1/favicon" ... />
     ...
     ...</html>
 
@@ -576,8 +576,12 @@ Smart Link, you can use the configuration panel itself: the "*Update existing li
 Now let's see what is changed in our links all around the site, going back to our third example.
 
     >>> browser.getLink('Almost internal link: sample 3').click()
-    >>> '<a href="http://127.0.0.1/plone/foo-folder/my-manual" rel="external">http://127.0.0.1/plone/foo-folder/my-manual</a>' in browser.contents
-    True
+    >>> print browser.contents.strip()
+    <!DOCTYPE html PUBLIC...
+    ...
+    <a href="http://127.0.0.1/plone/foo-folder/my-manual" rel="external">http://127.0.0.1/plone/foo-folder/my-manual</a> 
+    ...
+    ...</html>
 
 As you can see there also our fake internal link is changed. The configuration tool changed *all*
 Smart Link where the transformation can be applied, without looking at the internal/external status.

@@ -7,13 +7,16 @@ Changelog
 * added a link to the view that migrate to blob from the control panel [keul]
 * added a new ``Smart Link: access configuration`` permission for site configuration
   that "Site Administrator" role can handle [keul]
-* added an utility to convert fake external link to became internal [keul]
+* added an utility to convert "fake external" link to internal [keul]
 * Aligned all ``Link.xml`` files to be Plone 4 compliant [keul]
 * In Plone 4 the related items where duplicated (if used).
   No Plone 3.3 requires `collective.relateditems`__ [keul]
 * Moved URL transformation features to an ``ILinkNormalizerUtility`` [keul]
+* Fixed all tests to be compatible again with Plone 3.3.6 [keul]
+* Fixed bug when providing a non ASCII URL (close `#8`__) [keul]
 
 __ http://plone.org/products/collective.relateditems
+__ http://plone.org/products/smart-link/issues/8
 
 1.0.0 (2011-11-03)
 ------------------
