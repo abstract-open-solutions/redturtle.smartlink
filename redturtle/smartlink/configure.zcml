@@ -50,13 +50,28 @@
       description="An advanced ATLink version, with image field and internal link feature"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
- 
-  <!-- Register the installation GenericSetup extension profile -->
+  <!-- Register the uninstallation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="uninstall"
       title="Uninstall Smart Link"
       directory="profiles/uninstall"
       description="Remove Smart Link component"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <!-- migrate from/to SmartLinklink -->
+  <genericsetup:registerProfile
+      name="linkToSmartLink"
+      title="Smart Link: migrate ATLink to Smart Link"
+      directory="profiles/atLinkToSmartLink"
+      description="Migrate basic Plone ATLink to Smart Link"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <genericsetup:registerProfile
+      name="smartLinkToATLink"
+      title="Smart Link: migrate from Smart Link back to ATLink"
+      directory="profiles/smartLinkToATLink"
+      description="Migrate Smart Link to basic ATLink"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

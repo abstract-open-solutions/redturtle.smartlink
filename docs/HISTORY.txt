@@ -8,17 +8,21 @@ Changelog
 * added a new ``Smart Link: access configuration`` permission for site configuration
   that "Site Administrator" role can handle [keul]
 * added an utility to convert "fake external" link to internal [keul]
-* Aligned all ``Link.xml`` files to be Plone 4 compliant [keul]
+* aligned all ``Link.xml`` files to be Plone 4 compliant [keul]
 * In Plone 4 the related items where duplicated (if used).
-  No Plone 3.3 requires `collective.relateditems`__ [keul]
+  Now Plone 3.3 requires `collective.relateditems`__ [keul]
 * Moved URL transformation features to an ``ILinkNormalizerUtility`` [keul]
-* Fixed all tests to be compatible again with Plone 3.3.6 [keul]
-* Fixed bug when providing a non ASCII URL (close `#8`__) [keul]
-* Provide a count of updated links (close `#6`__) [keul]
+* fixed all tests to be compatible again with Plone 3.3.6 [keul]
+* fixed bug when providing a non ASCII URL (close `#8`__) [keul]
+* provide a count of updated links when using the administration
+  utility (close `#6`__) [keul]
+* provided an import step to migrate ATLink to Smart Link (close `#7`__) [keul]
+* provided an import step to go back to ATLink from Smart Link [keul]
 
 __ http://plone.org/products/collective.relateditems
 __ http://plone.org/products/smart-link/issues/8
 __ http://plone.org/products/smart-link/issues/6
+__ http://plone.org/products/smart-link/issues/7
 
 1.0.0 (2011-11-03)
 ------------------

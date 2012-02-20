@@ -85,13 +85,13 @@ Safe re-install, clean uninstall
 
 You can *re-install* Smart Link safely for upgrade task or for restore changes, without any problem.
 
-If you *uninstall* it all data from Smart Link will be removed. This means that if you re-install it after
-all you internal links will not be linked to target contents.
+If you *uninstall* it, all data from Smart Link will be removed. This means that if you re-install it after
+all your internal links will not be linked to target contents.
 
 At uninstall time Smart Link restore the Plone ATLink content. However all created Smart Link are still
 Smart Link and all of theme need the product code to continue working (even if not installed).
 
-So: the uninstall is not 100% perfect.
+So: the uninstall is not 100% perfect right now.
 
 Requirements
 ============
@@ -105,6 +105,7 @@ TODO
 * Fix this ugly error: *WARNING SecurityInfo Conflicting security declarations for setId*
 * Provide a proper uninstall step that transform all Smart Link back to original Plone ATLink
 * Evaluate a more general approach to icon substitution
+* Provide an import step that transform ATLink to Smart Link
 
 Additional documentation
 ========================

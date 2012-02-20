@@ -11,9 +11,14 @@ def install(portal, reinstall=False):
     setup_tool = portal.portal_setup
     setup_tool.setBaselineContext('profile-redturtle.smartlink:default')
     setup_tool.runAllImportStepsFromProfile('profile-redturtle.smartlink:default')
-    #if getFSVersionTuple()[0]>=4:
-    #    unregisterIcon(portal)
-    
+    if not reinstall:
+        portal.plone_utils.addPortalMessage(_('install_info',
+                                              default=u'Starting from now, all Links created in this site will be Smart Link.\n'
+                                                      u'If you have already created Link types in this site, you can migrate '
+                                                      u'them to Smart Link using the "Smart Link: migrate ATLink to Smart Link" '
+                                                      u'import step.'),
+                                            type='info')
+
 
 def uninstall(portal, reinstall=False):
     setup_tool = portal.portal_setup
@@ -25,7 +30,9 @@ def uninstall(portal, reinstall=False):
         removeSmartLinkMarks(portal)
         portal.plone_utils.addPortalMessage(_('uninstall_warning',
                                               default=u'Keep in mind that contents created with Smart Link are still using Smart Link code '
-                                                      u'and they will be broken if you remove the product from your Plone installation.'),
+                                                      u'and they will be broken if you remove the product from your Plone installation.\n'
+                                                      u'You can convert them back to basic ATLink using the "Smart Link: migrate from Smart Link to ATLink" '
+                                                      u'import step.'),
                                             type='warning')
 
 
@@ -57,6 +64,7 @@ def unLink(portal, object):
         r.setInternalLink(None)
         r.setExternalLink(object.absolute_url())
         r.reindexObject(['getRemoteUrl'])
+
 
 def unregisterIcon(portal):
     """Remove icon expression from Link type"""
