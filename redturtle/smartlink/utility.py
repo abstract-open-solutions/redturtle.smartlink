@@ -2,7 +2,7 @@
 
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.component import getUtility
+from zope.component import queryUtility
 from redturtle.smartlink.interfaces.utility import ISmartlinkConfig, ILinkNormalizerUtility
 from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
@@ -11,7 +11,7 @@ from zope.app.component.hooks import getSite
 
 def rn_config_adapter(context):
     """Form Adapter"""
-    return getUtility(ISmartlinkConfig, name="smartlink_config", context=context)
+    return queryUtility(ISmartlinkConfig, name="smartlink_config", context=context)
 
 
 class SmartlinkConfig(SimpleItem):
@@ -29,7 +29,7 @@ class LinkNormalizerUtility(object):
     implements(ILinkNormalizerUtility)
 
     def toFrontEnd(self, remote):
-        smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
+        smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
         portal = getSite()
         remote = remote or ''
         if smartlink_config:
@@ -56,7 +56,7 @@ class LinkNormalizerUtility(object):
 
 
     def toCurrent(self, remote):
-        smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
+        smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
         portal = getSite()
         remote = remote or ''
         portal_url = getToolByName(portal, 'portal_url')()

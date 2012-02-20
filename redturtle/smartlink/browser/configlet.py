@@ -10,6 +10,12 @@ try:
 except ImportError:
     BLOB = False
 
+try:
+    import Products.contentmigration
+    MIGRATION = True
+except ImportError:
+    MIGRATION = False
+
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.form import named_template_adapter
 from plone.app.controlpanel.form import ControlPanelForm
@@ -27,6 +33,7 @@ class SmartlinkConfigForm(ControlPanelForm):
     """Smartlink Control Panel Form"""
     
     implements(ISmartLinkControlPanelForm)
+    template = ViewPageTemplateFile('controlpanel.pt')
 
     form_fields = form.Fields(ISmartlinkConfig)
 
@@ -42,6 +49,10 @@ class SmartlinkConfigForm(ControlPanelForm):
     @property
     def blob_installed(self):
         return BLOB
+
+    @property
+    def contentmigration_installed(self):
+        return MIGRATION
 
     def saveFields(self, action, data):
         CheckAuthenticator(self.request)
@@ -83,5 +94,3 @@ class SmartlinkConfigForm(ControlPanelForm):
                                   mapping={'count': cnt}))
         return
 
-_template = ViewPageTemplateFile('controlpanel.pt')
-controlpanel_named_template_adapter = named_template_adapter(_template)

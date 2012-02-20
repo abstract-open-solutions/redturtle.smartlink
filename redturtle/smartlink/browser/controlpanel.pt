@@ -2,60 +2,57 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xml:lang="en" lang="en"
       tal:omit-tag=""
       metal:define-macro="controlpanel"
       i18n:domain="redturtle.smartlink">
 
 <metal:block use-macro="context/prefs_main_template/macros/master">
 
-<metal:block metal:fill-slot="top_slot"
-             tal:define="dummy python:request.set('disable_border', 1)" />
-
 <body>
 
-<div metal:fill-slot="prefs_configlet_main">
+<metal:main fill-slot="prefs_configlet_main">
 
-    <div metal:define-macro="form">
+    <metal:form metal:define-macro="form">
 
-        <div id="viewspace" metal:define-slot="viewspace">
+        <metal:block define-macro="header">
 
-            <metal:block define-macro="header">
+            <dl tal:define="status view/status"
+                 tal:condition="status"
+                 i18n:domain="plone"
+                 class="portalMessage info">
+                <dt i18n:translate="">
+                    Info
+                </dt>
+                <dd tal:content="view/status" />
+            </dl>
 
-                <dl tal:define="status view/status"
-				    i18n:domain="plone"
-                     tal:condition="status"
-                     class="portalMessage info">
-                    <dt i18n:translate="">
-                        Info
-                    </dt>
-                    <dd tal:content="view/status" />
-                </dl>
-
-            </metal:block>
-
-            <h1 class="documentFirstHeading"
-			    i18n:domain="plone"
-                i18n:translate=""
-                tal:condition="view/label"
-                tal:content="view/label"
-                metal:define-slot="heading">
-                Do something
-            </h1>
+        </metal:block>
 
             <a href=""
-			   i18n:domain="plone"
-               class="link-parent"
+               id="setup-link"
                tal:attributes="href string:$portal_url/plone_control_panel"
-               i18n:translate="label_up_to_plone_setup">
-                Up to Site Setup
-            </a>
+               i18n:domain="plone"
+               i18n:translate="">
+                Site Setup
+            </a> &rsaquo;
 
-            <p i18n:translate=""
-			   i18n:domain="plone"
-               tal:condition="view/description"
-               tal:content="view/description">
-                Description
-            </p>
+        <h1 class="documentFirstHeading"
+            i18n:translate=""
+            tal:condition="view/label"
+            tal:content="view/label"
+            i18n:domain="plone"
+            metal:define-slot="heading">
+            Do something
+        </h1>
+
+        <div class="documentDescription" i18n:translate="" i18n:domain="plone"
+           tal:condition="view/description"
+           tal:content="view/description">
+            Description
+        </div>
+
+        <div id="content-core">
 
             <form action="."
                   metal:define-macro="master"
@@ -78,14 +75,15 @@
                 <fieldset tal:condition="not: is_fieldsets">
                     <legend tal:define="form_name view/form_name|nothing"
                             tal:condition="form_name"
-                            tal:content="form_name">Form name</legend>
+                            tal:content="form_name"
+                            i18n:translate="">Form name</legend>
                     <tal:block tal:repeat="widget view/widgets">
 
                         <div class="field"
                              tal:define="description widget/hint;
                                          error widget/error"
                              tal:attributes="class python:'field'+(error and ' error' or '')">
-			  
+
                             <label i18n:translate=""
                                    tal:attributes="for widget/name"
                                    tal:content="widget/label">
@@ -94,7 +92,7 @@
 
                             <span class="fieldRequired"
                                   title="Required"
-								  i18n:domain="plone"
+                                  i18n:domain="plone"
                                   i18n:attributes="title title_required;"
                                   i18n:translate="label_required"
                                   tal:condition="widget/required">
@@ -128,7 +126,8 @@
                     <legend tal:define="form_name fieldset/label"
                             tal:condition="form_name"
                             tal:attributes="id python:'fieldsetlegend-%s' % fieldset.id"
-                            tal:content="form_name">Form name</legend>
+                            tal:content="form_name"
+                            i18n:translate="">Form name</legend>
 
                     <p i18n:translate=""
                        tal:condition="fieldset/description"
@@ -144,16 +143,16 @@
                              tal:attributes="class python:'field'+(error and ' error' or '')">
 
                             <label i18n:translate=""
-				   tal:define="name widget/name"
+                                   tal:define="name widget/name"
                                    tal:attributes="for widget/associateLabelWithInputControl|name"
-				   tal:content="widget/label">
+                                   tal:content="widget/label">
                                 label
                             </label>
 
                             <span class="fieldRequired"
                                   title="Required"
-								  i18n:domain="plone"
                                   i18n:attributes="title title_required;"
+								  i18n:domain="plone"
                                   i18n:translate="label_required"
                                   tal:condition="widget/required">
                                 (Required)
@@ -196,39 +195,48 @@
                 <input tal:replace="structure context/@@authenticator/authenticator" />
 
             </form>
-        </div>
 
             <div id="smartLinkUtilities">
-            	<h2 i18n:translate="">Other Smart Link utilities</h2>
-				<tal:blob condition="view/blob_installed">
-	            	<dt i18n:translate="">Migrate to plone.app.blob</dt>
-					<dd i18n:translate="description_migrate_to_blob">
-						If you used a version of Smart Link older that 1.0.0, you could
-						like to
-						<a tal:attributes="href string:${context/absolute_url}/@@blob-smartlink-migration"
-						   i18n:name="migrate-url"
-						   i18n:translate="">migrate your image fields to Plone blobs</a>.
-					</dd>
-				</tal:blob>
-            	<dt i18n:translate="">Fix absolute URL to internal link</dt>
-				<dd i18n:translate="description_fix_fake_interna_link">
-					Sometimes you could have link to internal content composed as external link.
-					If this is true, you can
-					<a tal:attributes="href string:${context/absolute_url}/@@fix-fake-internal-links"
-					   i18n:name="fix-fake-internal"
-					   i18n:translate="">migrate to be internal link</a> all links of this type.
-				</dd>
-			</div>
+                <h2 i18n:translate="">Other Smart Link utilities</h2>
+                <tal:blob condition="view/blob_installed">
+                    <dt i18n:translate="">Migrate to plone.app.blob</dt>
+                    <dd i18n:translate="description_migrate_to_blob">
+                        If you used a version of Smart Link older that 1.0.0, you could
+                        like to
+                        <a tal:attributes="href string:${context/absolute_url}/@@blob-smartlink-migration"
+                           i18n:name="migrate-url"
+                           i18n:translate="">migrate your image fields to Plone blobs</a>.
+                    </dd>
+                </tal:blob>
+                <dt i18n:translate="">Fix absolute URL to internal link</dt>
+                <dd i18n:translate="description_fix_fake_interna_link">
+                    Sometimes you could have link to internal content composed as external link.
+                    If this is true, you can
+                    <a tal:attributes="href string:${context/absolute_url}/@@fix-fake-internal-links"
+                       i18n:name="fix-fake-internal"
+                       i18n:translate="">migrate to be internal link</a> all links of this type.
+                </dd>
+                <tal:contentmigration condition="view/contentmigration_installed">
+                    <dt i18n:translate="">Migrate from ATLink to Smart Link</dt>
+                    <dd i18n:translate="description_migrate_to_smart_link">
+                        If you have ATLink created before installing Smart Link you could like to
+                        <a tal:attributes="href string:${context/absolute_url}/@@to-smartlink-migration"
+                           i18n:name="migrate-to-smartlink-url"
+                           i18n:translate="">migrate them to Smart Link</a>.
+                    </dd>
+				</tal:contentmigration>
+            </div>
 
-        <script type="text/javascript"
-            tal:define="extra_script view/extra_script | nothing"
-            tal:condition="extra_script"
-            tal:content="structure extra_script">
-        </script>
+            <script type="text/javascript"
+                tal:define="extra_script view/extra_script | nothing"
+                tal:condition="extra_script"
+                tal:content="structure extra_script">
+            </script>
+        </div>
 
-    </div>
+    </metal:form>
 
-</div>
+</metal:main>
 </body>
 
 </metal:block>

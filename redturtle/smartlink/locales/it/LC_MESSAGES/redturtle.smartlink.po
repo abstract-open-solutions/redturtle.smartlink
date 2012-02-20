@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2012-02-20 11:10+0000\n"
+"POT-Creation-Date: 2012-02-20 13:47+0000\n"
 "PO-Revision-Date: 2010-08-27 12:31+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
 
-#: ../browser/migrateblobs.py:26
+#: ../browser/migrate.py:26
 msgid "BLOBs Migration"
 msgstr "Migrazione ai BLOB"
 
@@ -22,15 +22,15 @@ msgstr "Migrazione ai BLOB"
 msgid "Back-end URLs"
 msgstr "URL di back-end"
 
-#: ../browser/migrateblobs.py:42
+#: ../browser/migrate.py:42
 msgid "Cancel"
 msgstr "Annulla"
 
-#: ../browser/configlet.py:63
+#: ../browser/configlet.py:74
 msgid "Changes canceled."
 msgstr "Modifiche annullate."
 
-#: ../browser/configlet.py:50
+#: ../browser/configlet.py:61
 msgid "Changes saved."
 msgstr "Modifiche effettuate."
 
@@ -43,7 +43,7 @@ msgstr "Configura Smart Link"
 msgid "Fake external links transformation"
 msgstr "Tranformazione dei falsi link esterni"
 
-#: ../browser/controlpanel.pt:213
+#: ../browser/controlpanel.pt:211
 msgid "Fix absolute URL to internal link"
 msgstr "Correggi URL assoluti a link interni"
 
@@ -59,15 +59,27 @@ msgstr "Ad un link di front end deve corrispondere un solo link di backend"
 msgid "Front-end main URL"
 msgstr "URL di front-end primario"
 
-#: ../browser/migrateblobs.py:27
+#: ../browser/migrate.py:29
+msgid "Migrate"
+msgstr "Migrazione"
+
+#: ../browser/migrate.py:49
+msgid "Migrate ATLink to Smart Link"
+msgstr "Migrazione di ATLink a Smart Link"
+
+#: ../browser/migrate.py:27
 msgid "Migrate Smart Link, making it use plone.app.blob"
 msgstr "Migra Smart Link, facendogli usare plone.app.blob"
 
-#: ../browser/migrateblobs.py:29
-msgid "Migrate images to BLOB"
-msgstr "Migra immagini ai BLOB"
+#: ../browser/migrate.py:50
+msgid "Migrate basic Plone ATLink to Smart Link"
+msgstr "Migra gli ATLink base di Plone a Smart Link"
 
-#: ../browser/controlpanel.pt:204
+#: ../browser/controlpanel.pt:220
+msgid "Migrate from ATLink to Smart Link"
+msgstr "Migra da ATLink a Smart Link"
+
+#: ../browser/controlpanel.pt:202
 msgid "Migrate to plone.app.blob"
 msgstr "Migrazione a plone.app.blob"
 
@@ -75,11 +87,11 @@ msgstr "Migrazione a plone.app.blob"
 msgid "No Smart Link with bad configuration found"
 msgstr "Nessun Smart Link con cattive configurazioni trovato"
 
-#: ../browser/configlet.py:53
+#: ../browser/configlet.py:64
 msgid "No changes made."
 msgstr "Nessuna modifica effettuata."
 
-#: ../browser/controlpanel.pt:202
+#: ../browser/controlpanel.pt:200
 msgid "Other Smart Link utilities"
 msgstr "Altre utilità di Smart Link"
 
@@ -87,11 +99,11 @@ msgstr "Altre utilità di Smart Link"
 msgid "Relative links"
 msgstr "Link relativi"
 
-#: ../browser/configlet.py:40
+#: ../browser/configlet.py:47
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: ../browser/configlet.py:33
+#: ../browser/configlet.py:40
 msgid "Smart Link configuration"
 msgstr "Configurazione di Smart Link"
 
@@ -100,7 +112,7 @@ msgid "Transform"
 msgstr "Transforma"
 
 #. Default: "Sometimes you could have link to internal content composed as external link. If this is true, you can ${fix-fake-internal} all links of this type."
-#: ../browser/controlpanel.pt:217
+#: ../browser/controlpanel.pt:215
 msgid "description_fix_fake_interna_link"
 msgstr "A volte potresti avere link a contenuti interni inseriti come link esterni. Se ciò è vero, puoi ${fix-fake-internal} tutti i contenuti di questo tipo."
 
@@ -112,9 +124,14 @@ msgstr ""
 "Sembrerebbe tu possa transformare questi link esterni a link interni. Puoi trasformare questi elementi automaticamente, da questo modulo."
 
 #. Default: "If you used a version of Smart Link older that 1.0.0, you could like to ${migrate-url}."
-#: ../browser/controlpanel.pt:208
+#: ../browser/controlpanel.pt:206
 msgid "description_migrate_to_blob"
 msgstr "Se hai usato una versione di Smart Link precedenze alla 1.0.0, puoi voler ${migrate-url}."
+
+#. Default: "If you have ATLink created before installing Smart Link you could like to ${migrate-to-smartlink-url}."
+#: ../browser/controlpanel.pt:223
+msgid "description_migrate_to_smart_link"
+msgstr "Se hai degli ATLink creati prima dell'installazione di Smart Link, potresti volerli ${migrate-to-smartlink-url}."
 
 #. Default: "Please provide the external URL, or fill the \"Internal link\" field"
 #: ../content/link.py:273
@@ -199,7 +216,7 @@ msgid "internal_unknow_link_explanation"
 msgstr "L'URL remoto è ${real-external-link}. Questo sembrerebbe un link interno, ma non è collegato a nessun contenuto."
 
 #. Default: "Cancel"
-#: ../browser/configlet.py:59
+#: ../browser/configlet.py:70
 msgid "label_cancel_links"
 msgstr "Annulla"
 
@@ -214,7 +231,7 @@ msgid "label_image_caption"
 msgstr "Didascalia dell'immagine"
 
 #. Default: "Save"
-#: ../browser/configlet.py:55
+#: ../browser/configlet.py:66
 msgid "label_save_links"
 msgstr "Salva"
 
@@ -244,7 +261,7 @@ msgid "label_up_to_smart_link_setup"
 msgstr "Torna alla configurazione di Smart Link"
 
 #. Default: "Update existing links"
-#: ../browser/configlet.py:70
+#: ../browser/configlet.py:81
 msgid "label_update_links"
 msgstr "Aggiorna i link esistenti"
 
@@ -263,21 +280,25 @@ msgstr "Link esterno modificato: ${origin} ora punta a ${linked}"
 msgid "link_fixed_not_found_message"
 msgstr "Non trovato un contenuto al percorso ${linked}"
 
-#: ../browser/controlpanel.pt:217
+#: ../browser/controlpanel.pt:223
+msgid "migrate them to Smart Link"
+msgstr "migrare a Smart Link"
+
+#: ../browser/controlpanel.pt:215
 msgid "migrate to be internal link"
 msgstr "migrare a link interni"
 
-#: ../browser/controlpanel.pt:208
+#: ../browser/controlpanel.pt:206
 msgid "migrate your image fields to Plone blobs"
 msgstr "migrare le tue immagini ai blob di Plone"
 
 #. Default: "You need to install \"Products.contentmigration\" product for perform the task"
-#: ../browser/migrateblobs.py:36
+#: ../browser/migrate.py:36
 msgid "migration_error_msg"
 msgstr "Devi installare \"Products.contentmigration\" per eseguire l'operazione"
 
 #. Default: "Fill this configuration panel for production settings; choose if use relative paths, an unified front-end URL, or manually enter many back-end/front-end URL (for advanced installation).\nEvery configuration option take precedence on the one that follows.\nAfter changes you (probably) want to run the \"Update existing links\" task."
-#: ../browser/configlet.py:34
+#: ../browser/configlet.py:41
 msgid "setting_description"
 msgstr ""
 "Compila questo pannello di configurazione per le impostazioni di produzione del sito; scegli se usare percorsi relativi, un URL di front-end unificato, o se gestire manualmente vary indirizzi di back-end/front-end (per installazioni avanzate).\n"
@@ -288,11 +309,12 @@ msgstr ""
 #: ../Extensions/install.py:31
 msgid "uninstall_warning"
 msgstr ""
-"Tieni presente che i contenuti creati con Smart Link stanno ancora usando il codice di Smart Link non saranno più funzionanti se rimuoverai il prodotto dalla tua installazione Plone.\n"
+"Tieni presente che i contenuti creati con Smart Link stanno ancora usando il codice di Smart Link e non saranno più funzionanti se rimuoverai il prodotto dalla tua installazione Plone.\n"
 "Puoi ripristinarli ad essere normali ATLink usando il profilo \"Smart Link: migrate from Smart Link back to ATLink\"."
 
 #. Default: "${count} elements updated"
-#: ../browser/configlet.py:81
+#: ../browser/configlet.py:92
+#: ../browser/migrate.py:59
 msgid "update_count_message"
 msgstr "${count} elementi aggiornati"
 

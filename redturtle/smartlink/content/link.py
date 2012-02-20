@@ -5,7 +5,7 @@ import urlparse
 from urllib import quote
 
 from zope import interface
-from zope.component import getUtility
+from zope.component import getUtility, queryUtility
 from AccessControl import ClassSecurityInfo
 
 from Products.Archetypes import atapi
@@ -240,7 +240,7 @@ class SmartLink(ATLink):
             anchor = self.getAnchor() or ''
             if anchor and not anchor.startswith("#"):
                 anchor = '#'+anchor
-            smartlink_config = getUtility(ISmartlinkConfig, name="smartlink_config")
+            smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
             if smartlink_config:
                 if smartlink_config.relativelink:            
                     object = self.getField('internalLink').get(self)

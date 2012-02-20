@@ -6,7 +6,7 @@ try: # >= 4.1
     from five.formlib import formbase
 except ImportError: # < 4.1
     from Products.Five.formlib import formbase
-from redturtle.smartlink.migrator import migrateSmartLink
+from redturtle.smartlink.migrator import migrateSmartLink, migrateLinkToSmartLink
 from Products.statusmessages.interfaces import IStatusMessage
 
 from redturtle.smartlink import smartlinkMessageFactory as _
@@ -26,7 +26,7 @@ class MigrateBlobs(formbase.PageForm):
     label = _(u'BLOBs Migration')
     description = _(u'Migrate Smart Link, making it use plone.app.blob')
 
-    @form.action(_(u'Migrate images to BLOB'))
+    @form.action(_(u'Migrate'))
     def actionMigrate(self, action, data):
         if MIGRATION_MODULE:
             output = migrateSmartLink(self.context)
@@ -42,3 +42,25 @@ class MigrateBlobs(formbase.PageForm):
     @form.action(_(u'Cancel'))
     def actionCancel(self, action, data):
         return self.request.response.redirect(self.context.absolute_url())
+
+
+class MigrateToSmartLink(formbase.PageForm):
+    form_fields = form.FormFields(IMigrateBlobsSchema)
+    label = _(u'Migrate ATLink to Smart Link')
+    description = _(u'Migrate basic Plone ATLink to Smart Link')
+
+    @form.action(_(u'Migrate'))
+    def actionMigrate(self, action, data):
+        output = migrateLinkToSmartLink(self.context)
+        cnt = 0
+        for l in output:
+            cnt+=1
+            IStatusMessage(self.request).addStatusMessage(l, type='info')
+        IStatusMessage(self.request).addStatusMessage(_('update_count_message',
+                                                        default="${count} elements updated", mapping={'count': cnt}),
+                                                      type='info')
+        return self.request.response.redirect(self.context.absolute_url() + '/@@smartlink-config')
+
+    @form.action(_(u'Cancel'))
+    def actionCancel(self, action, data):
+        return self.request.response.redirect(self.context.absolute_url() + '/@@smartlink-config')

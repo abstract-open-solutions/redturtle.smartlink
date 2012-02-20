@@ -32,7 +32,14 @@
         zcml:condition="installed plone.app.blob"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="blob-smartlink-migration"
-        class=".migrateblobs.MigrateBlobs"
+        class=".migrate.MigrateBlobs"
+        permission="redturtle.smartlink.ManageSmartLink" />
+
+	<browser:page
+        zcml:condition="installed Products.contentmigration"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="to-smartlink-migration"
+        class=".migrate.MigrateToSmartLink"
         permission="redturtle.smartlink.ManageSmartLink" />
 
 	<browser:page
@@ -41,13 +48,6 @@
         class=".utilities.FixFakeInternalLinkView"
 		template="fix-fake-internal-links.pt"
         permission="redturtle.smartlink.ManageSmartLink" />
-
-    <adapter
-        for="redturtle.smartlink.interfaces.utility.ISmartLinkControlPanelForm"
-        factory=".configlet.controlpanel_named_template_adapter"
-        name="default"
-        provides="zope.formlib.namedtemplate.INamedTemplate"
-      />
 
  	<browser:resource
       name="link.png"
