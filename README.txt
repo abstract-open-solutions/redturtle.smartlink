@@ -63,6 +63,13 @@ you have to launch a migration utility from the Smart Link control panel.
 
 E.g.: http://myhost/@@blob-smartlink-migration
 
+Migrate ATLink to Smart Link (and back)
+---------------------------------------
+
+Smart Link contains two Generic Setup import steps that can help you to transform all you ATLink
+to Smart Link, or to go back to ATLink if you don't like Smart Link anymore (in that case: first
+uninstall Smart Link, the run the import step).
+
 Warning 1
 ---------
 
@@ -88,24 +95,17 @@ You can *re-install* Smart Link safely for upgrade task or for restore changes, 
 If you *uninstall* it, all data from Smart Link will be removed. This means that if you re-install it after
 all your internal links will not be linked to target contents.
 
-At uninstall time Smart Link restore the Plone ATLink content. However all created Smart Link are still
-Smart Link and all of theme need the product code to continue working (even if not installed).
-
-So: the uninstall is not 100% perfect right now.
-
 Requirements
 ============
 
 Smart Link has been tested on Plone 3.3, 4.0 and 4.1. Is possible that also older Plone 3.x version can be
 used safely.
 
-TODO
-====
+TODO and know issue
+===================
 
-* Fix this ugly error: *WARNING SecurityInfo Conflicting security declarations for setId*
-* Provide a proper uninstall step that transform all Smart Link back to original Plone ATLink
 * Evaluate a more general approach to icon substitution
-* Provide an import step that transform ATLink to Smart Link
+* Uninstall will not work properly in Plone 3.3
 
 Additional documentation
 ========================
