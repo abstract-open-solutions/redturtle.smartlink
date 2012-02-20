@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.0 (Unreleased)
+1.1.0 (2012-02-20)
 ------------------
 
 * added a link to the view that migrate to blob from the control panel [keul]
