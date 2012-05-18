@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1.1 (Unreleased)
+------------------
+
+* fixed tests for Plone 4.2 compatibility [keul]
+
 1.1.0 (2012-02-20)
 ------------------
 
@@ -9,7 +14,7 @@ Changelog
   that "Site Administrator" role can handle [keul]
 * added an utility to convert "fake external" link to internal [keul]
 * aligned all ``Link.xml`` files to be Plone 4 compliant [keul]
-* In Plone 4 the related items where duplicated (if used).
+* In Plone 4 the related items were duplicated (if used).
   Now Plone 3.3 requires `collective.relateditems`__ [keul]
 * Moved URL transformation features to an ``ILinkNormalizerUtility`` [keul]
 * fixed all tests to be compatible again with Plone 3.3.6 [keul]
