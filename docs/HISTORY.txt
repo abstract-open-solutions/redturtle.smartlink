@@ -5,6 +5,9 @@ Changelog
 ------------------
 
 * fixed tests for Plone 4.2 compatibility [keul]
+* migrating "fake external links" now support the migration of URLs that
+  explicitly use "*resolveuid*" (sometimes Plone users are really evil)
+  [keul]
 
 1.1.0 (2012-02-20)
 ------------------
