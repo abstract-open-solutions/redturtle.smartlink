@@ -109,7 +109,7 @@ msgstr "Configurazione di Smart Link"
 
 #: ../browser/fix-fake-internal-links.pt:106
 msgid "Transform"
-msgstr "Transforma"
+msgstr "Trasforma"
 
 #. Default: "Sometimes you could have link to internal content composed as external link. If this is true, you can ${fix-fake-internal} all links of this type."
 #: ../browser/controlpanel.pt:215
