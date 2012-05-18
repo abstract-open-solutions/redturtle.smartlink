@@ -70,6 +70,10 @@ class FixFakeInternalLinkView(BrowserView):
         """
         context = self.context
         catalog = getToolByName(context, 'portal_catalog')
+        if url.startswith('resolveuid/') or url.startswith('/resolveuid/'):
+            uid = url[url.find('resolveuid/')+11:]
+            brain = catalog(UID=uid)
+            return brain and brain[0].getObject() or None
         portal_url = getToolByName(context, 'portal_url')
         site_url = portal_url()
         portal = portal_url.getPortalObject()
@@ -94,7 +98,9 @@ class FixFakeInternalLinkView(BrowserView):
                         (not obj.getInternalLink() and obj.getField('remoteUrl').get(obj))
             if external_link:
                 external_link = linkNormalizerUtility.toCurrent(external_link)
-                if external_link.startswith(portal_url):
+                if external_link.startswith(portal_url) \
+                            or external_link.startswith('resolveuid/') \
+                            or external_link.startswith('/resolveuid/'):
                     internalObj = self.findInternalByURL(external_link)
                     results.append({'path': '/'.join(obj.getPhysicalPath()),
                                     'title': obj.Title(),
