@@ -32,14 +32,14 @@
         zcml:condition="installed plone.app.blob"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="blob-smartlink-migration"
-        class=".migrate.MigrateBlobs"
+        class=".migrate_blob.MigrateBlobs"
         permission="redturtle.smartlink.ManageSmartLink" />
 
 	<browser:page
         zcml:condition="installed Products.contentmigration"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="to-smartlink-migration"
-        class=".migrate.MigrateToSmartLink"
+        class=".migrate_smartlink.MigrateToSmartLink"
         permission="redturtle.smartlink.ManageSmartLink" />
 
 	<browser:page
