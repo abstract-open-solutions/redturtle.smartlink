@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from plone.app.blob.migrations import migrate
+try:
+    from plone.app.blob.migrations import migrate as migrateBlob
+except ImportError:
+    # without plone.app.blob should never be possible that someone called the "migrateBlob" function
+    pass
 from redturtle.smartlink.interfaces import ISmartLink
 
 def migrateSmartLink(context):
-    return migrate(context, 'Link', 'ATLink')
+    return migrateBlob(context, 'Link', 'ATLink')
 
 
 def isATLink(oldObject, **kwargs):
