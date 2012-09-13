@@ -1,6 +1,24 @@
 Changelog
 =========
 
+1.1.3 (unreleased)
+------------------
+
+* Smart Link uninstall was changing the Generic Setup baseline context.
+  When we found it, we restore the "``profile-Products.CMFPlone:plone``"
+  (part of issue `#1`__)
+  [keul]
+* when uninstalling, restore old ATLink automatically
+  [keul]
+* fixed many bad formatted portal messages visualization
+  [keul]
+* uninstall now remove the persisten utility (fix the other
+  part of issue `#1`__)
+  [keul]
+
+__ https://github.com/RedTurtle/redturtle.smartlink/issues/1
+__ https://github.com/RedTurtle/redturtle.smartlink/issues/1
+
 1.1.2 (2012-05-23)
 ------------------
 

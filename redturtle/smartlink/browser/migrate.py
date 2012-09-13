@@ -6,9 +6,11 @@ try: # >= 4.1
     from five.formlib import formbase
 except ImportError: # < 4.1
     from Products.Five.formlib import formbase
-from redturtle.smartlink.migrator import migrateSmartLink, migrateLinkToSmartLink
+
+from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 
+from redturtle.smartlink.migrator import migrateSmartLink, migrateLinkToSmartLink
 from redturtle.smartlink import smartlinkMessageFactory as _
 
 try:
@@ -29,8 +31,16 @@ class MigrateBlobs(formbase.PageForm):
     @form.action(_(u'Migrate'))
     def actionMigrate(self, action, data):
         if MIGRATION_MODULE:
-            output = migrateSmartLink(self.context)
-            IStatusMessage(self.request).addStatusMessage(output, type='info')
+            messages = migrateSmartLink(self.context)
+            i = 0
+            for m in messages:
+                i+=1
+                IStatusMessage(self.request).addStatusMessage(m, type='info')
+            portal = getToolByName(self.context, 'portal_url').getPortalObject()
+            portal.plone_utils.addPortalMessage(_('sequence_help_message',
+                                                  default=u"$num element(s) migrated",
+                                                  mapping={'num': i}))
+
             return self.request.response.redirect(self.context.absolute_url())
         else:
             output = _(u'migration_error_msg',

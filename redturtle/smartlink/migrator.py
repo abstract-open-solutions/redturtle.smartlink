@@ -8,8 +8,7 @@ except ImportError:
 from redturtle.smartlink.interfaces import ISmartLink
 
 def migrateSmartLink(context):
-    return migrateBlob(context, 'Link', 'ATLink')
-
+    return migrateBlob(context, 'Link', 'ATLink').splitlines()
 
 def isATLink(oldObject, **kwargs):
     """Test if the object is a simple ATLink (i.e: is not a Smart Link)"""

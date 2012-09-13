@@ -53,7 +53,7 @@
   <!-- Register the uninstallation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="uninstall"
-      title="Uninstall Smart Link"
+      title="Smart Link: uninstall"
       directory="profiles/uninstall"
       description="Remove Smart Link component"
       provides="Products.GenericSetup.interfaces.EXTENSION"

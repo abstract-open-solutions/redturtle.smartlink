@@ -1,39 +1,41 @@
 # -*- coding: utf-8 -*-
 
-from redturtle.smartlink import logger
+import transaction
+
 from zope import interface
+from zope.component import getUtility
+
 from Products.CMFPlone.utils import getFSVersionTuple
 
+from redturtle.smartlink import logger
+from redturtle.smartlink.interfaces import ILinkNormalizerUtility
 from redturtle.smartlink.interfaces import ISmartLinked
+from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
 from redturtle.smartlink import smartlinkMessageFactory as _
 
 def install(portal, reinstall=False):
     setup_tool = portal.portal_setup
-    setup_tool.setBaselineContext('profile-redturtle.smartlink:default')
     setup_tool.runAllImportStepsFromProfile('profile-redturtle.smartlink:default')
     if not reinstall:
         portal.plone_utils.addPortalMessage(_('install_info',
                                               default=u'Starting from now, all Links created in this site will be Smart Link.\n'
                                                       u'If you have already created Link types in this site, you can migrate '
-                                                      u'them to Smart Link using the "Smart Link: migrate ATLink to Smart Link" '
-                                                      u'import step.'),
+                                                      u'them to Smart Link from the site control panel (Configure Smart Link).'),
                                             type='info')
 
 
 def uninstall(portal, reinstall=False):
     setup_tool = portal.portal_setup
-    setup_tool.setBaselineContext('profile-redturtle.smartlink:uninstall')
     setup_tool.runAllImportStepsFromProfile('profile-redturtle.smartlink:uninstall')
     if getFSVersionTuple()[0]>=4:
         unregisterIcon(portal)
     if not reinstall:
         removeSmartLinkMarks(portal)
-        portal.plone_utils.addPortalMessage(_('uninstall_warning',
-                                              default=u'Keep in mind that contents created with Smart Link are still using Smart Link code '
-                                                      u'and they will be broken if you remove the product from your Plone installation.\n'
-                                                      u'You can convert them back to basic ATLink using the "Smart Link: migrate from Smart Link to ATLink" '
-                                                      u'import step.'),
-                                            type='warning')
+        setup_tool.runAllImportStepsFromProfile('profile-redturtle.smartlink:smartLinkToATLink')
+        logger.info("...done. Thanks you for using me!")
+        portal.plone_utils.addPortalMessage(_('uninstall_info',
+                                              default=u'All of yours Smart Link contents has been transformed back to Plone ATLink'),
+                                              type='info')
 
 
 def removeSmartLinkMarks(portal):
@@ -49,9 +51,6 @@ def removeSmartLinkMarks(portal):
         interface.noLongerProvides(content, ISmartLinked)
         content.reindexObject(['object_provides'])
         logger.info("   unmarked %s" % '/'.join(content.getPhysicalPath()))
-    logger.info("...done. Thanks you for using me!")
-
-    # TODO: the perfect world is the one where SmartLink(s) are converted back to ATLink(s)
 
 
 def unLink(portal, object):

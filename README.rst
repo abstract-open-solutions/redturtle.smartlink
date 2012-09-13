@@ -67,8 +67,8 @@ Migrate ATLink to Smart Link (and back)
 ---------------------------------------
 
 Smart Link contains two Generic Setup import steps that can help you to transform all you ATLink
-to Smart Link, or to go back to ATLink if you don't like Smart Link anymore (in that case: first
-uninstall Smart Link, the run the import step).
+to Smart Link, or to go back to ATLink if you don't like Smart Link anymore (automatically done
+when you uninstall the product).
 
 Warning 1
 ---------
@@ -92,13 +92,13 @@ Safe re-install, clean uninstall
 
 You can *re-install* Smart Link safely for upgrade task or for restore changes, without any problem.
 
-If you *uninstall* it, all data from Smart Link will be removed. This means that if you re-install it after
-all your internal links will not be linked to target contents.
+If you *uninstall* it, all data from Smart Link will be removed. This means that if you re-install
+it after all your internal links will not be linked to target contents.
 
 Requirements
 ============
 
-Smart Link has been tested on Plone 3.3, 4.0, 4.1 and 4.2 (rc1).
+Smart Link has been tested on Plone 3.3, 4.0, 4.1 and 4.2.
 It's possible that also older Plone 3.x version can be used safely.
 
 TODO and know issue

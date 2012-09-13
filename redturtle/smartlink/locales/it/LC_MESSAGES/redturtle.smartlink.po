@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2012-02-20 13:47+0000\n"
+"POT-Creation-Date: 2012-09-13 13:55+0000\n"
 "PO-Revision-Date: 2010-08-27 12:31+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
 
-#: ../browser/migrate.py:26
+#: ../browser/migrate.py:28
 msgid "BLOBs Migration"
 msgstr "Migrazione ai BLOB"
 
@@ -22,7 +22,7 @@ msgstr "Migrazione ai BLOB"
 msgid "Back-end URLs"
 msgstr "URL di back-end"
 
-#: ../browser/migrate.py:42
+#: ../browser/migrate.py:52
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -59,19 +59,19 @@ msgstr "Ad un link di front end deve corrispondere un solo link di backend"
 msgid "Front-end main URL"
 msgstr "URL di front-end primario"
 
-#: ../browser/migrate.py:29
+#: ../browser/migrate.py:31
 msgid "Migrate"
 msgstr "Migrazione"
 
-#: ../browser/migrate.py:49
+#: ../browser/migrate.py:59
 msgid "Migrate ATLink to Smart Link"
 msgstr "Migrazione di ATLink a Smart Link"
 
-#: ../browser/migrate.py:27
+#: ../browser/migrate.py:29
 msgid "Migrate Smart Link, making it use plone.app.blob"
 msgstr "Migra Smart Link, facendogli usare plone.app.blob"
 
-#: ../browser/migrate.py:50
+#: ../browser/migrate.py:60
 msgid "Migrate basic Plone ATLink to Smart Link"
 msgstr "Migra gli ATLink base di Plone a Smart Link"
 
@@ -198,12 +198,12 @@ msgstr "Sarà visualizzata nelle viste che permettono di mostrare le immagini co
 msgid "help_smartlink_internallink"
 msgstr "Sfoglia per trovare la pagina interna che si desidera linkare. Se questo campo e' usato, il campo del link esterno verra' ignorato. Non e' possibile avere sia un collegamento interno che uno esterno"
 
-#. Default: "Starting from now, all Links created in this site will be Smart Link.\nIf you have already created Link types in this site, you can migrate them to Smart Link using the \"Smart Link: migrate ATLink to Smart Link\" import step."
-#: ../Extensions/install.py:15
+#. Default: "Starting from now, all Links created in this site will be Smart Link.\nIf you have already created Link types in this site, you can migrate them to Smart Link from the site control panel (Configure Smart Link)."
+#: ../Extensions/install.py:19
 msgid "install_info"
 msgstr ""
 "Partendo da ora, tutti i Collegamenti creati in questo sito saranno Smart Link.\n"
-"Se avevi già creato contenuto di tipo Collegamento, puoi migrarli al tipo Smart Link usando il profilo \"Smart Link: migrate ATLink to Smart Link\"."
+"Se avevi già creato contenuto di tipo Collegamento, puoi migrarli al tipo Smart Link dal pannello di controllo (Configura Smart Link)."
 
 #. Default: "This is an internal link to \"${internal_link_target}\""
 #: ../browser/smartlink_view.pt:69
@@ -293,9 +293,15 @@ msgid "migrate your image fields to Plone blobs"
 msgstr "migrare le tue immagini ai blob di Plone"
 
 #. Default: "You need to install \"Products.contentmigration\" product for perform the task"
-#: ../browser/migrate.py:36
+#: ../browser/migrate.py:46
 msgid "migration_error_msg"
 msgstr "Devi installare \"Products.contentmigration\" per eseguire l'operazione"
+
+#. Default: "$num element(s) migrated"
+#: ../browser/migrate.py:40
+#: ../setuphandlers.py:32
+msgid "sequence_help_message"
+msgstr "$num elemento(i) migrati"
 
 #. Default: "Fill this configuration panel for production settings; choose if use relative paths, an unified front-end URL, or manually enter many back-end/front-end URL (for advanced installation).\nEvery configuration option take precedence on the one that follows.\nAfter changes you (probably) want to run the \"Update existing links\" task."
 #: ../browser/configlet.py:41
@@ -305,16 +311,14 @@ msgstr ""
 "Ogni opzione di configurazione ha la precedenza su quella che la segue.\n"
 "Dopo le modifiche è probabile voler lanciare il processo \"Aggiorna i link esistenti\"."
 
-#. Default: "Keep in mind that contents created with Smart Link are still using Smart Link code and they will be broken if you remove the product from your Plone installation.\nYou can convert them back to basic ATLink using the \"Smart Link: migrate from Smart Link to ATLink\" import step."
-#: ../Extensions/install.py:31
-msgid "uninstall_warning"
-msgstr ""
-"Tieni presente che i contenuti creati con Smart Link stanno ancora usando il codice di Smart Link e non saranno più funzionanti se rimuoverai il prodotto dalla tua installazione Plone.\n"
-"Puoi ripristinarli ad essere normali ATLink usando il profilo \"Smart Link: migrate from Smart Link back to ATLink\"."
+#. Default: "All of yours Smart Link contents has been transformed back to Plone ATLink"
+#: ../Extensions/install.py:36
+msgid "uninstall_info"
+msgstr "Tutti i tuoi contenuti Smart Link sono stati ri-trasformati in ATLink Plone"
 
 #. Default: "${count} elements updated"
 #: ../browser/configlet.py:92
-#: ../browser/migrate.py:59
+#: ../browser/migrate.py:69
 msgid "update_count_message"
 msgstr "${count} elementi aggiornati"
 
