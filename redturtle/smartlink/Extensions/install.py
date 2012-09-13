@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import transaction
-
 from zope import interface
-from zope.component import getUtility
 
 from Products.CMFPlone.utils import getFSVersionTuple
 
 from redturtle.smartlink import logger
-from redturtle.smartlink.interfaces import ILinkNormalizerUtility
 from redturtle.smartlink.interfaces import ISmartLinked
-from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
 from redturtle.smartlink import smartlinkMessageFactory as _
 
 def install(portal, reinstall=False):
