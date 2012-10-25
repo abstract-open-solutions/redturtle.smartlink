@@ -3,11 +3,11 @@
 import os, sys
 from setuptools import setup, find_packages
 
-version = '1.1.4.dev0'
+version = '1.2.0'
 
 tests_require = ['zope.testing', 'Products.PloneTestCase']
 
-install_requires = ['setuptools', ]
+install_requires = ['setuptools', 'plone.app.imaging']
 # what I read there seems not working propery for Plone 3.3
 # http://plone.org/documentation/manual/upgrade-guide/version/upgrading-plone-4.0-to-4.1/referencemanual-all-pages
 if sys.version_info < (2, 6):

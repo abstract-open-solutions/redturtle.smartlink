@@ -106,6 +106,7 @@ TODO and know issue
 
 * Evaluate a more general approach to icon substitution
 * Uninstall will not work properly in Plone 3.3
+* On Plone 3 you need to manually install plone.app.imaging
 
 Additional documentation
 ========================
