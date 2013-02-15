@@ -17,7 +17,11 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.ATContentTypes.content.link import ATLink, ATLinkSchema
 from Products.ATContentTypes.interface import IImageContent
-from Products.ATReferenceBrowserWidget import ATReferenceBrowserWidget
+try:
+    # for future (Pone 5?) Plone compatibility
+    from archetypes.referencebrowserwidget import ReferenceBrowserWidget
+except ImportError:
+    from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
 from redturtle.smartlink import smartlinkMessageFactory as _
 from redturtle.smartlink.interfaces import ISmartLink, ISmartLinked
@@ -56,7 +60,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                    default=None,
                    relationship="internal_page",
                    multiValued=False, 
-                   widget=ATReferenceBrowserWidget.ReferenceBrowserWidget(
+                   widget=ReferenceBrowserWidget(
                         label= _(u'label_smartlink_internallink', default='Internal link'),
                         description = _(u'help_smartlink_internallink',
                                         default=(u"Browse to find the internal page to which you wish to link. "
