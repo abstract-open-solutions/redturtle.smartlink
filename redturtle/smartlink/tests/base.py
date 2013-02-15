@@ -38,7 +38,9 @@ def setup_product():
 
     fiveconfigure.debug_mode = True
     import redturtle.smartlink
+    import plone.app.imaging
     zcml.load_config('configure.zcml', redturtle.smartlink)
+    zcml.load_config('configure.zcml', plone.app.imaging)
     fiveconfigure.debug_mode = False
 
     # We need to tell the testing framework that these products
@@ -53,13 +55,14 @@ def setup_product():
     #   ztc.installPackage('borg.localrole')
 
     ztc.installPackage('redturtle.smartlink')
+    ztc.installPackage('plone.app.imaging')
 
 # The order here is important: We first call the (deferred) function
 # which installs the products we need for this product. Then, we let
 # PloneTestCase set up this product on installation.
 
 setup_product()
-ptc.setupPloneSite(products=['redturtle.smartlink'])
+ptc.setupPloneSite(products=['redturtle.smartlink', 'plone.app.imaging'])
 
 class TestCase(ptc.PloneTestCase):
     """We use this base class for all the tests in this package. If

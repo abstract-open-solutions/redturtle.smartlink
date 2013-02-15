@@ -6,6 +6,7 @@ Changelog
 
 - Removed longly deprecated actionicons.xml [keul]
 - Modern inclusion of referencebrowserwidget [keul]
+- Restored tests on Plone 3.3 that were broken in version 1.2 [keul]
 
 1.2.0 (2012-10-25)
 ------------------

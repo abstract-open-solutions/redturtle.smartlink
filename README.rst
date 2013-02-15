@@ -99,14 +99,18 @@ Requirements
 ============
 
 Smart Link has been tested on Plone 3.3, 4.0, 4.1 and 4.2.
-It's possible that also older Plone 3.x version can be used safely.
 
-TODO and know issue
-===================
+Plone 3 notes
+-------------
 
-* Evaluate a more general approach to icon substitution
-* Uninstall will not work properly in Plone 3.3
-* On Plone 3 you need to manually install plone.app.imaging
+There's some kwno issues for this product on Plone 3.3:
+
+* uninstall will probably not work (you can try to add to your buildout `experimental.backportGS`__)
+* uninstall will restore the Plone 4 style Link
+* you must manually activate `plone.app.imaging`__ in your Plone site
+
+__ http://pypi.python.org/pypi/experimental.backportGS
+__ http://pypi.python.org/pypi/plone.app.imaging
 
 Additional documentation
 ========================
