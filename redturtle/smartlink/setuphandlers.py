@@ -7,13 +7,6 @@ from redturtle.smartlink import smartlinkMessageFactory as _
 
 PROFILE_ID = 'profile-redturtle.smartlink:default'
 
-def setupVarious(context):
-    portal = context.getSite()
-
-    if context.readDataFile('redturtle.smartlink_various.txt') is None:
-        return
-
-
 def atLinkToSmartLink(context):
     portal = context.getSite()
 
@@ -77,3 +70,15 @@ def migrateTo1003(context):
         setup_tool.setBaselineContext('profile-Products.CMFPlone:plone')
         logger.info("Restoring the proper base line context for Generic Setup")
     logger.info("Migrated to 1.1.3")
+
+def migrateTo1210(context):
+    _REMOVE_IMPORT_STEPS = [
+        'imaged-event',
+    ]
+    registry = context.getImportStepRegistry()
+    remove = _REMOVE_IMPORT_STEPS
+    for step in remove:
+        if step in registry._registered:
+            registry.unregisterStep(step)
+            logger.info("Removing import_step %s" % step)
+    logger.info("Migrated to 1.2.1")

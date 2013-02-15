@@ -26,5 +26,14 @@
         profile="redturtle.smartlink:default"
     />
 
+  <genericsetup:upgradeStep
+        title="Upgrade Smart Link to 1.2.1"
+        description="Migrates Smart Link to 1210"
+        source="1003"
+        destination="1210"
+        handler=".setuphandlers.migrateTo1210"
+        sortkey="3"
+        profile="redturtle.smartlink:default"
+    />
 
 </configure>

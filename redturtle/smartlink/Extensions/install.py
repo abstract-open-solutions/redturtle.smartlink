@@ -69,4 +69,3 @@ def unregisterIcon(portal):
     link.manage_changeProperties(content_icon='', icon_expr='')
     logger.info("Removing icon type info")
 
-
