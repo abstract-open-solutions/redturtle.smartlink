@@ -9,15 +9,28 @@
               handler=".linker.smartLink"
             />
 
-  <subscriber for="..interfaces.ISmartLink
-                   zope.app.container.interfaces.IObjectRemovedEvent"
-              handler=".linker.cleanSmartLinked"
-            />
+  <configure zcml:condition="not-have plone-41">
+      <subscriber for="..interfaces.ISmartLink
+                       zope.app.container.interfaces.IObjectRemovedEvent"
+                  handler=".linker.cleanSmartLinked"
+                  />
 
-  <subscriber for="..interfaces.ISmartLinked
-                   zope.app.container.interfaces.IObjectMovedEvent"
-              handler=".linker.keepLink"
-            />
+      <subscriber for="..interfaces.ISmartLinked
+                       zope.app.container.interfaces.IObjectMovedEvent"
+                  handler=".linker.keepLink"
+                  />
+  </configure>
 
+  <configure zcml:condition="have plone-41">
+      <subscriber for="..interfaces.ISmartLink
+                       zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+                  handler=".linker.cleanSmartLinked"
+                  />
+
+      <subscriber for="..interfaces.ISmartLinked
+                       zope.lifecycleevent.interfaces.IObjectMovedEvent"
+                  handler=".linker.keepLink"
+                  />
+  </configure>
 
 </configure>

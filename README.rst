@@ -98,7 +98,11 @@ it after all your internal links will not be linked to target contents.
 Requirements
 ============
 
-Smart Link has been tested on Plone 3.3, 4.0, 4.1 and 4.2.
+Smart Link has been tested on:
+
+* Plone 3.3
+* Plone 4.2 
+* Plone 4.3
 
 Plone 3 notes
 -------------

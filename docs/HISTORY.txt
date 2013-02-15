@@ -8,6 +8,7 @@ Changelog
 - Modern inclusion of referencebrowserwidget [keul]
 - Restored tests on Plone 3.3 that were broken in version 1.2 [keul]
 - Removed old ununsed import step (close `#1`__) [keul]
+- Fixed product to be Plone 4.3 compatible [keul]
 
 __ https://github.com/RedTurtle/redturtle.smartlink/issues/1
 
