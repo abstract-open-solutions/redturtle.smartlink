@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2012-09-13 13:55+0000\n"
+"POT-Creation-Date: 2013-02-15 13:27+0000\n"
 "PO-Revision-Date: 2010-08-27 12:31+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -13,6 +13,9 @@ msgstr ""
 "Language-Name: Italian\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.smartlink\n"
+
+msgid "An advanced ATLink version, with image field and internal link feature"
+msgstr "Una versione avanzata di ATLink, con campo immagine e funzionalità per link interni"
 
 #: ../browser/migrate.py:28
 msgid "BLOBs Migration"
@@ -134,17 +137,17 @@ msgid "description_migrate_to_smart_link"
 msgstr "Se hai degli ATLink creati prima dell'installazione di Smart Link, potresti volerli ${migrate-to-smartlink-url}."
 
 #. Default: "Please provide the external URL, or fill the \"Internal link\" field"
-#: ../content/link.py:273
+#: ../content/link.py:270
 msgid "error_externallink_internallink_required"
 msgstr "Prego fornisci un URL esterno, o compila il campo \"Link interno\""
 
 #. Default: "You must select an internal link or enter an external link. You cannot have both."
-#: ../content/link.py:279
+#: ../content/link.py:276
 msgid "error_internallink_externallink_doubled"
 msgstr "Devi selezionare un link interno o un link esterno. Non puoi fornirli entrambi."
 
 #. Default: "Please provide the internal link, or fill the \"External link\" field"
-#: ../content/link.py:275
+#: ../content/link.py:272
 msgid "error_internallink_externallink_required"
 msgstr "Prego fornisci un link interno, o compila il campo \"Link esterno\""
 
@@ -169,7 +172,7 @@ msgid "help_frontendlink"
 msgstr "Inserisci qui gli URL nei quali vuoi transformare i relativi di back-office."
 
 #. Default: "Used only when the link is internal to the site. Use this field to obtain an internal link to a section of the target document"
-#: ../content/link.py:79
+#: ../content/link.py:83
 msgid "help_image_anchor"
 msgstr "Usato solo quanto il link è interno al sito. Usa questo campo per ottenere un link interno alla sezione del documento di riferimento"
 
@@ -179,27 +182,27 @@ msgid "help_relativelink"
 msgstr "Se selezionato, tutti i link interni del sito salveranno URL relativi alla radice del portale, piuttosto che assoluti. Esempio: non \"http://miohost/plone/foo\" ma \"/plone/foo\""
 
 #. Default: "Enter the web address for a page which is not located on this server."
-#: ../content/link.py:48
+#: ../content/link.py:52
 msgid "help_smartlink_externallink"
 msgstr "Inserisci l'indirizzo web di una pagina non presente su questo server"
 
 #. Default: "You can customize there the content icon. You can use this for provide the icon of the remote site"
-#: ../content/link.py:131
+#: ../content/link.py:128
 msgid "help_smartlink_favicon"
 msgstr "Puoi personalizzare qui l'icona del contenuto. Puoi usare questa funzionalità per fornire l'icona del sito remoto"
 
 #. Default: "Will be shown views that render content's images and in the link view itself"
-#: ../content/link.py:104
+#: ../content/link.py:101
 msgid "help_smartlink_image"
 msgstr "Sarà visualizzata nelle viste che permettono di mostrare le immagini contenute"
 
 #. Default: "Browse to find the internal page to which you wish to link. If this field is used, then any entry in the external link field will be ignored. You cannot have both an internal and external link."
-#: ../content/link.py:61
+#: ../content/link.py:65
 msgid "help_smartlink_internallink"
 msgstr "Sfoglia per trovare la pagina interna che si desidera linkare. Se questo campo e' usato, il campo del link esterno verra' ignorato. Non e' possibile avere sia un collegamento interno che uno esterno"
 
 #. Default: "Starting from now, all Links created in this site will be Smart Link.\nIf you have already created Link types in this site, you can migrate them to Smart Link from the site control panel (Configure Smart Link)."
-#: ../Extensions/install.py:19
+#: ../Extensions/install.py:15
 msgid "install_info"
 msgstr ""
 "Partendo da ora, tutti i Collegamenti creati in questo sito saranno Smart Link.\n"
@@ -221,12 +224,12 @@ msgid "label_cancel_links"
 msgstr "Annulla"
 
 #. Default: "Internal anchor"
-#: ../content/link.py:78
+#: ../content/link.py:82
 msgid "label_image_anchor"
 msgstr "Ancora interna"
 
 #. Default: "Image Caption"
-#: ../content/link.py:117
+#: ../content/link.py:114
 msgid "label_image_caption"
 msgstr "Didascalia dell'immagine"
 
@@ -236,22 +239,22 @@ msgid "label_save_links"
 msgstr "Salva"
 
 #. Default: "External link"
-#: ../content/link.py:47
+#: ../content/link.py:51
 msgid "label_smartlink_externallink"
 msgstr "Link esterno"
 
 #. Default: "Icon"
-#: ../content/link.py:134
+#: ../content/link.py:131
 msgid "label_smartlink_favicon"
 msgstr "Icona"
 
 #. Default: "Image"
-#: ../content/link.py:106
+#: ../content/link.py:103
 msgid "label_smartlink_image"
 msgstr "Immagine"
 
 #. Default: "Internal link"
-#: ../content/link.py:60
+#: ../content/link.py:64
 msgid "label_smartlink_internallink"
 msgstr "Link interno"
 
@@ -266,7 +269,7 @@ msgid "label_update_links"
 msgstr "Aggiorna i link esistenti"
 
 #. Default: "URL"
-#: ../content/link.py:38
+#: ../content/link.py:42
 msgid "label_url"
 msgstr ""
 
@@ -299,7 +302,7 @@ msgstr "Devi installare \"Products.contentmigration\" per eseguire l'operazione"
 
 #. Default: "$num element(s) migrated"
 #: ../browser/migrate.py:40
-#: ../setuphandlers.py:32
+#: ../setuphandlers.py:25
 msgid "sequence_help_message"
 msgstr "$num elemento(i) migrati"
 
@@ -312,7 +315,7 @@ msgstr ""
 "Dopo le modifiche è probabile voler lanciare il processo \"Aggiorna i link esistenti\"."
 
 #. Default: "All of yours Smart Link contents has been transformed back to Plone ATLink"
-#: ../Extensions/install.py:36
+#: ../Extensions/install.py:31
 msgid "uninstall_info"
 msgstr "Tutti i tuoi contenuti Smart Link sono stati ri-trasformati in ATLink Plone"
 
