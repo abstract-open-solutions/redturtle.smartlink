@@ -29,6 +29,23 @@ class ISmartlinkConfig(Interface):
         required=False
     )
 
+    relativelink_mask = schema.TextLine(
+        title=_(u"Relative links mask"),
+        description=_(
+            u'help_relativelink_mask',
+            default=(
+                u'Relative link may contain a path you want to mask, tipically '
+                u'the Plone site id. '
+                u'E.g.: if your site id is "Plone" and your link looks like '
+                u'"/Plone/relative/link" you can fix it '
+                u'putting in this field "/Plone/". '
+                u'Your relative links will become "relative/link". '
+                u'The mask is effective only when the "Relative links" option '
+                u'is enabled')),
+        default=u'',
+        required=False
+    )
+
     frontend_main_link = schema.TextLine(
         title=_(u"Front-end main URL"),
         description=_(u'help_frontend_main_link',

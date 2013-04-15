@@ -23,6 +23,7 @@ class SmartlinkConfig(SimpleItem):
     implements(ISmartlinkConfig)
     frontend_main_link = FieldProperty(ISmartlinkConfig['frontend_main_link'])
     relativelink = FieldProperty(ISmartlinkConfig['relativelink'])
+    relativelink_mask = FieldProperty(ISmartlinkConfig['relativelink_mask'])
     frontendlink = FieldProperty(ISmartlinkConfig['frontendlink'])
     backendlink = FieldProperty(ISmartlinkConfig['backendlink'])
 

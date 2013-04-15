@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-15 13:27+0000\n"
+"POT-Creation-Date: 2013-04-15 10:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "BLOBs Migration"
 msgstr ""
 
-#: ../interfaces/utility.py:43
+#: ../interfaces/utility.py:60
 msgid "Back-end URLs"
 msgstr ""
 
@@ -52,15 +52,15 @@ msgstr ""
 msgid "Fix absolute URL to internal link"
 msgstr ""
 
-#: ../interfaces/utility.py:54
+#: ../interfaces/utility.py:71
 msgid "Front-end URLs"
 msgstr ""
 
-#: ../interfaces/utility.py:66
+#: ../interfaces/utility.py:83
 msgid "Front-end link must correspond to a single back-end link"
 msgstr ""
 
-#: ../interfaces/utility.py:33
+#: ../interfaces/utility.py:50
 msgid "Front-end main URL"
 msgstr ""
 
@@ -104,6 +104,10 @@ msgstr ""
 msgid "Relative links"
 msgstr ""
 
+#: ../interfaces/utility.py:33
+msgid "Relative links mask"
+msgstr ""
+
 #: ../browser/configlet.py:47
 msgid "Settings"
 msgstr ""
@@ -137,17 +141,17 @@ msgid "description_migrate_to_smart_link"
 msgstr ""
 
 #. Default: "Please provide the external URL, or fill the \"Internal link\" field"
-#: ../content/link.py:270
+#: ../content/link.py:272
 msgid "error_externallink_internallink_required"
 msgstr ""
 
 #. Default: "You must select an internal link or enter an external link. You cannot have both."
-#: ../content/link.py:276
+#: ../content/link.py:278
 msgid "error_internallink_externallink_doubled"
 msgstr ""
 
 #. Default: "Please provide the internal link, or fill the \"External link\" field"
-#: ../content/link.py:272
+#: ../content/link.py:274
 msgid "error_internallink_externallink_required"
 msgstr ""
 
@@ -157,17 +161,17 @@ msgid "fake_link_explanation"
 msgstr ""
 
 #. Default: "Put there all your possible back-office URLs you want to transform. URLs there must be unique"
-#: ../interfaces/utility.py:44
+#: ../interfaces/utility.py:61
 msgid "help_backendlink"
 msgstr ""
 
 #. Default: "Put there the site main URL you want to expone to visitors. All Smart Link that starts with the current URL of the portal will be transformed to use this URL."
-#: ../interfaces/utility.py:34
+#: ../interfaces/utility.py:51
 msgid "help_frontend_main_link"
 msgstr ""
 
 #. Default: "Fill there URLs in which you want to change the relative back-end ones."
-#: ../interfaces/utility.py:55
+#: ../interfaces/utility.py:72
 msgid "help_frontendlink"
 msgstr ""
 
@@ -179,6 +183,11 @@ msgstr ""
 #. Default: "If selected, all internal links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
 #: ../interfaces/utility.py:25
 msgid "help_relativelink"
+msgstr ""
+
+#. Default: "Relative link may contain a path you want to mask, tipically the Plone site id. E.g.: if your site id is \"Plone\" and your link looks like \"/Plone/relative/link\" you can fix it putting in this field \"/Plone/\". Your relative links will become \"relative/link\". The mask is effective only when the \"Relative links\" option is enabled"
+#: ../interfaces/utility.py:34
+msgid "help_relativelink_mask"
 msgstr ""
 
 #. Default: "Enter the web address for a page which is not located on this server."
