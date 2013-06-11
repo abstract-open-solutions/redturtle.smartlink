@@ -14,6 +14,7 @@ from Products.validation import V_REQUIRED
 from redturtle.smartlink.interfaces import ISmartLink
 from redturtle.smartlink.content.link import LinkSchema
 
+
 class ExtensionBlobField(ExtensionField, BlobImageField):
     """ derivative of blobfield for extending schemas """
 
@@ -39,7 +40,7 @@ class SmartLinkExtender(object):
                 show_content_type = LinkSchema['favicon'].widget.show_content_type,
             ),
         ),
-              
+
     ]
 
     def __init__(self, context):
