@@ -28,7 +28,7 @@ def keepLink(object, event):
     """
     if HAS_DX_REFS:
         adapter = IReferenceable(object)
-        backRefs = adapter.getBackReferences(object, relationship='internal_page')
+        backRefs = adapter.getBackReferences(relationship='internal_page')
     else:
         rcatalog = getToolByName(object, 'reference_catalog')
         backRefs = rcatalog.getBackReferences(object, relationship='internal_page')
