@@ -13,7 +13,7 @@ Before beginning our tour, let's configure some of the underlying stuff.
     >>> self.portal.error_log._ignored_exceptions = ()
     >>> browser.open(portal_url)
 
-Let's log in. 
+Let's log in.
 
     >>> browser.getLink('Log in').click()
     >>> browser.getControl(name='__ac_name').value = portal_owner
@@ -138,7 +138,7 @@ Additional image fields
 Smart link give to the contributor some additional fields, better described in the `product documentation`__.
 
 __ http://pypi.python.org/pypi/redturtle.smartlink
-    
+
 Here we simply test the usage of those new fields.
 
 First of all, Smart Link give a new **image** and **image caption** field as *Plone "News Item"* does.
@@ -155,9 +155,9 @@ Let's add a new image and caption to our link.
     >>> browser.getControl('Save').click()
     >>> 'Changes saved.' in browser.contents
     True
-    
+
 We need also to test if our link really behave an image now:
-    
+
     >>> contactinfo_link = portal['remote-link-sample-1']
     >>> contactinfo_link.unrestrictedTraverse('image_large')
     <Image... at /plone/remote-link-sample-1/image_large>
@@ -479,7 +479,7 @@ you preventing those possible errors.
 Using and configuring the "*Configure Smart Link*" section will make you site's contributors happy again.
 
     >>> browser.getLink('Site Setup').click()
-    >>> browser.getLink('Configure Smart Link').click()    
+    >>> browser.getLink('Configure Smart Link').click()
     >>> 'Smart Link configuration' in browser.contents
     True
 
@@ -521,7 +521,7 @@ Advanced case: back-end/fron-end transformation
 Now we see the more advanced case.
 
     >>> browser.getLink('Site Setup').click()
-    >>> browser.getLink('Configure Smart Link').click()    
+    >>> browser.getLink('Configure Smart Link').click()
     >>> 'Smart Link configuration' in browser.contents
     True
     >>> browser.getControl('Front-end main URL').value = ''
@@ -536,7 +536,7 @@ Can we also add two or more times the same URL?
     >>> browser.getControl(name='form.backendlink.0.').value = 'http://backend'
     >>> browser.getControl('Add Back-end URLs').click()
     >>> browser.getControl(name='form.backendlink.1.').value = 'http://backend'
-    >>> browser.getControl('Save').click()    
+    >>> browser.getControl('Save').click()
     >>> 'One or more entries of sequence are not unique.' in browser.contents
     True
 
@@ -579,7 +579,7 @@ Now let's see what is changed in our links all around the site, going back to ou
     >>> print browser.contents.strip()
     <!DOCTYPE html...
     ...
-    <a href="http://127.0.0.1/plone/foo-folder/my-manual" rel="external">http://127.0.0.1/plone/foo-folder/my-manual</a> 
+    <a href="http://127.0.0.1/plone/foo-folder/my-manual" rel="external">http://127.0.0.1/plone/foo-folder/my-manual</a>
     ...
     ...</html>
 
@@ -597,7 +597,7 @@ Obviously we don't need to run the migration tool when adding new links.
     >>> browser.getControl('Title').value = 'Transformed internal link: sample 6'
     >>> browser.getControl(name='internalLink').value = ffolder.UID()
     >>> browser.getControl('Save').click()
-    >>> 'This is an internal link to &quot;<a href="http://127.0.0.1/plone/foo-folder" title="">Foo folder</a>&quot;' in browser.contents    
+    >>> 'This is an internal link to &quot;<a href="http://127.0.0.1/plone/foo-folder" title="">Foo folder</a>&quot;' in browser.contents
     True
 
 As said above, all new added links will feel the configuration settings.
@@ -625,7 +625,7 @@ to internal link.
 
     >>> browser.getControl('Update existing links').click()
     >>> browser.getLink('Transformed internal link: sample 6').click()
-    >>> 'This is an internal link to &quot;<a href="/plone/foo-folder" title="">Foo folder</a>&quot;' in browser.contents    
+    >>> 'This is an internal link to &quot;<a href="/plone/foo-folder" title="">Foo folder</a>&quot;' in browser.contents
     True
 
 So all internal link are now relative link based on the Plone portal root.
@@ -649,4 +649,3 @@ above (or forget to configure at all).
 ----
 
 That's all!
-

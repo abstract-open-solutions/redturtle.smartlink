@@ -4,7 +4,9 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix `keepLink` event for Dexterity items (with referenceablebehavior enabled)
+  referenced by a smartlink. Now we can delete the DX content without errors.
+  [cekk]
 
 
 1.2.1 (2013-02-15)
@@ -87,7 +89,7 @@ __ http://plone.org/products/smart-link/issues/7
 * added the BLOB extension for image field [mircoangelini]
 * added BLOB migration view: ``blob-smartlink-migration`` [mircoangelini]
 * fixed icon handling, going back to the Plone 3 icons, disabling
-  Sunburst CSS-sprite with a new ``smart_link.css`` resource [keul] 
+  Sunburst CSS-sprite with a new ``smart_link.css`` resource [keul]
 * when linking an internal content, do not display a simple URL
   but a link using item's title [keul]
 
@@ -112,10 +114,10 @@ __ http://plone.org/products/smart-link/issues/3
 * Plone 4 compatibility [keul]
 * The explicit use of *iw.fss* has been removed. The *fss.zcml* is still there and you can still include
   it if you like, but you must do this manually [keul]
-* *ISmartLink* also extends the *IImageContent* interface [keul] 
+* *ISmartLink* also extends the *IImageContent* interface [keul]
 * A better uninstall procedure, that remove Plone UI stuff and restore original linked object status [keul]
 * Added the *favicon* field, that drive the icon's link [keul]
-* Added the *anchor* field, for manage anchor in internal links [keul] 
+* Added the *anchor* field, for manage anchor in internal links [keul]
 * Moved new and old secondary fields to the *Advanced* fieldset [keul]
 * The "unlink" event when deleting a referenced object has been removed: keeping an additional index only for
   this feature was not a soo good idea. Now the internal link will display the latest memoized link [keul]
@@ -197,7 +199,7 @@ __ http://plone.org/products/smart-link/issues/3
 
 * Fixed syntax error on relation name ("internal_page" was "interal_page") [keul]
 * Disabled the backup of basic Plone ATLink [keul]
-* Fixed some integration problem in content/link.py related to p4a (remoteUrl) [lucabel] 
+* Fixed some integration problem in content/link.py related to p4a (remoteUrl) [lucabel]
 * Fixed major bug in post_validate (validation was useless) [fdelia]
 * Internalization with i18ndude [fdelia]
 * Created italian translation [micecchi]
@@ -215,4 +217,3 @@ __ http://plone.org/products/smart-link/issues/3
 ---------------------
 
 * Initial release
-
