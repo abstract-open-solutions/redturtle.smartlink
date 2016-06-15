@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.2 (unreleased)
+1.2.2 (2016-06-15)
 ------------------
 
 - Fix `keepLink` event for Dexterity items (with referenceablebehavior enabled)
