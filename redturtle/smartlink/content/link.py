@@ -59,7 +59,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
     atapi.ReferenceField("internalLink",
                    default=None,
                    relationship="internal_page",
-                   multiValued=False, 
+                   multiValued=False,
                    widget=ReferenceBrowserWidget(
                         label= _(u'label_smartlink_internallink', default='Internal link'),
                         description = _(u'help_smartlink_internallink',
@@ -72,7 +72,7 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
     ),
 
     # ******* Advanced tab *******
-    
+
     atapi.StringField('anchor',
         required = False,
         searchable = False,
@@ -151,7 +151,7 @@ class SmartLink(ATLink):
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
     internalLink = atapi.ATReferenceFieldProperty('internalLink')
-    
+
     security = ClassSecurityInfo()
 
     security.declareProtected(permissions.View, 'size')
@@ -171,7 +171,7 @@ class SmartLink(ATLink):
             size+=f.get_size(self)
         f = self.getField('favicon')
         if f is not None:
-            size+=f.get_size(self)        
+            size+=f.get_size(self)
         return size
 
     security.declareProtected(permissions.View, 'tag')
@@ -202,7 +202,7 @@ class SmartLink(ATLink):
             image = field.getScale(self)
             if image is not None and not isinstance(image, basestring):
                 # image might be None or '' for empty images
-                return image            
+                return image
 
         return ATLink.__bobo_traverse__(self, REQUEST, name)
 
@@ -239,7 +239,7 @@ class SmartLink(ATLink):
                 anchor = '#'+anchor
             smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
             if smartlink_config:
-                if smartlink_config.relativelink:            
+                if smartlink_config.relativelink:
                     object = self.getField('internalLink').get(self)
                     remote = '/'.join(object.getPhysicalPath())
                     return quote(remote + anchor, safe='?$#@/:=+;$,&%')
@@ -318,6 +318,6 @@ class SmartLink(ATLink):
                 internalPath = '/' + portal_url.getPortalObject().getId() + internalPath
             return internalPath
         return None
-        
+
 
 atapi.registerType(SmartLink, PROJECTNAME)
