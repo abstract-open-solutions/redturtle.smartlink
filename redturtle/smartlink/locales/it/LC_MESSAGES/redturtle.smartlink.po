@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: redturtle.smartlink\n"
-"POT-Creation-Date: 2013-02-15 13:27+0000\n"
+"POT-Creation-Date: 2016-12-16 17:46+0000\n"
 "PO-Revision-Date: 2010-08-27 12:31+0200\n"
 "Last-Translator: Federica D'Elia <federica.delia@redturtle.net>\n"
 "Language-Team: it\n"
@@ -54,13 +54,17 @@ msgstr "Correggi URL assoluti a link interni"
 msgid "Front-end URLs"
 msgstr "URL di front-end"
 
-#: ../interfaces/utility.py:66
+#: ../interfaces/utility.py:74
 msgid "Front-end link must correspond to a single back-end link"
 msgstr "Ad un link di front end deve corrispondere un solo link di backend"
 
 #: ../interfaces/utility.py:33
 msgid "Front-end main URL"
 msgstr "URL di front-end primario"
+
+#: ../interfaces/utility.py:64
+msgid "Globally enable proxy feature for title and description"
+msgstr "Abilita globalmente proxy per titolo e descrizione"
 
 #: ../browser/migrate.py:31
 msgid "Migrate"
@@ -137,17 +141,17 @@ msgid "description_migrate_to_smart_link"
 msgstr "Se hai degli ATLink creati prima dell'installazione di Smart Link, potresti volerli ${migrate-to-smartlink-url}."
 
 #. Default: "Please provide the external URL, or fill the \"Internal link\" field"
-#: ../content/link.py:270
+#: ../content/link.py:283
 msgid "error_externallink_internallink_required"
 msgstr "Prego fornisci un URL esterno, o compila il campo \"Link interno\""
 
 #. Default: "You must select an internal link or enter an external link. You cannot have both."
-#: ../content/link.py:276
+#: ../content/link.py:289
 msgid "error_internallink_externallink_doubled"
 msgstr "Devi selezionare un link interno o un link esterno. Non puoi fornirli entrambi."
 
 #. Default: "Please provide the internal link, or fill the \"External link\" field"
-#: ../content/link.py:272
+#: ../content/link.py:285
 msgid "error_internallink_externallink_required"
 msgstr "Prego fornisci un link interno, o compila il campo \"Link esterno\""
 
@@ -161,6 +165,13 @@ msgstr "L'URL remoto è ${real-external-link} ma punta a ${equiv-internal-link}.
 msgid "help_backendlink"
 msgstr "Inserisci qui tutti i possibili URL di back-office che vuoi trasformare. Gli URL devono essere unici"
 
+#. Default: "Disable this if you don't want to use the \"Use referenced content's data\" feature.\nPlease note: changing this configuration will not update existings links automatically."
+#: ../interfaces/utility.py:65
+msgid "help_enable_proxy_feature"
+msgstr ""
+"Disabilita se non vuoi che la funzionalità \"Usa i dati del contenuto referenziato\" sia utilizzabile.\n"
+"Nota bene: cambiando questa configurazione i Collegamenti esistenti non vengono aggiornati automaticamente."
+
 #. Default: "Put there the site main URL you want to expone to visitors. All Smart Link that starts with the current URL of the portal will be transformed to use this URL."
 #: ../interfaces/utility.py:34
 msgid "help_frontend_main_link"
@@ -172,9 +183,14 @@ msgid "help_frontendlink"
 msgstr "Inserisci qui gli URL nei quali vuoi transformare i relativi di back-office."
 
 #. Default: "Used only when the link is internal to the site. Use this field to obtain an internal link to a section of the target document"
-#: ../content/link.py:83
+#: ../content/link.py:96
 msgid "help_image_anchor"
 msgstr "Usato solo quanto il link è interno al sito. Usa questo campo per ottenere un link interno alla sezione del documento di riferimento"
+
+#. Default: "When active and an internal link is used, the Link content will use title and description from the referenced content."
+#: ../content/link.py:78
+msgid "help_internalProxy"
+msgstr "Quando attivato, e se è utilizzato un link interno, il Collegamento utilizzerà titolo e descrizione del contenuti referenziato"
 
 #. Default: "If selected, all internal links in the site will store URLs relative to the portal root, rather than absolute save the complete absolute ones. For example: no \"http://myhost/plone/foo\" but \"/plone/foo\""
 #: ../interfaces/utility.py:25
@@ -187,17 +203,17 @@ msgid "help_smartlink_externallink"
 msgstr "Inserisci l'indirizzo web di una pagina non presente su questo server"
 
 #. Default: "You can customize there the content icon. You can use this for provide the icon of the remote site"
-#: ../content/link.py:128
+#: ../content/link.py:142
 msgid "help_smartlink_favicon"
 msgstr "Puoi personalizzare qui l'icona del contenuto. Puoi usare questa funzionalità per fornire l'icona del sito remoto"
 
 #. Default: "Will be shown views that render content's images and in the link view itself"
-#: ../content/link.py:101
+#: ../content/link.py:113
 msgid "help_smartlink_image"
 msgstr "Sarà visualizzata nelle viste che permettono di mostrare le immagini contenute"
 
 #. Default: "Browse to find the internal page to which you wish to link. If this field is used, then any entry in the external link field will be ignored. You cannot have both an internal and external link."
-#: ../content/link.py:65
+#: ../content/link.py:64
 msgid "help_smartlink_internallink"
 msgstr "Sfoglia per trovare la pagina interna che si desidera linkare. Se questo campo e' usato, il campo del link esterno verra' ignorato. Non e' possibile avere sia un collegamento interno che uno esterno"
 
@@ -224,14 +240,19 @@ msgid "label_cancel_links"
 msgstr "Annulla"
 
 #. Default: "Internal anchor"
-#: ../content/link.py:82
+#: ../content/link.py:95
 msgid "label_image_anchor"
 msgstr "Ancora interna"
 
 #. Default: "Image Caption"
-#: ../content/link.py:114
+#: ../content/link.py:127
 msgid "label_image_caption"
 msgstr "Didascalia dell'immagine"
+
+#. Default: "Use referenced content's data"
+#: ../content/link.py:77
+msgid "label_internalProxy"
+msgstr "Usa i dati del contenuto referenziato"
 
 #. Default: "Save"
 #: ../browser/configlet.py:66
@@ -244,17 +265,17 @@ msgid "label_smartlink_externallink"
 msgstr "Link esterno"
 
 #. Default: "Icon"
-#: ../content/link.py:131
+#: ../content/link.py:145
 msgid "label_smartlink_favicon"
 msgstr "Icona"
 
 #. Default: "Image"
-#: ../content/link.py:103
+#: ../content/link.py:115
 msgid "label_smartlink_image"
 msgstr "Immagine"
 
 #. Default: "Internal link"
-#: ../content/link.py:64
+#: ../content/link.py:63
 msgid "label_smartlink_internallink"
 msgstr "Link interno"
 

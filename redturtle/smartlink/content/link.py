@@ -51,7 +51,6 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                     label= _(u'label_smartlink_externallink', default='External link'),
                     description = _(u'help_smartlink_externallink',
                                     default=u"Enter the web address for a page which is not located on this server."),
-                    i18n_domain='redturtle.smartlink',
                     size=50,
               )
     ),
@@ -67,9 +66,23 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                                                  u"If this field is used, then any entry in the external link field will be ignored. "
                                                  u"You cannot have both an internal and external link.")),
                         force_close_on_insert = True,
-                        i18n_domain='redturtle.smartlink',
                     )
     ),
+
+    atapi.BooleanField('internalProxy',
+        required = False,
+        searchable = False,
+        default=False,
+        widget = atapi.BooleanWidget(
+            label = _(u'label_internalProxy', default=u"Use referenced content's data"),
+            description = _(u'help_internalProxy',
+                            default=(u'When active and an internal link is used, '
+                                     u'the Link content will use title and description from the referenced content.')
+            ),
+            condition = 'object/proxy_enabled'
+        )
+    ),
+
 
     # ******* Advanced tab *******
 
@@ -83,10 +96,9 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
             description = _(u'help_image_anchor',
                             default=(u'Used only when the link is internal to the site. '
                                      u'Use this field to obtain an internal link to a section of the target document')),
-            i18n_domain='redturtle.smartlink',
-            size = 30)
-        ),
-
+            size = 30
+        )
+    ),
 
     atapi.ImageField('image',
         required = False,
@@ -102,8 +114,9 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                             default=u"Will be shown views that render content's images and in the link view itself"),
             label= _(u'label_smartlink_image', default=u'Image'),
             i18n_domain='redturtle.smartlink',
-            show_content_type = False)
-        ),
+            show_content_type = False
+        )
+    ),
 
     atapi.StringField('imageCaption',
         required = False,
@@ -113,8 +126,9 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
             description = '',
             label = _(u'label_image_caption', default=u'Image Caption'),
             i18n_domain='redturtle.smartlink',
-            size = 40)
-        ),
+            size = 40
+        )
+    ),
 
     atapi.ImageField('favicon',
         required = False,
@@ -130,8 +144,9 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
                                      u'You can use this for provide the icon of the remote site')),
             label= _(u'label_smartlink_favicon', default=u'Icon'),
             i18n_domain='redturtle.smartlink',
-            show_content_type = False)
-        ),
+            show_content_type = False
+        )
+    ),
 
 
 ))
@@ -148,8 +163,6 @@ class SmartLink(ATLink):
     meta_type = "ATLink"
     schema = LinkSchema
 
-    title = atapi.ATFieldProperty('title')
-    description = atapi.ATFieldProperty('description')
     internalLink = atapi.ATReferenceFieldProperty('internalLink')
 
     security = ClassSecurityInfo()
@@ -302,7 +315,6 @@ class SmartLink(ATLink):
             res = res[1:]
         return res
 
-
     security.declareProtected(permissions.View, 'getInternalLinkPath')
     def getInternalLinkPath(self):
         """Get database path to the internally linked content"""
@@ -319,5 +331,40 @@ class SmartLink(ATLink):
             return internalPath
         return None
 
+    # Proxy data
+    @property
+    def proxy_enabled(self):
+        """ Global check if proxy is enabled in the site """
+        smartlink_config = queryUtility(ISmartlinkConfig, name="smartlink_config")
+        if not smartlink_config:
+            return False
+        return getattr(smartlink_config, 'proxy_enabled', False)
+
+    security.declarePrivate('check_proxy_status')
+    def check_proxy_status(self):
+        """ Returns True is we can proxy reference content's data """
+        internal = self.getInternalLink()
+        return internal and self.getInternalProxy() and self.proxy_enabled
+
+    def Title(self):
+        internal = self.getInternalLink()
+        if self.check_proxy_status():
+            return internal.Title()
+        return self.getField('title').get(self)
+
+    @property
+    def title(self):
+        return self.Title()
+
+    def Description(self):
+        internal = self.getInternalLink()
+        if self.check_proxy_status:
+            return internal.Description()
+        return self.getField('description').get(self)
+
+    @property
+    def description(self):
+        return self.Description()
+    # / End proxy data
 
 atapi.registerType(SmartLink, PROJECTNAME)

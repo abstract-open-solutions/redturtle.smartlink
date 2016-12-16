@@ -14,7 +14,7 @@ class ILinkNormalizerUtility(Interface):
 
     def toFrontEnd(remote):
         """Transform an URL to the proper frontend ones"""
-    
+
     def toCurrent(remote):
         """Tranform an URL to a compatible type, like the current ones"""
 
@@ -49,7 +49,7 @@ class ISmartlinkConfig(Interface):
         unique=True,
         required=False
     )
-    
+
     frontendlink = schema.List(
         title=_(u"Front-end URLs"),
         description=_(u'help_frontendlink',
@@ -59,9 +59,16 @@ class ISmartlinkConfig(Interface):
         unique=False,
         required=False
     )
-    
+
+    proxy_enabled = schema.Bool(
+        title=_(u"Globally enable proxy feature for title and description"),
+        description=_(u'help_enable_proxy_feature',
+                      default=u"Disable this if you don't want to use the \"Use referenced content's data\" feature.\n"
+                              u"Please note: changing this configuration will not update existings links automatically."),
+        default=False
+    )
+
     @invariant
     def otherFilledIfSelected(smartlink):
         if len(smartlink.frontendlink) != len(smartlink.backendlink):
             raise Invalid(_(u"Front-end link must correspond to a single back-end link"))
-    

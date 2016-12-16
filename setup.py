@@ -3,7 +3,7 @@
 import os, sys
 from setuptools import setup, find_packages
 
-version = '1.2.3.dev0'
+version = '1.3.0.dev0'
 
 tests_require = ['zope.testing', 'Products.PloneTestCase']
 
@@ -26,8 +26,6 @@ setup(name='redturtle.smartlink',
       classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Plone',
-        'Framework :: Plone :: 3.3',
-        'Framework :: Plone :: 4.0',
         'Framework :: Plone :: 4.1',
         'Framework :: Plone :: 4.2',
         'Framework :: Plone :: 4.3',

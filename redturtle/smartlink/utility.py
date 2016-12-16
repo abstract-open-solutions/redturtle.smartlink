@@ -25,6 +25,7 @@ class SmartlinkConfig(SimpleItem):
     relativelink = FieldProperty(ISmartlinkConfig['relativelink'])
     frontendlink = FieldProperty(ISmartlinkConfig['frontendlink'])
     backendlink = FieldProperty(ISmartlinkConfig['backendlink'])
+    proxy_enabled = FieldProperty(ISmartlinkConfig['proxy_enabled'])
 
 
 class LinkNormalizerUtility(object):

@@ -25,6 +25,13 @@ Due to changes between Plone 3 and Plone 4 themes, we need to keep the Plone 3 a
 (not using CSS sprite. To restore the Plone 4 default way, disable the ``smart_link.css`` resource
 and remove the "*Icon (Expression)*" value from ``portal_types`` tool).
 
+When using an internal link you can choose to use title and description from the referenced content
+instead of the ones you used in the Link content itself.
+In this way the Link is more like a *proxy* of the referenced item.
+
+This feature is globally disabled by default (in the control panel), then can be enabled on every Link content
+activating the "*Use referenced content's data*" option.
+
 Handle back-end/front-end URLs
 ------------------------------
 
@@ -44,24 +51,7 @@ For this reason you must use the "*Configure Smart Link*" control panel to handl
 
 You can also use an option that says to Smart Link to store relative URLs, but this will also
 include the Plone site id in every link (and you must rewrite this from Apache if you don't
-like this). 
-
-Blob and Blob migration tool
-----------------------------
-
-SmartLink supports (starting from 1.0.0 revision) the use of blob for the image field.
-In this way we doesn't increases the size of Data.fs .
-
-The Blob support for SmartLink is activated only if `plone.app.blob`__ is installed.
-Plone 4 has Blob as storage default for the images and the files.
-On Plone 3.x you have to install it by yourself.
-
-__ http://pypi.python.org/pypi/plone.app.blob
-
-If you have already created Smark Link contents with an old version that doesn't support Blobs
-you have to launch a migration utility from the Smart Link control panel. 
-
-E.g.: http://myhost/@@blob-smartlink-migration
+like this).
 
 Migrate ATLink to Smart Link (and back)
 ---------------------------------------
@@ -100,28 +90,9 @@ Requirements
 
 Smart Link has been tested on:
 
-* Plone 3.3
-* Plone 4.2 
+* Plone 4.1
+* Plone 4.2
 * Plone 4.3
-
-Plone 3 notes
--------------
-
-There's some kwno issues for this product on Plone 3.3:
-
-* uninstall will probably not work (you can try to add to your buildout `experimental.backportGS`__)
-* uninstall will restore the Plone 4 style Link
-* you must manually activate `plone.app.imaging`__ in your Plone site
-
-__ http://pypi.python.org/pypi/experimental.backportGS
-__ http://pypi.python.org/pypi/plone.app.imaging
-
-Additional documentation
-========================
-
-You can find more documentation on the `project's home page`__
-
-__ http://plone.org/products/smart-link/documentation/
 
 Credits
 =======
@@ -129,19 +100,19 @@ Credits
 Developed with the support of:
 
 * `Camera di Commercio di Ferrara`__
-  
+
   .. image:: http://www.fe.camcom.it/cciaa-logo.png/
      :alt: CCIAA Ferrara - logo
-  
+
 * `Regione Emilia Romagna`__
 * `Azienda USL Ferrara`__
-  
+
   .. image:: http://www.ausl.fe.it/logo_ausl.gif
      :alt: Azienda USL - logo
 
 * `Rete Civica Mo-Net - Comune di Modena`__
-  
-  .. image:: http://www.comune.modena.it/grafica/logoComune/logoComunexweb.jpg 
+
+  .. image:: http://www.comune.modena.it/grafica/logoComune/logoComunexweb.jpg
      :alt: Comune di Modena - logo
 
 All of them supports the `PloneGov initiative`__.
@@ -157,9 +128,9 @@ Authors
 
 This product was developed by RedTurtle Technology team.
 
-.. image:: http://www.redturtle.net/redturtle_banner.png
+.. image:: http://www.redturtle.it/redturtle_banner.png
    :alt: RedTurtle Technology Site
-   :target: http://www.redturtle.net/
+   :target: http://www.redturtle.it/
 
 Thanks to:
 
@@ -173,4 +144,3 @@ Part of the code of Smart Link was taken from the `ComboLink`__ Plone (and Plone
 This project was giving the same internal link feature in old 2.1/2.5 Plone releases.
 
 __ http://plone.org/products/combolink/
-
