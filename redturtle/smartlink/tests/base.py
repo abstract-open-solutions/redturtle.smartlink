@@ -82,6 +82,7 @@ class FunctionalTestCase(ptc.FunctionalTestCase):
         ptc.FunctionalTestCase.setUp(self)
         try:
             from plone.protect import auto
+            global CSRF_DISABLED_BACKUP
             CSRF_DISABLED_BACKUP = auto.CSRF_DISABLED
             auto.CSRF_DISABLED = True
         except ImportError:

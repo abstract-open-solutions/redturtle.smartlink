@@ -3,34 +3,28 @@
 
 import urlparse
 from urllib import quote
-
-from zope import interface
-from zope.component import getUtility, queryUtility
 from AccessControl import ClassSecurityInfo
-
-from Products.Archetypes import atapi
+from Products.ATContentTypes.configuration import zconf
 from Products.ATContentTypes.content import schemata
-from Products.Archetypes.atapi import AnnotationStorage
-
-from Products.CMFCore import permissions
-from Products.CMFCore.utils import getToolByName
-
 from Products.ATContentTypes.content.link import ATLink, ATLinkSchema
 from Products.ATContentTypes.interface import IImageContent
+from Products.Archetypes import atapi
+from Products.Archetypes.atapi import AnnotationStorage
+from Products.CMFCore import permissions
+from Products.CMFCore.utils import getToolByName
+from Products.validation import V_REQUIRED
+from redturtle.smartlink import smartlinkMessageFactory as _
+from redturtle.smartlink.config import PROJECTNAME
+from redturtle.smartlink.interfaces import ISmartLink, ISmartLinked
+from redturtle.smartlink.interfaces.utility import ILinkNormalizerUtility
+from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
+from zope import interface
+from zope.component import getUtility, queryUtility
 try:
-    # for future (Pone 5?) Plone compatibility
     from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 except ImportError:
     from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-from redturtle.smartlink import smartlinkMessageFactory as _
-from redturtle.smartlink.interfaces import ISmartLink, ISmartLinked
-from redturtle.smartlink.interfaces.utility import ILinkNormalizerUtility
-from redturtle.smartlink.config import PROJECTNAME
-
-from Products.ATContentTypes.configuration import zconf
-from Products.validation import V_REQUIRED
-from redturtle.smartlink.interfaces.utility import ISmartlinkConfig
 
 LinkSchema = ATLinkSchema.copy() + atapi.Schema((
 
@@ -153,8 +147,8 @@ LinkSchema = ATLinkSchema.copy() + atapi.Schema((
 
 LinkSchema['title'].storage = atapi.AnnotationStorage()
 LinkSchema['description'].storage = atapi.AnnotationStorage()
-
 schemata.finalizeATCTSchema(LinkSchema, moveDiscussion=False)
+
 
 class SmartLink(ATLink):
     """A link to an internal or external resource."""
@@ -163,6 +157,8 @@ class SmartLink(ATLink):
     meta_type = "ATLink"
     schema = LinkSchema
 
+    title = atapi.ATFieldProperty('title')
+    description = atapi.ATFieldProperty('description')
     internalLink = atapi.ATReferenceFieldProperty('internalLink')
 
     security = ClassSecurityInfo()
@@ -346,25 +342,19 @@ class SmartLink(ATLink):
         internal = self.getInternalLink()
         return internal and self.getInternalProxy() and self.proxy_enabled
 
+    # Proxy data
+    # NB: can't proxy title and description with property due to Archetypes internals  # noqa
     def Title(self):
         internal = self.getInternalLink()
-        if self.check_proxy_status():
+        if internal and self.check_proxy_status():
             return internal.Title()
         return self.getField('title').get(self)
 
-    @property
-    def title(self):
-        return self.Title()
-
     def Description(self):
         internal = self.getInternalLink()
-        if self.check_proxy_status:
+        if internal and self.check_proxy_status:
             return internal.Description()
         return self.getField('description').get(self)
-
-    @property
-    def description(self):
-        return self.Description()
     # / End proxy data
 
 atapi.registerType(SmartLink, PROJECTNAME)
