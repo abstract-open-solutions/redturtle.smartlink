@@ -4,8 +4,7 @@ Changelog
 1.3.0 (unreleased)
 ------------------
 
-End of the official support to Plone 3: it *may* still work but has not been tested.
-
+- End of the official support to Plone 3: it *may* still work but has not been tested.
 - New feature: a way to use title and description of the referenced internal content
   (Poor Man `bda.contentproxy`__).
   This close `#6`__.
