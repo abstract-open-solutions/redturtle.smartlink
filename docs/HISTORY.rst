@@ -5,9 +5,11 @@ Changelog
 ------------------
 
 - End of the official support to Plone 3: it *may* still work but has not been tested.
+  [keul]
 - New feature: a way to use title and description of the referenced internal content
   (Poor Man `bda.contentproxy`__).
   This close `#6`__.
+  [keul]
 
 __ https://pypi.python.org/pypi/bda.contentproxy
 __ https://github.com/RedTurtle/redturtle.smartlink/issues/6
