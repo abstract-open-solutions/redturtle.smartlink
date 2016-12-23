@@ -16,6 +16,8 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import onsetup
 from Products.PloneTestCase.setup import default_password
 
+CSRF_DISABLED_BACKUP = None
+
 # When ZopeTestCase configures Zope, it will *not* auto-load products
 # in Products/. Instead, we have to use a statement such as:
 #   ztc.installProduct('SimpleAttachment')
@@ -76,11 +78,29 @@ class FunctionalTestCase(ptc.FunctionalTestCase):
     code in here.
     """
 
+    def setUp(self):
+        ptc.FunctionalTestCase.setUp(self)
+        try:
+            from plone.protect import auto
+            global CSRF_DISABLED_BACKUP
+            CSRF_DISABLED_BACKUP = auto.CSRF_DISABLED
+            auto.CSRF_DISABLED = True
+        except ImportError:
+            pass
+
     def afterSetUp(self):
         self.portal.portal_membership.addMember('contributor',
                                                 default_password,
                                                 ('Member', 'Contributor'), [])
         self.setRoles(('Manager', ))
+
+    def tearDown(self):
+        ptc.FunctionalTestCase.tearDown(self)
+        try:
+            from plone.protect import auto
+            auto.CSRF_DISABLED = CSRF_DISABLED_BACKUP
+        except ImportError:
+            pass
 
     def getImage(self):
         image = '/'.join(os.path.realpath( __file__ ).split(os.path.sep )[:-2])

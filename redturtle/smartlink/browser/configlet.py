@@ -17,7 +17,6 @@ except ImportError:
     MIGRATION = False
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.app.form import named_template_adapter
 from plone.app.controlpanel.form import ControlPanelForm
 from plone.protect import CheckAuthenticator
 from plone.app.form.validators import null_validator
@@ -31,7 +30,7 @@ from redturtle.smartlink.interfaces.utility import ISmartLinkControlPanelForm
 
 class SmartlinkConfigForm(ControlPanelForm):
     """Smartlink Control Panel Form"""
-    
+
     implements(ISmartLinkControlPanelForm)
     template = ViewPageTemplateFile('controlpanel.pt')
 
@@ -93,4 +92,3 @@ class SmartlinkConfigForm(ControlPanelForm):
                                   default=u"${count} elements updated",
                                   mapping={'count': cnt}))
         return
-

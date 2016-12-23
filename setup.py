@@ -3,7 +3,7 @@
 import os, sys
 from setuptools import setup, find_packages
 
-version = '1.2.3.dev0'
+version = '1.3.0.dev0'
 
 tests_require = ['zope.testing', 'Products.PloneTestCase']
 
@@ -21,13 +21,11 @@ setup(name='redturtle.smartlink',
       description=("An advanced Link content type for Plone, "
                    "with image field, customizable content icon and internal link feature"),
       long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open(os.path.join("docs", "HISTORY.rst")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Plone',
-        'Framework :: Plone :: 3.3',
-        'Framework :: Plone :: 4.0',
         'Framework :: Plone :: 4.1',
         'Framework :: Plone :: 4.2',
         'Framework :: Plone :: 4.3',
