@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3.0 (unreleased)
+1.3.0 (2016-12-23)
 ------------------
 
 - End of the official support to Plone 3: it *may* still work but has not been tested.
