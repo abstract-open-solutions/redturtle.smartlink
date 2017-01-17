@@ -48,6 +48,16 @@ class ProxyTestSetup(TestCase):
         # attributes access is not proxied
         self.assertEqual(self.link.title, 'Link to something')
 
+    def test_not_linked_ct_attributes_if_globally_disabled(self):
+        self.smartlink_config.proxy_enabled = False
+        self.assertEqual(self.link.Title(), "Link to something")
+        self.assertEqual(self.link.Description(), "This is a link")
+
+    def test_not_linked_ct_attributes_if_locally_disabled(self):
+        self.link.setInternalProxy(False)
+        self.assertEqual(self.link.Title(), "Link to something")
+        self.assertEqual(self.link.Description(), "This is a link")
+
     def test_catalog_metadata(self):
         result = self.portal.portal_catalog(portal_type='Link')[0]
         self.assertEqual(result.Title, self.doc.Title())

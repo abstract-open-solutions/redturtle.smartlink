@@ -352,7 +352,7 @@ class SmartLink(ATLink):
 
     def Description(self):
         internal = self.getInternalLink()
-        if internal and self.check_proxy_status:
+        if internal and self.check_proxy_status():
             return internal.Description()
         return self.getField('description').get(self)
     # / End proxy data
