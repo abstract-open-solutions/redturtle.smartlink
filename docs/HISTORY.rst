@@ -7,6 +7,8 @@ Changelog
 - Fixed issue with new proxy feature.
   Local activation flag was unproperly ignored
   [keul] 
+- Fixed an error at creation object
+  [ekulos]
 
 1.3.0 (2016-12-23)
 ------------------
