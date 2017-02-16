@@ -25,7 +25,7 @@
   	  factory=".utility.rn_config_adapter"
    />
 
-  <utility 
+  <utility
       provides="redturtle.smartlink.interfaces.utility.ILinkNormalizerUtility"
       factory=".utility.LinkNormalizerUtility" />
 
@@ -75,6 +75,7 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <adapter name="Title" factory=".indexers.Title" />
   <include file="upgrades.zcml" />
- 
+
 </configure>
