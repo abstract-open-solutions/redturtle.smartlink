@@ -17,7 +17,7 @@ except ImportError:
     MIGRATION = False
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.app.controlpanel.form import ControlPanelForm
+from redomino.advancedkeyword.browser.form import ControlPanelForm
 from plone.protect import CheckAuthenticator
 from plone.app.form.validators import null_validator
 from Products.statusmessages.interfaces import IStatusMessage
